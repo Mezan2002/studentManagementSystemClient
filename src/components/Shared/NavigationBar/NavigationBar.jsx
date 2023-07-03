@@ -63,7 +63,7 @@ export default function NavigationBar() {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Pages
+          Home
         </a>
       </Typography>
       <Typography
@@ -73,7 +73,7 @@ export default function NavigationBar() {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Account
+          About Us
         </a>
       </Typography>
       <Typography
@@ -83,7 +83,7 @@ export default function NavigationBar() {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Blocks
+          Our Teachers
         </a>
       </Typography>
       <Typography
@@ -93,7 +93,27 @@ export default function NavigationBar() {
         className="p-1 font-normal"
       >
         <a href="#" className="flex items-center">
-          Docs
+          Blogs
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <a href="#" className="flex items-center">
+          Events
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <a href="#" className="flex items-center">
+          Contact Us
         </a>
       </Typography>
     </ul>
@@ -161,11 +181,11 @@ export default function NavigationBar() {
 
   return (
     <>
-      <Navbar className="sticky top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
+      <Navbar className="sticky bg-transparent top-0 z-40 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 border-0">
         <div className="flex items-center justify-between text-blue-gray-900">
           <a href="" className="w-12">
             <img
-              src="https://i.ibb.co/wKqQJJv/download.png"
+              src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
               alt="deuty high school and college logo"
             />
           </a>

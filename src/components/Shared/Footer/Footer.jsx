@@ -20,17 +20,17 @@ const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
     <footer className="relative w-full">
-      <div className="mx-auto w-full pt-10 px-8 shadow-2xl fixed bottom-0">
+      <div className="mx-auto w-full pt-10 px-8 shadow-2xl">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
           <div className="w-5/12">
             <a href="" className="w-10">
               <img
-                src="https://i.ibb.co/wKqQJJv/download.png"
+                src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
                 alt="deuty high school and college logo"
                 className="w-32"
               />
             </a>
-            <p className="mt-10">
+            <p className="mt-10 hidden md:block">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore
               praesentium voluptates.
             </p>

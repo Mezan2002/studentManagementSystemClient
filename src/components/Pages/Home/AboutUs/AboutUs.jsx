@@ -5,7 +5,7 @@ const AboutUs = () => {
   return (
     <section className="min-h-screen">
       <div className="grid grid-cols-2 px-10 my-10 gap-5">
-        <div className="mt-40">
+        <div className="mt-44">
           <p className="text-red-500 text-xl font-medium">About Us</p>
           <h1 className="text-6xl font-bold my-5">
             Qualified And Highly Equipped Tutors
@@ -25,14 +25,14 @@ const AboutUs = () => {
         <div className="relative">
           <div className="">
             <img
-              src="https://i.ibb.co/nBf1F0f/pexels-max-fischer-5212338.jpg"
+              src="https://i.ibb.co/Pz9k54h/pexels-max-fischer-5212338-3.jpg"
               alt=""
-              className="rounded-3xl absolute right-5 top-20"
+              className="rounded-3xl absolute right-5 top-20 "
             />
             <img
-              src="https://i.ibb.co/zmDyxxF/pexels-fauxels-3184644-1.jpg"
+              src="https://i.ibb.co/PQsjtYY/pexels-fauxels-3184644-2.jpg"
               alt=""
-              className="rounded-3xl w-6/12 absolute top-80 left-10 border-white border-4"
+              className="rounded-3xl w-6/12 absolute top-80 left-28 border-white border-8"
             />
           </div>
         </div>

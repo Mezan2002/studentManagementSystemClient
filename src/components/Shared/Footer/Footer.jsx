@@ -19,7 +19,12 @@ const currentYear = new Date().getFullYear();
 
 const Footer = () => {
   return (
-    <footer className="relative w-full">
+    <footer
+      style={{
+        backgroundImage: "url(https://i.ibb.co/vsv28Xt/bg-banner.png)",
+      }}
+      className="relative w-full"
+    >
       <div className="mx-auto w-full pt-10 px-8 shadow-2xl">
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
           <div className="w-5/12">

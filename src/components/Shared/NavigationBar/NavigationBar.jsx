@@ -20,6 +20,7 @@ import {
   LifebuoyIcon,
   PowerIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
   const [openNav, setOpenNav] = useState(false);
@@ -191,20 +192,24 @@ export default function NavigationBar() {
           </a>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            <Button
-              variant="gradient"
-              size="sm"
-              className="hidden lg:inline-block"
-            >
-              <span>Log In</span>
-            </Button>
-            <Button
-              variant="gradient"
-              size="sm"
-              className="hidden lg:inline-block"
-            >
-              <span>Sign Up</span>
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="gradient"
+                size="sm"
+                className="hidden lg:inline-block"
+              >
+                <span>Log In</span>
+              </Button>
+            </Link>
+            <Link to="register">
+              <Button
+                variant="gradient"
+                size="sm"
+                className="hidden lg:inline-block"
+              >
+                <span>Register</span>
+              </Button>
+            </Link>
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -247,12 +252,16 @@ export default function NavigationBar() {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Log In</span>
-          </Button>
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Sign Up</span>
-          </Button>
+          <Link to="/login">
+            <Button variant="gradient" size="sm" fullWidth className="mb-2">
+              <span>Log In</span>
+            </Button>
+          </Link>
+          <Link to="/register">
+            <Button variant="gradient" size="sm" fullWidth className="mb-2">
+              <span>Register</span>
+            </Button>
+          </Link>
         </MobileNav>
       </Navbar>
     </>

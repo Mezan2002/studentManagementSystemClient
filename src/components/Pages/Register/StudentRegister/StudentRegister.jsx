@@ -1,23 +1,38 @@
-import { Checkbox, Button, Typography, Input } from "@material-tailwind/react";
+import {
+  Checkbox,
+  Button,
+  Typography,
+  Input,
+  Menu,
+  MenuHandler,
+} from "@material-tailwind/react";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 // import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { Link } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const StudentRegister = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [value, setValue] = useState(new Date());
+
   const {
     register,
     formState: { errors },
   } = useForm();
-  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));
     }
     /* const image = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", image);
+    const forlgata = new Forlgata();
+    forlgata.append("image", image);
 
     const config = {
       headers: {
@@ -29,7 +44,7 @@ const StudentRegister = () => {
       axios
         .post(
           `https://api.imgbb.com/1/upload?key=${imageHostingKey}`,
-          formData,
+          forlgata,
           config
         )
         .then((response) => {
@@ -69,7 +84,7 @@ const StudentRegister = () => {
           {/* form top end */}
 
           {/* student's info form input start */}
-          <p className="text-xl font-bold mb-5">Student's Info</p>
+          <p className="text-xl font-bold mb-5">Students Info</p>
           <form>
             <div className="flex items-start gap-5">
               <div className="grid grid-cols-2 gap-5 w-[80%]">
@@ -121,6 +136,44 @@ const StudentRegister = () => {
                   />
                 )}
               </div>
+            </div>
+            <div className="grid grid-cols-2 gap-5 w-[78%]">
+              <div className="relative flex">
+                <Menu placement="bottom-start">
+                  <MenuHandler>
+                    <Button
+                      ripple={false}
+                      variant="text"
+                      color="blue-gray"
+                      className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                    >
+                      +880
+                    </Button>
+                  </MenuHandler>
+                </Menu>
+                <Input
+                  type="tel"
+                  size="md"
+                  placeholder="Mobile Number"
+                  className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              </div>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DesktopDatePicker
+                  slotProps={{ textField: { size: "small" } }}
+                  label="Date of Birth"
+                  inputFormat="MM/dd/yyyy"
+                  value={value}
+                  onChange={handleChange}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
             </div>
             {/* student's info form input end */}
           </form>

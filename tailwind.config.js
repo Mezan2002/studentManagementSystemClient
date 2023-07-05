@@ -7,11 +7,14 @@ export default withMT({
     "path-to-your-node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
     "path-to-your-node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
+  daisyui: {
+    themes: ["light"],
+  },
   theme: {
     screens: {
       "3xl": "1920px",
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 });

@@ -5,6 +5,9 @@ import {
   Input,
   Menu,
   MenuHandler,
+  Radio,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 // import axios from "axios";
@@ -13,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -62,26 +66,74 @@ const StudentRegister = () => {
       }}
     >
       <div className="min-h-screen flex items-center justify-center">
-        <div className="w-6/12 border border-black rounded-lg p-10 mx-auto">
+        <div className="w-6/12 border border-black rounded-lg p-10 mx-auto my-5">
           {/* form top start */}
-          <div className="6/12 flex flex-col items-center justify-center mb-10">
-            <a href="">
+          <div className="flex items-start justify-between">
+            <div className="mb-10 flex items-start w-10/12">
               <img
                 src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
                 alt="deuty high school and college logo"
-                className="w-16 mb-3"
+                className="w-32 mb-3"
               />
-            </a>
-            <h2 className="text-lg font-medium">
-              Deuty High School and College
-            </h2>
-            <h2 className="text-lg font-medium">EIIN Number : 127777</h2>
-            <h2 className="text-xl font-semibold">
-              {" "}
-              Student Registeration Form
-            </h2>
+              <div className="ml-3">
+                <h2 className="text-3xl font-bold">
+                  Deuty High School and College
+                </h2>
+                <h2 className="text-xl font-medium">EIIN Number : 127777</h2>
+              </div>
+            </div>
+            <div className="w-[20%] border border-gray-300 h-40 mx-auto my-3 overflow-hidden rounded-xl">
+              {selectedImage === null ? (
+                <>
+                  {" "}
+                  <label
+                    htmlFor="selectProfilePicture"
+                    className="flex items-center justify-center h-full flex-col-reverse cursor-pointer"
+                  >
+                    <h2 className="text-center mt-4 text-sm capitalize">
+                      Select your profile picture
+                    </h2>
+                    <figure>
+                      <img
+                        loading="lazy"
+                        draggable={false}
+                        src="https://i.ibb.co/zxPs4Tq/gallery.png"
+                        alt=""
+                        className="w-7"
+                        title="Photo or Video"
+                      />
+                    </figure>
+                  </label>
+                  <input
+                    {...register("selectedImage", { required: true })}
+                    onChange={handleImageChange}
+                    type="file"
+                    id="selectProfilePicture"
+                    className="hidden invisible"
+                  />
+                  {errors.profilePicture && (
+                    <span className="text-red-500">
+                      Profile Picture is required
+                    </span>
+                  )}
+                </>
+              ) : (
+                <img
+                  loading="lazy"
+                  draggable={false}
+                  src={selectedImage}
+                  alt=""
+                  className="imageDiv h-full w-full object-cover"
+                />
+              )}
+            </div>
           </div>
           {/* form top end */}
+
+          <h2 className="text-xl font-semibold py-2 px-4 rounded-xl mt-5 uppercase bg-[#2196F3] text-white">
+            {" "}
+            Student Registeration Form
+          </h2>
 
           {/* student's info form input start */}
           <p className="text-xl font-bold mb-5">Students Info</p>
@@ -90,51 +142,6 @@ const StudentRegister = () => {
               <div className="grid grid-cols-2 gap-5 w-[80%]">
                 <Input size="md" label="First Name" />
                 <Input size="md" label="Last Name" />
-              </div>
-              <div className="w-[20%] -mt-[13%] border border-gray-300 h-40 mx-auto my-3 overflow-hidden rounded-xl">
-                {selectedImage === null ? (
-                  <>
-                    {" "}
-                    <label
-                      htmlFor="selectProfilePicture"
-                      className="flex items-center justify-center h-full flex-col-reverse cursor-pointer"
-                    >
-                      <h2 className="text-center mt-4 text-sm capitalize">
-                        Select your profile picture
-                      </h2>
-                      <figure>
-                        <img
-                          loading="lazy"
-                          draggable={false}
-                          src="https://i.ibb.co/zxPs4Tq/gallery.png"
-                          alt=""
-                          className="w-7"
-                          title="Photo or Video"
-                        />
-                      </figure>
-                    </label>
-                    <input
-                      {...register("selectedImage", { required: true })}
-                      onChange={handleImageChange}
-                      type="file"
-                      id="selectProfilePicture"
-                      className="hidden invisible"
-                    />
-                    {errors.profilePicture && (
-                      <span className="text-red-500">
-                        Profile Picture is required
-                      </span>
-                    )}
-                  </>
-                ) : (
-                  <img
-                    loading="lazy"
-                    draggable={false}
-                    src={selectedImage}
-                    alt=""
-                    className="imageDiv h-full w-full object-cover"
-                  />
-                )}
               </div>
             </div>
             <div className="grid grid-cols-2 gap-5 w-[78%]">
@@ -174,6 +181,58 @@ const StudentRegister = () => {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
+              <div>
+                <Select
+                  label="Select Your Class"
+                  animate={{
+                    mount: { y: 0 },
+                    unmount: { y: 25 },
+                  }}
+                >
+                  <Option className="mb-2">6</Option>
+                  <Option className="mb-2">7</Option>
+                  <Option className="mb-2">8</Option>
+                  <Option className="mb-2">9</Option>
+                  <Option className="mb-2">10</Option>
+                </Select>
+              </div>
+              <div className="form-control w-full -mt-4">
+                <label className="label">
+                  <span className="label-text">Select Your Gender</span>
+                </label>
+                <div className="flex items-center -mt-2">
+                  <Radio
+                    id="premium"
+                    name="type"
+                    ripple={false}
+                    icon={
+                      <CheckCircleIcon className="w-full h-full scale-105" />
+                    }
+                    className="hover:before:opacity-0 bg-blue-500/25 border-blue-500/50 transition-all p-0"
+                    label={
+                      <Typography color="blue-gray" className="font-normal">
+                        Male
+                      </Typography>
+                    }
+                  />
+                  <Radio
+                    id="premium"
+                    name="type"
+                    ripple={false}
+                    icon={
+                      <CheckCircleIcon className="w-full h-full scale-105" />
+                    }
+                    className="hover:before:opacity-0 bg-blue-500/25 border-blue-500/50 transition-all p-0"
+                    label={
+                      <Typography color="blue-gray" className="font-normal">
+                        Female
+                      </Typography>
+                    }
+                  />
+                </div>
+              </div>
+              <Input label="Nationality" />
+              <Input label="Religion" />
             </div>
             {/* student's info form input end */}
           </form>

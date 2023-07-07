@@ -20,9 +20,14 @@ const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [value, setValue] = useState(new Date());
   const [isLocalGuardian, setIsLocalGuardian] = useState(false);
+  const [isSameAddress, setIsSameAddress] = useState(false);
 
   const handleIsLocalGuardian = (event) => {
     setIsLocalGuardian(event);
+  };
+
+  const handleIsSameAddress = (event) => {
+    setIsSameAddress(event);
   };
 
   const {
@@ -104,16 +109,15 @@ const StudentRegister = () => {
                     className="flex items-center justify-center h-full flex-col-reverse cursor-pointer"
                   >
                     <h2 className="text-center mt-4 text-sm capitalize">
-                      Select your profile picture
+                      Student's Photo
                     </h2>
                     <figure>
                       <img
                         loading="lazy"
                         draggable={false}
-                        src="https://i.ibb.co/zxPs4Tq/gallery.png"
+                        src="https://i.ibb.co/txqTdTx/image.png"
                         alt=""
                         className="w-7"
-                        title="Photo or Video"
                       />
                     </figure>
                   </label>
@@ -148,7 +152,10 @@ const StudentRegister = () => {
           {/* form top end */}
 
           {/* student's info form input start */}
-          <p className="text-xl font-bold mb-5">Student's Info</p>
+          <p className="text-xl font-bold mt-5">Student's Info</p>
+          <p className="text-sm text-gray-600 font-semibold mb-5">
+            All information here will be student information
+          </p>
           <form>
             <div className="flex flex-col gap-5 mb-5">
               <Input size="md" label="Fullname in Bangla" />
@@ -258,165 +265,333 @@ const StudentRegister = () => {
             {/* student's info form input end */}
 
             {/* guardian's info form input start */}
-            <p className="text-xl font-bold mb-5">Guardian's Info</p>
-            <div className="grid grid-cols-2 gap-5 mb-5 border-b border-gray-500 pb-8 border-dashed">
-              <div className="flex flex-col w-full gap-5 ">
-                <p className="text-base text-gray-600 font-semibold">
-                  Father's Info
-                </p>
-                <Input size="md" label="Fullname in Bangla" />
-                <Input size="md" label="Fullname in English" />
-                <Input label="NID Number" />
-                <div className="flex flex-col gap-1">
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DesktopDatePicker
-                      slotProps={{ textField: { size: "small" } }}
-                      label="Date of Birth"
-                      inputFormat="MM/dd/yyyy"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
-                  <label className="cursor-pointer flex items-center">
-                    <input type="checkbox" className="checkbox checkbox-xs" />
-                    <span className="label-text ml-2">If Father Died</span>
-                  </label>
-                </div>
+            <div className="border-b border-gray-500 pb-8 border-dashed">
+              <p className="text-xl font-bold mt-5">Guardian's Info</p>
+              <p className="text-sm text-gray-600 font-semibold mb-5">
+                All information here will be guardian's information
+              </p>
+              <div className="grid grid-cols-2 gap-5 mb-5 ">
+                <div className="flex flex-col w-full gap-5 ">
+                  <p className="text-base text-gray-600 font-semibold">
+                    Father's Info
+                  </p>
+                  <Input size="md" label="Fullname in Bangla" />
+                  <Input size="md" label="Fullname in English" />
+                  <Input label="NID Number" />
+                  <div className="flex flex-col gap-1">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DesktopDatePicker
+                        slotProps={{ textField: { size: "small" } }}
+                        label="Date of Birth"
+                        inputFormat="MM/dd/yyyy"
+                        value={value}
+                        onChange={handleChange}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
+                    <label className="cursor-pointer flex items-center">
+                      <input type="checkbox" className="checkbox checkbox-xs" />
+                      <span className="label-text ml-2">If Father Died</span>
+                    </label>
+                  </div>
 
-                <div className="relative flex">
-                  <Menu placement="bottom-start">
-                    <MenuHandler>
-                      <Button
-                        ripple={false}
-                        variant="text"
-                        color="blue-gray"
-                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
-                      >
-                        +880
-                      </Button>
-                    </MenuHandler>
-                  </Menu>
-                  <Input
-                    type="tel"
-                    size="md"
-                    placeholder="Mobile Number"
-                    className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-                    labelProps={{
-                      className: "before:content-none after:content-none",
-                    }}
-                    containerProps={{
-                      className: "min-w-0",
-                    }}
-                  />
-                </div>
-                <Input label="Father's Occupation" />
-              </div>
-              <div className="flex flex-col gap-5">
-                <p className="text-base text-gray-600 font-semibold">
-                  Mother's Info
-                </p>
-                <Input size="md" label="Fullname in Bangla" />
-                <Input size="md" label="Fullname in English" />
-                <Input label="NID Number" />
-                <div className="flex flex-col gap-1">
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DesktopDatePicker
-                      slotProps={{ textField: { size: "small" } }}
-                      label="Date of Birth"
-                      inputFormat="MM/dd/yyyy"
-                      value={value}
-                      onChange={handleChange}
-                      renderInput={(params) => <TextField {...params} />}
+                  <div className="relative flex">
+                    <Menu placement="bottom-start">
+                      <MenuHandler>
+                        <Button
+                          ripple={false}
+                          variant="text"
+                          color="blue-gray"
+                          className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                        >
+                          +880
+                        </Button>
+                      </MenuHandler>
+                    </Menu>
+                    <Input
+                      type="tel"
+                      size="md"
+                      placeholder="Mobile Number"
+                      className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                      containerProps={{
+                        className: "min-w-0",
+                      }}
                     />
-                  </LocalizationProvider>
-                  <label className="cursor-pointer flex items-center">
-                    <input type="checkbox" className="checkbox checkbox-xs" />
-                    <span className="label-text  ml-2">If Mother Died</span>
-                  </label>
+                  </div>
+                  <Input label="Father's Occupation" />
                 </div>
-                <div className="relative flex">
-                  <Menu placement="bottom-start">
-                    <MenuHandler>
-                      <Button
-                        ripple={false}
-                        variant="text"
-                        color="blue-gray"
-                        className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
-                      >
-                        +880
-                      </Button>
-                    </MenuHandler>
-                  </Menu>
-                  <Input
-                    type="tel"
-                    size="md"
-                    placeholder="Mobile Number"
-                    className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-                    labelProps={{
-                      className: "before:content-none after:content-none",
-                    }}
-                    containerProps={{
-                      className: "min-w-0",
-                    }}
-                  />
+                <div className="flex flex-col gap-5">
+                  <p className="text-base text-gray-600 font-semibold">
+                    Mother's Info
+                  </p>
+                  <Input size="md" label="Fullname in Bangla" />
+                  <Input size="md" label="Fullname in English" />
+                  <Input label="NID Number" />
+                  <div className="flex flex-col gap-1">
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                      <DesktopDatePicker
+                        slotProps={{ textField: { size: "small" } }}
+                        label="Date of Birth"
+                        inputFormat="MM/dd/yyyy"
+                        value={value}
+                        onChange={handleChange}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </LocalizationProvider>
+                    <label className="cursor-pointer flex items-center">
+                      <input type="checkbox" className="checkbox checkbox-xs" />
+                      <span className="label-text  ml-2">If Mother Died</span>
+                    </label>
+                  </div>
+                  <div className="relative flex">
+                    <Menu placement="bottom-start">
+                      <MenuHandler>
+                        <Button
+                          ripple={false}
+                          variant="text"
+                          color="blue-gray"
+                          className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                        >
+                          +880
+                        </Button>
+                      </MenuHandler>
+                    </Menu>
+                    <Input
+                      type="tel"
+                      size="md"
+                      placeholder="Mobile Number"
+                      className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                      containerProps={{
+                        className: "min-w-0",
+                      }}
+                    />
+                  </div>
+                  <Input label="Mother's Occupation" />
                 </div>
-                <Input label="Mother's Occupation" />
               </div>
+              {/* local guardian's info form input start */}
+
+              <label
+                className="cursor-pointer flex items-center"
+                onClick={() => handleIsLocalGuardian(event.target.checked)}
+              >
+                <input type="checkbox" className="checkbox checkbox-xs" />
+                <span className="label-text font-medium ml-2">
+                  If student is with his local guardian (like elder brother or
+                  sister, grandfather etc)
+                </span>
+              </label>
+
+              {isLocalGuardian ? (
+                <div className="">
+                  <p className="text-xl font-bold my-5">
+                    Local Guardian's Info
+                  </p>
+                  <div className="flex flex-col gap-5">
+                    <Input size="md" label="Fullname in Bangla" />
+                    <Input size="md" label="Fullname in English" />
+                    <Input
+                      size="md"
+                      label="What is the relation with the local guardian?"
+                    />
+                    <div className="relative flex">
+                      <Menu placement="bottom-start">
+                        <MenuHandler>
+                          <Button
+                            ripple={false}
+                            variant="text"
+                            color="blue-gray"
+                            className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                          >
+                            +880
+                          </Button>
+                        </MenuHandler>
+                      </Menu>
+                      <Input
+                        type="tel"
+                        size="md"
+                        placeholder="Mobile Number"
+                        className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                        labelProps={{
+                          className: "before:content-none after:content-none",
+                        }}
+                        containerProps={{
+                          className: "min-w-0",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {/* local guardian's info form input end */}
             </div>
             {/* guardian's info form input end */}
 
-            {/* local guardian's info form input start */}
-
-            <label
-              className="cursor-pointer flex items-center"
-              onClick={() => handleIsLocalGuardian(event.target.checked)}
-            >
-              <input type="checkbox" className="checkbox checkbox-xs" />
-              <span className="label-text font-medium ml-2">
-                If Student is with his local guardian (like elder brother or
-                sister, grandfather etc)
-              </span>
-            </label>
-
-            {isLocalGuardian ? (
-              <p className="text-xl font-bold my-5">Local Guardian's Info</p>
-            ) : null}
-
-            {/* local guardian's info form input end */}
-          </form>
-
-          <Checkbox
-            label={
-              <Typography
-                variant="small"
-                color="gray"
-                className="flex items-center font-normal"
-              >
-                I agree the
-                <a
-                  href="#"
-                  className="font-medium transition-colors hover:text-blue-500"
+            {/* address info form input start */}
+            {isSameAddress ? (
+              <div className="border-b border-gray-500 pb-4 border-dashed">
+                <p className="text-xl font-bold mt-5">Address</p>
+                <label
+                  className="cursor-pointer flex items-center mb-5"
+                  onClick={() => handleIsSameAddress(event.target.checked)}
                 >
-                  &nbsp;Terms and Conditions
-                </a>
-              </Typography>
-            }
-            containerProps={{ className: "-ml-2.5" }}
-          />
-          <Button className="mt-6" fullWidth>
-            Register
-          </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              href="#"
-              className="font-medium text-blue-500 transition-colors hover:text-blue-700"
-            >
-              Log In
-            </Link>
-          </Typography>
+                  <input type="checkbox" className="checkbox checkbox-xs" />
+                  <span className="label-text font-medium ml-1">
+                    If present address and permanent address are same
+                  </span>
+                </label>
+                <div className="gap-5 mb-5">
+                  <div className="flex flex-col w-full gap-5 ">
+                    <p className="text-base text-gray-600 font-semibold">
+                      Present and Permanent Address
+                    </p>
+                    <Input size="md" label="Division" />
+                    <Input size="md" label="District" />
+                    <Input label="Upazila" />
+                    <Input label="City Corporation / Municipality" />
+                    <Input label="Union" />
+                    <Input label="Ward No" />
+                    <Input label="Post Office" />
+                    <Input label="Post Code / Zip Code" />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="border-b border-gray-500 pb-8 border-dashed">
+                <p className="text-xl font-bold mt-5">Address</p>
+                <label
+                  className="cursor-pointer flex items-center mb-5"
+                  onClick={() => handleIsSameAddress(event.target.checked)}
+                >
+                  <input type="checkbox" className="checkbox checkbox-xs" />
+                  <span className="label-text font-medium ml-1">
+                    If present address and permanent address are same
+                  </span>
+                </label>
+                <div className="grid grid-cols-2 gap-5 mb-5">
+                  <div className="flex flex-col w-full gap-5 ">
+                    <p className="text-base text-gray-600 font-semibold">
+                      Present Address
+                    </p>
+                    <Input size="md" label="Division" />
+                    <Input size="md" label="District" />
+                    <Input label="Upazila" />
+                    <Input label="City Corporation / Municipality" />
+                    <Input label="Union" />
+                    <Input label="Ward No" />
+                    <Input label="Post Office" />
+                    <Input label="Post Code / Zip Code" />
+                  </div>
+                  <div className="flex flex-col gap-5">
+                    <p className="text-base text-gray-600 font-semibold">
+                      Permanent Address
+                    </p>
+                    <Input size="md" label="Division" />
+                    <Input size="md" label="District" />
+                    <Input label="Upazila" />
+                    <Input label="City Corporation / Municipality" />
+                    <Input label="Union" />
+                    <Input label="Ward No" />
+                    <Input label="Post Office" />
+                    <Input label="Post Code / Zip Code" />
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* address info form input end */}
+
+            {/* login info form input start */}
+            <p className="text-xl font-bold mt-5">Login Info</p>
+            <div className="border-b border-gray-500 pb-4 border-dashed mb-5">
+              <div className="gap-5 mb-5">
+                <div className="flex flex-col w-full gap-5 ">
+                  <p className="text-sm text-gray-600 font-semibold">
+                    Set a phone number and password for next time login
+                  </p>
+                  <div className="relative flex">
+                    <Menu placement="bottom-start">
+                      <MenuHandler>
+                        <Button
+                          ripple={false}
+                          variant="text"
+                          color="blue-gray"
+                          className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                        >
+                          +880
+                        </Button>
+                      </MenuHandler>
+                    </Menu>
+                    <Input
+                      type="tel"
+                      size="md"
+                      placeholder="Mobile Number"
+                      className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                      containerProps={{
+                        className: "min-w-0",
+                      }}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-5">
+                    <Input
+                      label="Password"
+                      type="password"
+                      icon={<img src="https://i.ibb.co/bRFKd1D/eye.png" />}
+                    />
+                    <Input
+                      type="password"
+                      label="Re-type Password"
+                      icon={<img src="https://i.ibb.co/nLfF2nW/hide.png" />}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* login info form input end */}
+
+            {/* form bottom start */}
+            <Checkbox
+              label={
+                <Typography
+                  variant="small"
+                  color="gray"
+                  className="flex items-center font-normal"
+                >
+                  I agree the
+                  <a
+                    href="#"
+                    className="font-medium transition-colors hover:text-blue-500"
+                  >
+                    &nbsp;Terms and Conditions
+                  </a>
+                </Typography>
+              }
+              containerProps={{ className: "-ml-2.5" }}
+            />
+            <Button className="mt-6" fullWidth>
+              Register
+            </Button>
+            <Typography color="gray" className="mt-4 text-center font-normal">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                href="#"
+                className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+              >
+                Log In
+              </Link>
+            </Typography>
+            {/* form bottom end */}
+          </form>
         </div>
       </div>
     </section>

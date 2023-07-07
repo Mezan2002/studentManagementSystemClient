@@ -1,4 +1,4 @@
-import { Card, CardBody, Typography } from "@material-tailwind/react";
+import { Card } from "@material-tailwind/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,33 +25,31 @@ const Register = () => {
         <div className="grid grid-cols-2 gap-10">
           <Card
             onClick={handleSetTeacher}
-            className="mt-6 cursor-pointer w-72 text-center"
+            className="w-96 p-10 text-center cursor-pointer"
           >
-            <CardBody>
-              <img
-                src="https://i.ibb.co/HNXDCx5/teacher.png"
-                alt=""
-                className=" mx-auto mb-3"
-              />
-              <Typography className="mb-2 text-2xl font-medium text-black">
-                Teacher{" "}
-              </Typography>
-            </CardBody>
+            <img
+              src="https://i.ibb.co/sPHvXQ8/teacher-1.png"
+              alt="profile-picture"
+              className=""
+            />
+
+            <h2 className="text-3xl mt-6 font-semibold py-2 px-4 rounded-xl bg-[#2196F3] text-white">
+              Teacher
+            </h2>
           </Card>
           <Card
             onClick={handleSetStudent}
-            className="mt-6 cursor-pointer w-72 text-center"
+            className="w-96 p-10 text-center cursor-pointer"
           >
-            <CardBody>
-              <img
-                src="https://i.ibb.co/Q9n3mhT/student.png"
-                alt=""
-                className=" mx-auto mb-4"
-              />
-              <Typography className="mb-2 text-2xl font-medium text-black">
-                Student{" "}
-              </Typography>
-            </CardBody>
+            <img
+              src="https://i.ibb.co/c6nK5w1/student-2.png"
+              alt="profile-picture"
+              className=""
+            />
+
+            <h2 className="text-3xl mt-6 font-semibold py-2 px-4 rounded-xl bg-[#2196F3] text-white">
+              Student
+            </h2>
           </Card>
         </div>
         {isStudent && navigate("/studentRegister")}

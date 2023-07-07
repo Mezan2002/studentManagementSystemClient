@@ -10,17 +10,17 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import TextField from "@mui/material/TextField";
 
-const StudentsInfo = ({ value, handleChange }) => {
+const TeachersInfo = ({ value, handleChange }) => {
   return (
     <section>
-      <p className="text-xl font-bold mt-5">Student's Info</p>
+      <p className="text-xl font-bold mt-5">Teacher's Info</p>
       <p className="text-sm text-gray-600 font-semibold mb-5">
-        All information here will be student's information
+        All information here will be teacher's information
       </p>
       <div className="flex flex-col gap-5 mb-5">
         <Input size="md" label="Fullname in Bangla" />
         <Input size="md" label="Fullname in English" />
-        <Input size="md" label="Birth Certificate Number" />
+        <Input size="md" label="NID Number" />
       </div>
       <div className="grid grid-cols-2 gap-5 mb-5 border-b border-gray-500 pb-8 border-dashed">
         <Input label="Birth Place" />
@@ -38,17 +38,17 @@ const StudentsInfo = ({ value, handleChange }) => {
         <Input label="Religion" />
         <div>
           <Select
-            label="Select Your Class"
+            label="Select Your Designation"
             animate={{
               mount: { y: 0 },
               unmount: { y: 25 },
             }}
           >
-            <Option className="mb-2">6</Option>
-            <Option className="mb-2">7</Option>
-            <Option className="mb-2">8</Option>
-            <Option className="mb-2">9</Option>
-            <Option className="mb-2">10</Option>
+            <Option className="mb-2">Headmaster</Option>
+            <Option className="mb-2">Assistant Headmaster</Option>
+            <Option className="mb-2">Professor</Option>
+            <Option className="mb-2">Class Teacher</Option>
+            <Option className="mb-2">Assistant teacher</Option>
           </Select>
         </div>
         <div>
@@ -94,6 +94,9 @@ const StudentsInfo = ({ value, handleChange }) => {
             <Option className="mb-2">Unmarried </Option>
           </Select>
         </div>
+        <div className="col-span-2">
+          <Input size="md" label="Which Subjects Class Do You Take?" />
+        </div>
         <div className="relative flex">
           <Menu placement="bottom-start">
             <MenuHandler>
@@ -126,4 +129,4 @@ const StudentsInfo = ({ value, handleChange }) => {
   );
 };
 
-export default StudentsInfo;
+export default TeachersInfo;

@@ -147,14 +147,14 @@ const StudentRegister = () => {
           </div>
           <h2 className="text-xl font-semibold py-2 px-4 rounded-xl uppercase bg-[#2196F3] text-white text-center w-1/2 mx-auto">
             {" "}
-            Student Registeration Form
+            Students Registeration Form
           </h2>
           {/* form top end */}
 
           {/* student's info form input start */}
           <p className="text-xl font-bold mt-5">Student's Info</p>
           <p className="text-sm text-gray-600 font-semibold mb-5">
-            All information here will be student information
+            All information here will be student's information
           </p>
           <form>
             <div className="flex flex-col gap-5 mb-5">
@@ -559,37 +559,39 @@ const StudentRegister = () => {
             {/* login info form input end */}
 
             {/* form bottom start */}
-            <Checkbox
-              label={
-                <Typography
-                  variant="small"
-                  color="gray"
-                  className="flex items-center font-normal"
-                >
-                  I agree the
-                  <a
-                    href="#"
-                    className="font-medium transition-colors hover:text-blue-500"
+            <div className="flex items-center justify-between">
+              <Checkbox
+                label={
+                  <Typography
+                    variant="small"
+                    color="gray"
+                    className="flex items-center font-normal"
                   >
-                    &nbsp;Terms and Conditions
-                  </a>
-                </Typography>
-              }
-              containerProps={{ className: "-ml-2.5" }}
-            />
+                    I agree the
+                    <a
+                      href="#"
+                      className="font-medium transition-colors hover:text-blue-500"
+                    >
+                      &nbsp;Terms and Conditions
+                    </a>
+                  </Typography>
+                }
+                containerProps={{ className: "-ml-2.5" }}
+              />
+              <Typography color="gray" className="mt-4 text-center font-normal">
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  href="#"
+                  className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+                >
+                  Log In
+                </Link>
+              </Typography>
+            </div>
             <Button className="mt-6" fullWidth>
               Register
             </Button>
-            <Typography color="gray" className="mt-4 text-center font-normal">
-              Already have an account?{" "}
-              <Link
-                to="/login"
-                href="#"
-                className="font-medium text-blue-500 transition-colors hover:text-blue-700"
-              >
-                Log In
-              </Link>
-            </Typography>
             {/* form bottom end */}
           </form>
         </div>

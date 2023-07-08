@@ -26,29 +26,10 @@ const EducationalQualification = () => {
 
   const TABLE_ROWS = [
     {
-      name: "John Michael",
-      job: "Manager",
-      date: "23/04/18",
-    },
-    {
-      name: "Alexa Liras",
-      job: "Developer",
-      date: "23/04/18",
-    },
-    {
-      name: "Laurent Perrier",
-      job: "Executive",
-      date: "19/09/17",
-    },
-    {
-      name: "Michael Levi",
-      job: "Developer",
-      date: "24/12/08",
-    },
-    {
-      name: "Richard Gran",
-      job: "Manager",
-      date: "04/10/21",
+      degreeName: "BBA",
+      universityOrCollege: "Dhaka University",
+      passingYear: "2006",
+      gradeOrDivision: "1st Division",
     },
   ];
   return (
@@ -91,7 +72,7 @@ const EducationalQualification = () => {
                 </Dialog>
               </div>
             </div>
-            <Card className="overflow-auto h-full w-full">
+            {/* <Card className="overflow-auto h-full w-full">
               <table className="w-full min-w-max table-auto text-left">
                 <thead>
                   <tr>
@@ -112,58 +93,68 @@ const EducationalQualification = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {TABLE_ROWS.map(({ name, job, date }, index) => (
-                    <tr
-                      key={name}
-                      className="even:bg-blue-gray-50/50 text-center"
-                    >
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {name}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {job}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className="p-4">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {date}
-                        </Typography>
-                      </td>
-                      <td className="p-4 ">
-                        <ButtonGroup size="sm" className="ml-12">
-                          <Button>Edit</Button>
-                          <Button color="red">Delete</Button>
-                        </ButtonGroup>
-                      </td>
-                    </tr>
-                  ))}
+                  {TABLE_ROWS.map(
+                    (
+                      {
+                        degreeName,
+                        universityOrCollege,
+                        passingYear,
+                        gradeOrDivision,
+                      },
+                      index
+                    ) => (
+                      <tr
+                        key={name}
+                        className="even:bg-blue-gray-50/50 text-center"
+                      >
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {degreeName}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {universityOrCollege}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {passingYear}
+                          </Typography>
+                        </td>
+                        <td className="p-4">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {gradeOrDivision}
+                          </Typography>
+                        </td>
+                        <td className="p-4 ">
+                          <ButtonGroup size="sm" className="ml-12">
+                            <Button>Edit</Button>
+                            <Button color="red">Delete</Button>
+                          </ButtonGroup>
+                        </td>
+                      </tr>
+                    )
+                  )}
                 </tbody>
               </table>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </div>

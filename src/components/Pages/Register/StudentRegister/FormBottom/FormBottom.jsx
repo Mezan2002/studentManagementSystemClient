@@ -1,4 +1,4 @@
-import { Checkbox, Typography, Button } from "@material-tailwind/react";
+import { Checkbox, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 const FormBottom = () => {
@@ -34,9 +34,12 @@ const FormBottom = () => {
           </Link>
         </Typography>
       </div>
-      <Button className="mt-6" fullWidth>
+      <button
+        type="submit"
+        className="btn btn-block mt-10 bg-[#2196F3] text-white hover:bg-[#2196F3]"
+      >
         Register
-      </Button>
+      </button>
     </section>
   );
 };

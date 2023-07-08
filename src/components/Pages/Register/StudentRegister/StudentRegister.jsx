@@ -10,7 +10,7 @@ import FormBottom from "./FormBottom/FormBottom";
 
 const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [value, setValue] = useState(new Date());
+  const [value, setValue] = useState(null);
   const [isLocalGuardian, setIsLocalGuardian] = useState(false);
   const [isSameAddress, setIsSameAddress] = useState(false);
 
@@ -24,7 +24,8 @@ const StudentRegister = () => {
 
   const {
     register,
-    // formState: { errors },
+    handleSubmit,
+    formState: { errors },
   } = useForm();
 
   const handleChange = (newValue) => {
@@ -59,6 +60,11 @@ const StudentRegister = () => {
         });
     } */
   };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <section
       style={{
@@ -73,13 +79,19 @@ const StudentRegister = () => {
           <FormTop
             selectedImage={selectedImage}
             register={register}
+            errors={errors}
             handleImageChange={handleImageChange}
           />
           {/* form top end */}
 
           {/* student's info form input start */}
-          <form>
-            <StudentsInfo value={value} handleChange={handleChange} />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <StudentsInfo
+              value={value}
+              handleChange={handleChange}
+              errors={errors}
+              register={register}
+            />
             {/* student's info form input end */}
 
             {/* guardian's info form input start */}

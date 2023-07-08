@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormTop = ({ selectedImage, register, handleImageChange }) => {
+const FormTop = ({ selectedImage, register, handleImageChange, errors }) => {
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -25,32 +25,51 @@ const FormTop = ({ selectedImage, register, handleImageChange }) => {
             </h2>
           </div>
         </div>
-        <div className="w-[20%] -mt-7 border border-gray-300 h-40 mx-auto my-3 overflow-hidden rounded-xl">
+        <div
+          className={`w-[20%] -mt-7 border ${
+            errors.studentsPhoto ? "border-red-300" : "border-gray-300"
+          } h-40 mx-auto my-3 overflow-hidden rounded-xl`}
+        >
           {selectedImage === null ? (
             <>
               {" "}
               <label
-                htmlFor="selectProfilePicture"
+                htmlFor="studentsPhoto"
                 className="flex items-center justify-center h-full flex-col-reverse cursor-pointer"
               >
-                <h2 className="text-center mt-4 text-sm capitalize">
-                  Student's Photo
+                <h2
+                  className={`text-center mt-4 text-sm ${
+                    errors.studentsPhoto ? "text-red-500 text-xs" : "text-black"
+                  }`}
+                >
+                  {errors.studentsPhoto
+                    ? "Please Upload a Photo"
+                    : "Student's Photo"}
                 </h2>
                 <figure>
                   <img
                     loading="lazy"
                     draggable={false}
-                    src="https://i.ibb.co/txqTdTx/image.png"
+                    src={` ${
+                      errors.studentsPhoto
+                        ? "https://i.ibb.co/4W5WZ2x/image-1.png"
+                        : "https://i.ibb.co/txqTdTx/image.png"
+                    }`}
                     alt=""
                     className="w-7"
                   />
                 </figure>
               </label>
+              {errors.studentsPhoto && (
+                <span className="text-red-500">
+                  Profile Picture is required
+                </span>
+              )}
               <input
-                {...register("selectedImage", { required: true })}
+                {...register("studentsPhoto", { required: true })}
                 onChange={handleImageChange}
                 type="file"
-                id="selectProfilePicture"
+                id="studentsPhoto"
                 className="hidden invisible"
               />
             </>

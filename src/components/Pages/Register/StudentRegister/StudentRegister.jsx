@@ -39,10 +39,11 @@ const StudentRegister = () => {
   const handleMothersDateOfBirth = (newValue) => {
     setMothersDateOfBirth(newValue);
   };
-  console.log("Student DOB", studentsDateOfBirth);
+
+  /* console.log("Student DOB", studentsDateOfBirth);
   console.log("Fathers DOB", fathersDateOfBirth);
   console.log("Mothers DOB", mothersDateOfBirth);
-
+ */
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));

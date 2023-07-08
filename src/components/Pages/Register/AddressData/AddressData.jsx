@@ -1,6 +1,11 @@
 import { Input } from "@material-tailwind/react";
 
-const AddressData = ({ isSameAddress, handleIsSameAddress }) => {
+const AddressData = ({
+  isSameAddress,
+  handleIsSameAddress,
+  register,
+  errors,
+}) => {
   return (
     <section>
       {isSameAddress ? (
@@ -20,14 +25,166 @@ const AddressData = ({ isSameAddress, handleIsSameAddress }) => {
               <p className="text-base text-gray-600 font-semibold">
                 Present and Permanent Address
               </p>
-              <Input size="md" label="Division" />
-              <Input size="md" label="District" />
-              <Input label="Upazila" />
-              <Input label="City Corporation / Municipality" />
-              <Input label="Union" />
-              <Input label="Ward No" />
-              <Input label="Post Office" />
-              <Input label="Post Code / Zip Code" />
+              {errors.presentAndPermanentDivision ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Division *"
+                    {...register("presentAndPermanentDivision", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Division *"
+                  {...register("presentAndPermanentDivision", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentDistrict ? (
+                <>
+                  <Input
+                    size="md"
+                    label="District *"
+                    {...register("presentAndPermanentDistrict", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="District *"
+                  {...register("presentAndPermanentDistrict", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentUpazilla ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Upazila *"
+                    {...register("presentAndPermanentUpazilla", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Upazila *"
+                  {...register("presentAndPermanentUpazilla", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentCityCoporation ? (
+                <>
+                  <Input
+                    size="md"
+                    label="City Corporation / Municipality *"
+                    {...register("presentAndPermanentCityCoporation", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="City Corporation / Municipality *"
+                  {...register("presentAndPermanentCityCoporation", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentUnion ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Union *"
+                    {...register("presentAndPermanentUnion", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Union *"
+                  {...register("presentAndPermanentUnion", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentWardNo ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Ward No *"
+                    {...register("presentAndPermanentWardNo", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Ward No *"
+                  {...register("presentAndPermanentWardNo", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentPostOffice ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Post Office *"
+                    {...register("presentAndPermanentPostOffice", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Post Office *"
+                  {...register("presentAndPermanentPostOffice", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentAndPermanentPostCode ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Post Code / Zip Code *"
+                    {...register("presentAndPermanentPostCode", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Post Code / Zip Code *"
+                  {...register("presentAndPermanentPostCode", {
+                    required: true,
+                  })}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -48,27 +205,331 @@ const AddressData = ({ isSameAddress, handleIsSameAddress }) => {
               <p className="text-base text-gray-600 font-semibold">
                 Present Address
               </p>
-              <Input size="md" label="Division" />
-              <Input size="md" label="District" />
-              <Input label="Upazila" />
-              <Input label="City Corporation / Municipality" />
-              <Input label="Union" />
-              <Input label="Ward No" />
-              <Input label="Post Office" />
-              <Input label="Post Code / Zip Code" />
+              {errors.presentDivision ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Division *"
+                    {...register("presentDivision", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Division *"
+                  {...register("presentDivision", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentDistrict ? (
+                <>
+                  <Input
+                    size="md"
+                    label="District *"
+                    {...register("presentDistrict", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="District *"
+                  {...register("presentDistrict", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentUpazilla ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Upazila *"
+                    {...register("presentUpazilla", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Upazila *"
+                  {...register("presentUpazilla", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentCityCoporation ? (
+                <>
+                  <Input
+                    size="md"
+                    label="City Corporation / Municipality *"
+                    {...register("presentCityCoporation", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="City Corporation / Municipality *"
+                  {...register("presentCityCoporation", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentUnion ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Union *"
+                    {...register("presentUnion", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Union *"
+                  {...register("presentUnion", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentWardNo ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Ward No *"
+                    {...register("presentWardNo", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Ward No *"
+                  {...register("presentWardNo", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentPostOffice ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Post Office *"
+                    {...register("presentPostOffice", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Post Office *"
+                  {...register("presentPostOffice", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.presentPostCode ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Post Code / Zip Code *"
+                    {...register("presentPostCode", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Post Code / Zip Code *"
+                  {...register("presentPostCode", {
+                    required: true,
+                  })}
+                />
+              )}
             </div>
             <div className="flex flex-col gap-5">
               <p className="text-base text-gray-600 font-semibold">
                 Permanent Address
               </p>
-              <Input size="md" label="Division" />
-              <Input size="md" label="District" />
-              <Input label="Upazila" />
-              <Input label="City Corporation / Municipality" />
-              <Input label="Union" />
-              <Input label="Ward No" />
-              <Input label="Post Office" />
-              <Input label="Post Code / Zip Code" />
+              {errors.permanentDivision ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Division *"
+                    {...register("permanentDivision", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Division *"
+                  {...register("permanentDivision", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentDistrict ? (
+                <>
+                  <Input
+                    size="md"
+                    label="District *"
+                    {...register("permanentDistrict", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="District *"
+                  {...register("permanentDistrict", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentUpazilla ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Upazila *"
+                    {...register("permanentUpazilla", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Upazila *"
+                  {...register("permanentUpazilla", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentCityCoporation ? (
+                <>
+                  <Input
+                    size="md"
+                    label="City Corporation / Municipality *"
+                    {...register("permanentCityCoporation", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="City Corporation / Municipality *"
+                  {...register("permanentCityCoporation", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentUnion ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Union *"
+                    {...register("permanentUnion", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Union *"
+                  {...register("permanentUnion", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentWardNo ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Ward No *"
+                    {...register("permanentWardNo", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Ward No *"
+                  {...register("permanentWardNo", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentPostOffice ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Post Office *"
+                    {...register("permanentPostOffice", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Post Office *"
+                  {...register("permanentPostOffice", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.permanentPostCode ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Post Code / Zip Code *"
+                    {...register("permanentPostCode", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Post Code / Zip Code *"
+                  {...register("permanentPostCode", {
+                    required: true,
+                  })}
+                />
+              )}
             </div>
           </div>
         </div>

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import FormBottom from "./FormBottom/FormBottom";
-import LogInInfo from "./LogInInfo/LogInInfo";
-import AddressData from "./AddressData/AddressData";
-import FormTop from "./FormTop/FormTop";
 import TeachersInfo from "./TeachersInfo/TeachersInfo";
 import EducationalQualification from "./EducationalQualification/EducationalQualification";
+import FormTop from "../FormTop/FormTop";
+import AddressData from "../AddressData/AddressData";
+import LogInInfo from "../LogInInfo/LogInInfo";
+import FormBottom from "../FormBottom/FormBottom";
 
 const TeacherRegister = () => {
   const [isSameAddress, setIsSameAddress] = useState(false);
@@ -46,6 +46,9 @@ const TeacherRegister = () => {
         });
     } */
   };
+
+  const isStudnet = false;
+
   const {
     register,
     formState: { errors },
@@ -62,6 +65,7 @@ const TeacherRegister = () => {
         <div className="w-6/12 border border-black rounded-lg p-10 mx-auto my-10">
           {/* form top start */}
           <FormTop
+            isStudnet={isStudnet}
             selectedImage={selectedImage}
             register={register}
             errors={errors}

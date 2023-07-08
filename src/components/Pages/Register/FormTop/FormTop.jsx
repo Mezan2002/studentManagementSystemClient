@@ -1,6 +1,12 @@
 import React from "react";
 
-const FormTop = ({ selectedImage, register, handleImageChange, errors }) => {
+const FormTop = ({
+  selectedImage,
+  register,
+  handleImageChange,
+  errors,
+  isStudent,
+}) => {
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -27,31 +33,33 @@ const FormTop = ({ selectedImage, register, handleImageChange, errors }) => {
         </div>
         <div
           className={`w-[20%] -mt-7 border ${
-            errors.studentsPhoto ? "border-red-300" : "border-gray-300"
+            errors.uploadedPhoto ? "border-red-300" : "border-gray-300"
           } h-40 mx-auto my-3 overflow-hidden rounded-xl`}
         >
           {selectedImage === null ? (
             <>
               {" "}
               <label
-                htmlFor="studentsPhoto"
+                htmlFor={`${isStudent ? "studentsPhoto" : "teachersPhoto"}`}
                 className="flex items-center justify-center h-full flex-col-reverse cursor-pointer"
               >
                 <h2
                   className={`text-center mt-4 text-sm ${
-                    errors.studentsPhoto ? "text-red-500 text-xs" : "text-black"
+                    errors.uploadedPhoto ? "text-red-500 text-xs" : "text-black"
                   }`}
                 >
-                  {errors.studentsPhoto
+                  {errors.uploadedPhoto
                     ? "Please Upload a Photo"
-                    : "Student's Photo"}
+                    : isStudent
+                    ? "Student's Photo"
+                    : "Teacher's Photo"}
                 </h2>
                 <figure>
                   <img
                     loading="lazy"
                     draggable={false}
                     src={` ${
-                      errors.studentsPhoto
+                      errors.uploadedPhoto
                         ? "https://i.ibb.co/4W5WZ2x/image-1.png"
                         : "https://i.ibb.co/txqTdTx/image.png"
                     }`}
@@ -60,16 +68,16 @@ const FormTop = ({ selectedImage, register, handleImageChange, errors }) => {
                   />
                 </figure>
               </label>
-              {errors.studentsPhoto && (
+              {errors.uploadedPhoto && (
                 <span className="text-red-500">
                   Profile Picture is required
                 </span>
               )}
               <input
-                {...register("studentsPhoto", { required: true })}
+                {...register("uploadedPhoto", { required: true })}
                 onChange={handleImageChange}
                 type="file"
-                id="studentsPhoto"
+                id={`${isStudent ? "studentsPhoto" : "teachersPhoto"}`}
                 className="hidden invisible"
               />
             </>
@@ -86,7 +94,9 @@ const FormTop = ({ selectedImage, register, handleImageChange, errors }) => {
       </div>
       <h2 className="text-xl font-semibold py-2 px-4 rounded-xl uppercase bg-[#2196F3] text-white text-center w-1/2 mx-auto">
         {" "}
-        Students Registeration Form
+        {isStudent
+          ? "Students Registeration Form"
+          : "Teachers Registeration Form"}
       </h2>
     </div>
   );

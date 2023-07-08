@@ -1,12 +1,12 @@
 // import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import FormTop from "./FormTop/FormTop";
+import FormTop from "../FormTop/FormTop";
 import StudentsInfo from "./StudentsInfo/StudentsInfo";
 import GuardiantInfo from "./GuardiantInfo/GuardiantInfo";
-import AddressData from "./AddressData/AddressData";
-import LogInInfo from "./LogInInfo/LogInInfo";
-import FormBottom from "./FormBottom/FormBottom";
+import AddressData from "../AddressData/AddressData";
+import LogInInfo from "../LogInInfo/LogInInfo";
+import FormBottom from "../FormBottom/FormBottom";
 
 const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -61,6 +61,10 @@ const StudentRegister = () => {
     } */
   };
 
+  const isStudent = {
+    isStudent: true,
+  };
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -77,6 +81,7 @@ const StudentRegister = () => {
         <div className="w-6/12 border border-black rounded-lg p-10 mx-auto my-10">
           {/* form top start */}
           <FormTop
+            isStudent={isStudent}
             selectedImage={selectedImage}
             register={register}
             errors={errors}

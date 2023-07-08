@@ -10,11 +10,15 @@ import FormBottom from "../FormBottom/FormBottom";
 
 const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isLocalGuardian, setIsLocalGuardian] = useState(false);
+  const [isSameAddress, setIsSameAddress] = useState(false);
   const [studentsDateOfBirth, setStudentsDateOfBirth] = useState(null);
   const [fathersDateOfBirth, setFathersDateOfBirth] = useState(null);
   const [mothersDateOfBirth, setMothersDateOfBirth] = useState(null);
-  const [isLocalGuardian, setIsLocalGuardian] = useState(false);
-  const [isSameAddress, setIsSameAddress] = useState(false);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
+  const [selectedMaritalStatus, setSelectedMaritalStatus] = useState(null);
 
   const handleIsLocalGuardian = (event) => {
     setIsLocalGuardian(event);
@@ -30,6 +34,8 @@ const StudentRegister = () => {
     formState: { errors },
   } = useForm();
 
+  // handle functions start
+
   const handleStudentsDateOfBirth = (newValue) => {
     setStudentsDateOfBirth(newValue);
   };
@@ -39,6 +45,27 @@ const StudentRegister = () => {
   const handleMothersDateOfBirth = (newValue) => {
     setMothersDateOfBirth(newValue);
   };
+
+  const handleChangeSelectedClass = (selectedClass) => {
+    setSelectedClass(selectedClass);
+  };
+  console.log(selectedClass);
+  const handleChangeGender = (selectedGender) => {
+    setSelectedGender(selectedGender);
+  };
+  console.log(selectedGender);
+
+  const handeleSelectedBloodGroup = (selectedBloodGroup) => {
+    setSelectedBloodGroup(selectedBloodGroup);
+  };
+  console.log(selectedBloodGroup);
+
+  const handeleSelectedMaritalStatus = (selectedMaritalStatus) => {
+    setSelectedMaritalStatus(selectedMaritalStatus);
+  };
+  console.log(selectedMaritalStatus);
+
+  // handle functions end
 
   /* console.log("Student DOB", studentsDateOfBirth);
   console.log("Fathers DOB", fathersDateOfBirth);
@@ -105,6 +132,10 @@ const StudentRegister = () => {
           {/* student's info form input start */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <StudentsInfo
+              handleChangeSelectedClass={handleChangeSelectedClass}
+              handleChangeGender={handleChangeGender}
+              handeleSelectedBloodGroup={handeleSelectedBloodGroup}
+              handeleSelectedMaritalStatus={handeleSelectedMaritalStatus}
               studentsDateOfBirth={studentsDateOfBirth}
               handleStudentsDateOfBirth={handleStudentsDateOfBirth}
               errors={errors}

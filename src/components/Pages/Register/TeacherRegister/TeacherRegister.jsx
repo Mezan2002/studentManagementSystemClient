@@ -64,6 +64,7 @@ const TeacherRegister = () => {
       <div className="flex items-center justify-center">
         <div className="w-6/12 border border-black rounded-lg p-10 mx-auto my-10">
           {/* form top start */}
+
           <FormTop
             isStudnet={isStudnet}
             selectedImage={selectedImage}
@@ -71,29 +72,41 @@ const TeacherRegister = () => {
             errors={errors}
             handleImageChange={handleImageChange}
           />
+
           {/* form top end */}
 
           {/* teacher's info form input start */}
+
           <form>
             <TeachersInfo value={value} handleChange={handleChange} />
+
             {/* teacher's info form input end */}
+
             {/* address info form input start */}
+
             <AddressData
               isSameAddress={isSameAddress}
               handleIsSameAddress={handleIsSameAddress}
             />
+
             {/* address info form input end */}
 
             {/* educational qualification form input start */}
+
             <EducationalQualification />
+
             {/* educational qualification form input end */}
 
             {/* login info form input start */}
+
             <LogInInfo register={register} errors={errors} />
+
             {/* login info form input end */}
 
             {/* form bottom start */}
+
             <FormBottom />
+
             {/* form bottom end */}
           </form>
         </div>

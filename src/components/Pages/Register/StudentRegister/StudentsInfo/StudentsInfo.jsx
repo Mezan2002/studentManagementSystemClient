@@ -14,6 +14,10 @@ const StudentsInfo = ({
   handleStudentsDateOfBirth,
   register,
   errors,
+  handleChangeSelectedClass,
+  handleChangeGender,
+  handeleSelectedMaritalStatus,
+  handeleSelectedBloodGroup,
 }) => {
   return (
     <section>
@@ -131,77 +135,111 @@ const StudentsInfo = ({
             {...register("religion", { required: true })}
           />
         )}
-        {/* <select
-          {...register("selectedClass", { required: true })}
-          className="select border-gray-400 font-normal select-md text-gray-500 focus:outline-none w-full bg-transparent"
-        >
-          <option value={""}>Select Your Class</option>
-          <option className="mb-2">6</option>
-          <option className="mb-2">7</option>
-          <option className="mb-2">8</option>
-          <option className="mb-2">9</option>
-          <option className="mb-2">10</option>
-        </select> */}
         <div>
           <Select
-            // {...register("selectedClass")}
-            // name="selectedClass"
+            onChange={(selectedValue) => {
+              handleChangeSelectedClass(selectedValue);
+            }}
             label="Select Your Class"
             animate={{
               mount: { y: 0 },
               unmount: { y: 25 },
             }}
           >
-            <Option className="mb-2">6</Option>
-            <Option className="mb-2">7</Option>
-            <Option className="mb-2">8</Option>
-            <Option className="mb-2">9</Option>
-            <Option className="mb-2">10</Option>
+            <Option className="mb-2" value="6">
+              6
+            </Option>
+            <Option className="mb-2" value="7">
+              7
+            </Option>
+            <Option className="mb-2" value="8">
+              8
+            </Option>
+            <Option className="mb-2" value="9">
+              9
+            </Option>
+            <Option className="mb-2" value="10">
+              10
+            </Option>
           </Select>
         </div>
         <div>
           <Select
+            onChange={(selectedValue) => {
+              handleChangeGender(selectedValue);
+            }}
             size="md"
             label="Gender"
-            // {...register("")}
             animate={{
               mount: { y: 0 },
               unmount: { y: 25 },
             }}
           >
-            <Option className="mb-2">Male</Option>
-            <Option className="mb-2">Female</Option>
-            <Option className="mb-2">Others</Option>
+            <Option className="mb-2" value="Male">
+              Male
+            </Option>
+            <Option className="mb-2" value="Female">
+              Female
+            </Option>
+            <Option className="mb-2" value="Others">
+              Others
+            </Option>
           </Select>
         </div>
         <div>
           <Select
+            onChange={(selectedValue) => {
+              handeleSelectedBloodGroup(selectedValue);
+            }}
             label="Blood Group"
             animate={{
               mount: { y: 0 },
               unmount: { y: 25 },
             }}
           >
-            <Option className="mb-2">A - </Option>
-            <Option className="mb-2">A +</Option>
-            <Option className="mb-2">B - </Option>
-            <Option className="mb-2">B + </Option>
-            <Option className="mb-2">AB +</Option>
-            <Option className="mb-2">AB - </Option>
-            <Option className="mb-2">O - </Option>
-            <Option className="mb-2">O + </Option>
+            <Option className="mb-2" value="A +">
+              A +
+            </Option>
+            <Option className="mb-2" value="A -">
+              A -{" "}
+            </Option>
+            <Option className="mb-2" value="B +">
+              B +{" "}
+            </Option>
+            <Option className="mb-2" value="B -">
+              B -{" "}
+            </Option>
+            <Option className="mb-2" value="AB +">
+              AB +
+            </Option>
+            <Option className="mb-2" value="AB -">
+              AB -{" "}
+            </Option>
+            <Option className="mb-2" value="O +">
+              O +{" "}
+            </Option>
+            <Option className="mb-2" value="O -">
+              O -{" "}
+            </Option>
           </Select>
         </div>
         <div>
           <Select
+            onChange={(selectedValue) => {
+              handeleSelectedMaritalStatus(selectedValue);
+            }}
             label="Marital Status"
             animate={{
               mount: { y: 0 },
               unmount: { y: 25 },
             }}
           >
-            <Option className="mb-2">Married</Option>
-            <Option className="mb-2">Unmarried </Option>
+            <Option className="mb-2" value="Married">
+              Married
+            </Option>
+            <Option className="mb-2" value="Unmarried">
+              Unmarried{" "}
+            </Option>
           </Select>
         </div>
         <div className="relative flex">

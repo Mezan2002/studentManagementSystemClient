@@ -10,7 +10,9 @@ import FormBottom from "../FormBottom/FormBottom";
 
 const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [value, setValue] = useState(null);
+  const [studentsDateOfBirth, setStudentsDateOfBirth] = useState(null);
+  const [fathersDateOfBirth, setFathersDateOfBirth] = useState(null);
+  const [mothersDateOfBirth, setMothersDateOfBirth] = useState(null);
   const [isLocalGuardian, setIsLocalGuardian] = useState(false);
   const [isSameAddress, setIsSameAddress] = useState(false);
 
@@ -28,9 +30,19 @@ const StudentRegister = () => {
     formState: { errors },
   } = useForm();
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const handleStudentsDateOfBirth = (newValue) => {
+    setStudentsDateOfBirth(newValue);
   };
+  const handleFathersDateOfBirth = (newValue) => {
+    setFathersDateOfBirth(newValue);
+  };
+  const handleMothersDateOfBirth = (newValue) => {
+    setMothersDateOfBirth(newValue);
+  };
+  console.log("Student DOB", studentsDateOfBirth);
+  console.log("Fathers DOB", fathersDateOfBirth);
+  console.log("Mothers DOB", mothersDateOfBirth);
+
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));
@@ -92,8 +104,8 @@ const StudentRegister = () => {
           {/* student's info form input start */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <StudentsInfo
-              value={value}
-              handleChange={handleChange}
+              studentsDateOfBirth={studentsDateOfBirth}
+              handleStudentsDateOfBirth={handleStudentsDateOfBirth}
               errors={errors}
               register={register}
             />
@@ -101,22 +113,28 @@ const StudentRegister = () => {
 
             {/* guardian's info form input start */}
             <GuardiantInfo
+              errors={errors}
+              register={register}
               isLocalGuardian={isLocalGuardian}
               handleIsLocalGuardian={handleIsLocalGuardian}
-              handleChange={handleChange}
-              value={value}
+              handleFathersDateOfBirth={handleFathersDateOfBirth}
+              fathersDateOfBirth={fathersDateOfBirth}
+              mothersDateOfBirth={mothersDateOfBirth}
+              handleMothersDateOfBirth={handleMothersDateOfBirth}
             />
             {/* guardian's info form input end */}
 
             {/* address info form input start */}
             <AddressData
+              errors={errors}
+              register={register}
               isSameAddress={isSameAddress}
               handleIsSameAddress={handleIsSameAddress}
             />
             {/* address info form input end */}
 
             {/* login info form input start */}
-            <LogInInfo />
+            <LogInInfo errors={errors} register={register} />
             {/* login info form input end */}
 
             {/* form bottom start */}

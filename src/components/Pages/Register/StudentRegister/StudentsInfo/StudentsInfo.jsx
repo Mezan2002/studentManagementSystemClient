@@ -8,19 +8,13 @@ import {
 } from "@material-tailwind/react";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
 
-const StudentsInfo = ({ value, handleChange, register, errors }) => {
-  const [formState, setFormState] = useState({
-    selectYourClass: "",
-  });
-  const handleStateChange = (event) => {
-    setFormState({
-      ...formState,
-      selectYourClass: event.target.value,
-    });
-  };
+const StudentsInfo = ({
+  studentsDateOfBirth,
+  handleStudentsDateOfBirth,
+  register,
+  errors,
+}) => {
   return (
     <section>
       <p className="text-xl font-bold mt-5">Student's Info</p>
@@ -28,12 +22,12 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
         All information here will be student's information
       </p>
       <div className="flex flex-col gap-5 mb-5">
-        {errors.fullNameInBangla ? (
+        {errors.studentsFullNameInBangla ? (
           <>
             <Input
               size="md"
               label="Full Name in Bangla *"
-              {...register("fullNameInBangla", { required: true })}
+              {...register("studentsFullNameInBangla", { required: true })}
               error
             />
           </>
@@ -41,15 +35,15 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
           <Input
             size="md"
             label="Full Name in Bangla *"
-            {...register("fullNameInBangla", { required: true })}
+            {...register("studentsFullNameInBangla", { required: true })}
           />
         )}
-        {errors.fullNameInEnglish ? (
+        {errors.studentsFullNameInEnglish ? (
           <>
             <Input
               size="md"
               label="Full Name in English *"
-              {...register("fullNameInEnglish", { required: true })}
+              {...register("studentsFullNameInEnglish", { required: true })}
               error
             />
           </>
@@ -57,7 +51,7 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
           <Input
             size="md"
             label="Full Name in English *"
-            {...register("fullNameInEnglish", { required: true })}
+            {...register("studentsFullNameInEnglish", { required: true })}
           />
         )}
         {errors.birthCertificateNumber ? (
@@ -99,10 +93,10 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
             slotProps={{ textField: { size: "small" } }}
             label="Date of Birth"
             inputFormat="MM/dd/yyyy"
-            value={value}
-            onChange={handleChange}
-            renderInput={(params) => <TextField {...params} />}
-            // {...register("dateOfBirth", { required: true })}
+            value={studentsDateOfBirth}
+            onChange={(selectedDate) => {
+              handleStudentsDateOfBirth(selectedDate);
+            }}
           />
         </LocalizationProvider>
         {errors.nationality ? (
@@ -223,13 +217,13 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
               </Button>
             </MenuHandler>
           </Menu>
-          {errors.mobileNumber ? (
+          {errors.studentsMobileNumber ? (
             <Input
               error
-              {...register("mobileNumber", { required: true })}
+              {...register("studentsMobileNumber", { required: true })}
               type="tel"
               size="md"
-              placeholder="Mobile Number *"
+              placeholder="Students Mobile Number *"
               className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
               labelProps={{
                 className: "before:content-none after:content-none",
@@ -240,10 +234,10 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
             />
           ) : (
             <Input
-              {...register("mobileNumber", { required: true })}
+              {...register("studentsMobileNumber", { required: true })}
               type="tel"
               size="md"
-              placeholder="Mobile Number *"
+              placeholder="Students Mobile Number *"
               className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
               labelProps={{
                 className: "before:content-none after:content-none",
@@ -254,20 +248,20 @@ const StudentsInfo = ({ value, handleChange, register, errors }) => {
             />
           )}
         </div>
-        {errors.email ? (
+        {errors.studentsEmail ? (
           <>
             <Input
               size="md"
-              label="Email *"
-              {...register("email", { required: true })}
+              label="Students Email *"
+              {...register("studentsEmail", { required: true })}
               error
             />
           </>
         ) : (
           <Input
             size="md"
-            label="Email *"
-            {...register("email", { required: true })}
+            label="Students Email *"
+            {...register("studentsEmail", { required: true })}
           />
         )}
       </div>

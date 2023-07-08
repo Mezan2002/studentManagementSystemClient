@@ -1,11 +1,14 @@
 import { Button, Input, Menu, MenuHandler } from "@material-tailwind/react";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import TextField from "@mui/material/TextField";
 
 const GuardiantInfo = ({
-  value,
-  handleChange,
+  errors,
+  register,
+  fathersDateOfBirth,
+  handleFathersDateOfBirth,
+  mothersDateOfBirth,
+  handleMothersDateOfBirth,
   handleIsLocalGuardian,
   isLocalGuardian,
 }) => {
@@ -21,18 +24,64 @@ const GuardiantInfo = ({
             <p className="text-base text-gray-600 font-semibold">
               Father's Info
             </p>
-            <Input size="md" label="Fullname in Bangla" />
-            <Input size="md" label="Fullname in English" />
-            <Input label="NID Number" />
+            {errors.fathersFullNameInBangla ? (
+              <>
+                <Input
+                  size="md"
+                  label="Full Name in Bangla *"
+                  {...register("fathersFullNameInBangla", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Full Name in Bangla *"
+                {...register("fathersFullNameInBangla", { required: true })}
+              />
+            )}
+            {errors.fathersFullNameInEnglish ? (
+              <>
+                <Input
+                  size="md"
+                  label="Full Name in English *"
+                  {...register("fathersFullNameInEnglish", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Full Name in English *"
+                {...register("fathersFullNameInEnglish", { required: true })}
+              />
+            )}
+            {errors.fathersNIDNumber ? (
+              <>
+                <Input
+                  size="md"
+                  label="Father's NID Number *"
+                  {...register("fathersNIDNumber", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Father's NID Number *"
+                {...register("fathersNIDNumber", { required: true })}
+              />
+            )}
             <div className="flex flex-col gap-1">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DesktopDatePicker
                   slotProps={{ textField: { size: "small" } }}
                   label="Date of Birth"
                   inputFormat="MM/dd/yyyy"
-                  value={value}
-                  onChange={handleChange}
-                  renderInput={(params) => <TextField {...params} />}
+                  value={fathersDateOfBirth}
+                  onChange={(selectedDate) => {
+                    handleFathersDateOfBirth(selectedDate);
+                  }}
                 />
               </LocalizationProvider>
               <label className="cursor-pointer flex items-center">
@@ -40,7 +89,6 @@ const GuardiantInfo = ({
                 <span className="label-text ml-2">If Father Died</span>
               </label>
             </div>
-
             <div className="relative flex">
               <Menu placement="bottom-start">
                 <MenuHandler>
@@ -54,37 +102,116 @@ const GuardiantInfo = ({
                   </Button>
                 </MenuHandler>
               </Menu>
-              <Input
-                type="tel"
-                size="md"
-                placeholder="Mobile Number"
-                className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-                containerProps={{
-                  className: "min-w-0",
-                }}
-              />
+              {errors.fathersMobileNumber ? (
+                <Input
+                  error
+                  {...register("fathersMobileNumber", { required: true })}
+                  type="tel"
+                  size="md"
+                  placeholder="Father's Mobile Number *"
+                  className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              ) : (
+                <Input
+                  {...register("fathersMobileNumber", { required: true })}
+                  type="tel"
+                  size="md"
+                  placeholder="Father's Mobile Number *"
+                  className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              )}
             </div>
-            <Input label="Father's Occupation" />
+            {errors.fathersOccupation ? (
+              <>
+                <Input
+                  size="md"
+                  label="Father's Occupation *"
+                  {...register("fathersOccupation", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Father's Occupation *"
+                {...register("fathersOccupation", { required: true })}
+              />
+            )}
           </div>
           <div className="flex flex-col gap-5">
             <p className="text-base text-gray-600 font-semibold">
               Mother's Info
             </p>
-            <Input size="md" label="Fullname in Bangla" />
-            <Input size="md" label="Fullname in English" />
-            <Input label="NID Number" />
+            {errors.mothersFullNameInBangla ? (
+              <>
+                <Input
+                  size="md"
+                  label="Full Name in Bangla *"
+                  {...register("mothersFullNameInBangla", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Full Name in Bangla *"
+                {...register("mothersFullNameInBangla", { required: true })}
+              />
+            )}
+            {errors.mothersFullNameInEnglish ? (
+              <>
+                <Input
+                  size="md"
+                  label="Full Name in English *"
+                  {...register("mothersFullNameInEnglish", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Full Name in English *"
+                {...register("mothersFullNameInEnglish", { required: true })}
+              />
+            )}
+            {errors.mothersNIDNumber ? (
+              <>
+                <Input
+                  size="md"
+                  label="Mother's NID Number *"
+                  {...register("mothersNIDNumber", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Mother's NID Number *"
+                {...register("mothersNIDNumber", { required: true })}
+              />
+            )}
             <div className="flex flex-col gap-1">
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DesktopDatePicker
                   slotProps={{ textField: { size: "small" } }}
                   label="Date of Birth"
                   inputFormat="MM/dd/yyyy"
-                  value={value}
-                  onChange={handleChange}
-                  renderInput={(params) => <TextField {...params} />}
+                  value={mothersDateOfBirth}
+                  onChange={(selectedDate) => {
+                    handleMothersDateOfBirth(selectedDate);
+                  }}
                 />
               </LocalizationProvider>
               <label className="cursor-pointer flex items-center">
@@ -105,20 +232,53 @@ const GuardiantInfo = ({
                   </Button>
                 </MenuHandler>
               </Menu>
-              <Input
-                type="tel"
-                size="md"
-                placeholder="Mobile Number"
-                className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-                containerProps={{
-                  className: "min-w-0",
-                }}
-              />
+              {errors.mothersMobileNumber ? (
+                <Input
+                  error
+                  {...register("mothersMobileNumber", { required: true })}
+                  type="tel"
+                  size="md"
+                  placeholder="Mother's Mobile Number *"
+                  className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              ) : (
+                <Input
+                  {...register("mothersMobileNumber", { required: true })}
+                  type="tel"
+                  size="md"
+                  placeholder="Mother's Mobile Number *"
+                  className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              )}
             </div>
-            <Input label="Mother's Occupation" />
+            {errors.mothersOccupation ? (
+              <>
+                <Input
+                  size="md"
+                  label="Mother's Occupation *"
+                  {...register("mothersOccupation", { required: true })}
+                  error
+                />
+              </>
+            ) : (
+              <Input
+                size="md"
+                label="Mother's Occupation *"
+                {...register("mothersOccupation", { required: true })}
+              />
+            )}
           </div>
         </div>
         {/* local guardian's info form input start */}
@@ -137,13 +297,67 @@ const GuardiantInfo = ({
         {isLocalGuardian ? (
           <div className="">
             <p className="text-xl font-bold my-5">Local Guardian's Info</p>
-            <div className="flex flex-col gap-5">
-              <Input size="md" label="Fullname in Bangla" />
-              <Input size="md" label="Fullname in English" />
-              <Input
-                size="md"
-                label="What is the relation with the local guardian?"
-              />
+            <div className="grid grid-cols-2 gap-5">
+              {errors.localGuardiansFullNameInBangla ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Full Name in Bangla *"
+                    {...register("localGuardiansFullNameInBangla", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Full Name in Bangla *"
+                  {...register("localGuardiansFullNameInBangla", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.localGuardiansFullNameInEnglish ? (
+                <>
+                  <Input
+                    size="md"
+                    label="Full Name in English *"
+                    {...register("localGuardiansFullNameInEnglish", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="Full Name in English *"
+                  {...register("localGuardiansFullNameInEnglish", {
+                    required: true,
+                  })}
+                />
+              )}
+              {errors.relationWithLocalGuardian ? (
+                <>
+                  <Input
+                    size="md"
+                    label="What is the relation with the local guardian? *"
+                    {...register("relationWithLocalGuardian", {
+                      required: true,
+                    })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  label="What is the relation with the local guardian? *"
+                  {...register("relationWithLocalGuardian", {
+                    required: true,
+                  })}
+                />
+              )}
               <div className="relative flex">
                 <Menu placement="bottom-start">
                   <MenuHandler>
@@ -157,18 +371,40 @@ const GuardiantInfo = ({
                     </Button>
                   </MenuHandler>
                 </Menu>
-                <Input
-                  type="tel"
-                  size="md"
-                  placeholder="Mobile Number"
-                  className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                  containerProps={{
-                    className: "min-w-0",
-                  }}
-                />
+                {errors.localGuardiansMobileNumber ? (
+                  <Input
+                    error
+                    {...register("localGuardiansMobileNumber", {
+                      required: true,
+                    })}
+                    type="tel"
+                    size="md"
+                    placeholder="Local Guardian's Mobile Number *"
+                    className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                    containerProps={{
+                      className: "min-w-0",
+                    }}
+                  />
+                ) : (
+                  <Input
+                    {...register("localGuardiansMobileNumber", {
+                      required: true,
+                    })}
+                    type="tel"
+                    size="md"
+                    placeholder="Local Guardian's Mobile Number *"
+                    className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                    labelProps={{
+                      className: "before:content-none after:content-none",
+                    }}
+                    containerProps={{
+                      className: "min-w-0",
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>

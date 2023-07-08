@@ -1,6 +1,6 @@
 import { Button, Input, Menu, MenuHandler } from "@material-tailwind/react";
 
-const LogInInfo = () => {
+const LogInInfo = ({ register, errors }) => {
   return (
     <section>
       <p className="text-xl font-bold mt-5">Login Info</p>
@@ -23,30 +23,82 @@ const LogInInfo = () => {
                   </Button>
                 </MenuHandler>
               </Menu>
-              <Input
-                type="tel"
-                size="md"
-                placeholder="Mobile Number"
-                className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-                labelProps={{
-                  className: "before:content-none after:content-none",
-                }}
-                containerProps={{
-                  className: "min-w-0",
-                }}
-              />
+              {errors.logInMobileNumber ? (
+                <Input
+                  error
+                  {...register("logInMobileNumber", {
+                    required: true,
+                  })}
+                  type="tel"
+                  size="md"
+                  placeholder="Log In Mobile Number *"
+                  className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              ) : (
+                <Input
+                  {...register("logInMobileNumber", {
+                    required: true,
+                  })}
+                  type="tel"
+                  size="md"
+                  placeholder="Log In Mobile Number *"
+                  className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  containerProps={{
+                    className: "min-w-0",
+                  }}
+                />
+              )}
             </div>
             <div className="grid grid-cols-2 gap-5">
-              <Input
-                label="Password"
-                type="password"
-                icon={<img src="https://i.ibb.co/bRFKd1D/eye.png" />}
-              />
-              <Input
-                type="password"
-                label="Re-type Password"
-                icon={<img src="https://i.ibb.co/nLfF2nW/hide.png" />}
-              />
+              {errors.logInPassword ? (
+                <>
+                  <Input
+                    size="md"
+                    type="password"
+                    label="Set Log In Password *"
+                    icon={<img src="https://i.ibb.co/bRFKd1D/eye.png" />}
+                    {...register("logInPassword", { required: true })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  icon={<img src="https://i.ibb.co/bRFKd1D/eye.png" />}
+                  type="password"
+                  label="Set Log In Password *"
+                  {...register("logInPassword", { required: true })}
+                />
+              )}
+              {errors.reTypeLogInPassword ? (
+                <>
+                  <Input
+                    size="md"
+                    type="password"
+                    label="Re-type Log In Password *"
+                    icon={<img src="https://i.ibb.co/nLfF2nW/hide.png" />}
+                    {...register("reTypeLogInPassword", { required: true })}
+                    error
+                  />
+                </>
+              ) : (
+                <Input
+                  size="md"
+                  type="password"
+                  label="Re-type Log In Password *"
+                  icon={<img src="https://i.ibb.co/nLfF2nW/hide.png" />}
+                  {...register("reTypeLogInPassword", { required: true })}
+                />
+              )}
             </div>
           </div>
         </div>

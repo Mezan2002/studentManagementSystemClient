@@ -89,7 +89,7 @@ const TeacherRegister = () => {
             {/* educational qualification form input end */}
 
             {/* login info form input start */}
-            <LogInInfo />
+            <LogInInfo register={register} errors={errors} />
             {/* login info form input end */}
 
             {/* form bottom start */}

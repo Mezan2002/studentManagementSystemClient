@@ -1,7 +1,7 @@
 import { Checkbox, Typography } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
-const FormBottom = () => {
+const FormBottom = ({ handleRegisterClicked }) => {
   return (
     <section>
       <div className="flex items-center justify-between">
@@ -35,6 +35,7 @@ const FormBottom = () => {
         </Typography>
       </div>
       <button
+        onClick={handleRegisterClicked}
         type="submit"
         className="btn btn-block mt-10 bg-[#2196F3] text-white hover:bg-[#2196F3]"
       >

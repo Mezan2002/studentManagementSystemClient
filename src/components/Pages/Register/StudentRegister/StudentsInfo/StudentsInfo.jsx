@@ -18,6 +18,11 @@ const StudentsInfo = ({
   handleChangeGender,
   handeleSelectedMaritalStatus,
   handeleSelectedBloodGroup,
+  selectedClass,
+  isClassError,
+  isGenderError,
+  isBloodGroupError,
+  isMaritalStatusError,
 }) => {
   return (
     <section>
@@ -136,111 +141,226 @@ const StudentsInfo = ({
           />
         )}
         <div>
-          <Select
-            onChange={(selectedValue) => {
-              handleChangeSelectedClass(selectedValue);
-            }}
-            label="Select Your Class"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2" value="6">
-              6
-            </Option>
-            <Option className="mb-2" value="7">
-              7
-            </Option>
-            <Option className="mb-2" value="8">
-              8
-            </Option>
-            <Option className="mb-2" value="9">
-              9
-            </Option>
-            <Option className="mb-2" value="10">
-              10
-            </Option>
-          </Select>
+          {isClassError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handleChangeSelectedClass(selectedValue);
+              }}
+              label="Select Your Class"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="6">
+                6
+              </Option>
+              <Option className="mb-2" value="7">
+                7
+              </Option>
+              <Option className="mb-2" value="8">
+                8
+              </Option>
+              <Option className="mb-2" value="9">
+                9
+              </Option>
+              <Option className="mb-2" value="10">
+                10
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handleChangeSelectedClass(selectedValue);
+              }}
+              label="Select Your Class"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="6">
+                6
+              </Option>
+              <Option className="mb-2" value="7">
+                7
+              </Option>
+              <Option className="mb-2" value="8">
+                8
+              </Option>
+              <Option className="mb-2" value="9">
+                9
+              </Option>
+              <Option className="mb-2" value="10">
+                10
+              </Option>
+            </Select>
+          )}
         </div>
         <div>
-          <Select
-            onChange={(selectedValue) => {
-              handleChangeGender(selectedValue);
-            }}
-            size="md"
-            label="Gender"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2" value="Male">
-              Male
-            </Option>
-            <Option className="mb-2" value="Female">
-              Female
-            </Option>
-            <Option className="mb-2" value="Others">
-              Others
-            </Option>
-          </Select>
+          {isGenderError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handleChangeGender(selectedValue);
+              }}
+              size="md"
+              label="Gender"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Male">
+                Male
+              </Option>
+              <Option className="mb-2" value="Female">
+                Female
+              </Option>
+              <Option className="mb-2" value="Others">
+                Others
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handleChangeGender(selectedValue);
+              }}
+              size="md"
+              label="Gender"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Male">
+                Male
+              </Option>
+              <Option className="mb-2" value="Female">
+                Female
+              </Option>
+              <Option className="mb-2" value="Others">
+                Others
+              </Option>
+            </Select>
+          )}
         </div>
         <div>
-          <Select
-            onChange={(selectedValue) => {
-              handeleSelectedBloodGroup(selectedValue);
-            }}
-            label="Blood Group"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2" value="A +">
-              A +
-            </Option>
-            <Option className="mb-2" value="A -">
-              A -{" "}
-            </Option>
-            <Option className="mb-2" value="B +">
-              B +{" "}
-            </Option>
-            <Option className="mb-2" value="B -">
-              B -{" "}
-            </Option>
-            <Option className="mb-2" value="AB +">
-              AB +
-            </Option>
-            <Option className="mb-2" value="AB -">
-              AB -{" "}
-            </Option>
-            <Option className="mb-2" value="O +">
-              O +{" "}
-            </Option>
-            <Option className="mb-2" value="O -">
-              O -{" "}
-            </Option>
-          </Select>
+          {isBloodGroupError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handeleSelectedBloodGroup(selectedValue);
+              }}
+              label="Blood Group"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="A +">
+                A +
+              </Option>
+              <Option className="mb-2" value="A -">
+                A -{" "}
+              </Option>
+              <Option className="mb-2" value="B +">
+                B +{" "}
+              </Option>
+              <Option className="mb-2" value="B -">
+                B -{" "}
+              </Option>
+              <Option className="mb-2" value="AB +">
+                AB +
+              </Option>
+              <Option className="mb-2" value="AB -">
+                AB -{" "}
+              </Option>
+              <Option className="mb-2" value="O +">
+                O +{" "}
+              </Option>
+              <Option className="mb-2" value="O -">
+                O -{" "}
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handeleSelectedBloodGroup(selectedValue);
+              }}
+              label="Blood Group"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="A +">
+                A +
+              </Option>
+              <Option className="mb-2" value="A -">
+                A -{" "}
+              </Option>
+              <Option className="mb-2" value="B +">
+                B +{" "}
+              </Option>
+              <Option className="mb-2" value="B -">
+                B -{" "}
+              </Option>
+              <Option className="mb-2" value="AB +">
+                AB +
+              </Option>
+              <Option className="mb-2" value="AB -">
+                AB -{" "}
+              </Option>
+              <Option className="mb-2" value="O +">
+                O +{" "}
+              </Option>
+              <Option className="mb-2" value="O -">
+                O -{" "}
+              </Option>
+            </Select>
+          )}
         </div>
         <div>
-          <Select
-            onChange={(selectedValue) => {
-              handeleSelectedMaritalStatus(selectedValue);
-            }}
-            label="Marital Status"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2" value="Married">
-              Married
-            </Option>
-            <Option className="mb-2" value="Unmarried">
-              Unmarried{" "}
-            </Option>
-          </Select>
+          {isMaritalStatusError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handeleSelectedMaritalStatus(selectedValue);
+              }}
+              label="Marital Status"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Married">
+                Married
+              </Option>
+              <Option className="mb-2" value="Unmarried">
+                Unmarried{" "}
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handeleSelectedMaritalStatus(selectedValue);
+              }}
+              label="Marital Status"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Married">
+                Married
+              </Option>
+              <Option className="mb-2" value="Unmarried">
+                Unmarried{" "}
+              </Option>
+            </Select>
+          )}
         </div>
         <div className="relative flex">
           <Menu placement="bottom-start">

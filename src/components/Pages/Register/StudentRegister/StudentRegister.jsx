@@ -19,13 +19,30 @@ const StudentRegister = () => {
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState(null);
+  const [isRegisterClicked, setIsRegisterClicked] = useState(false);
+  const [isClassError, setIsClassError] = useState(false);
+  const [isGenderError, setIsGenderError] = useState(false);
+  const [isBloodGroupError, setIsBloodGroupError] = useState(false);
+  const [isMaritalStatusError, setIsMaritalStatusError] = useState(false);
 
-  const handleIsLocalGuardian = (event) => {
-    setIsLocalGuardian(event);
-  };
+  console.log(isRegisterClicked);
 
-  const handleIsSameAddress = (event) => {
-    setIsSameAddress(event);
+  const handleRegisterClicked = () => {
+    setIsRegisterClicked(true);
+    if (
+      selectedClass === null ||
+      selectedGender === null ||
+      selectedBloodGroup === null ||
+      selectedMaritalStatus === null
+    ) {
+      setIsClassError(true);
+      setIsGenderError(true);
+      setIsBloodGroupError(true);
+      setIsMaritalStatusError(true);
+      return;
+    }
+
+    // Continue with form submission logic if no errors
   };
 
   const {
@@ -48,22 +65,34 @@ const StudentRegister = () => {
 
   const handleChangeSelectedClass = (selectedClass) => {
     setSelectedClass(selectedClass);
+    setIsClassError(false);
   };
   console.log(selectedClass);
   const handleChangeGender = (selectedGender) => {
     setSelectedGender(selectedGender);
+    setIsGenderError(false);
   };
   console.log(selectedGender);
 
   const handeleSelectedBloodGroup = (selectedBloodGroup) => {
     setSelectedBloodGroup(selectedBloodGroup);
+    setIsBloodGroupError(false);
   };
   console.log(selectedBloodGroup);
 
   const handeleSelectedMaritalStatus = (selectedMaritalStatus) => {
     setSelectedMaritalStatus(selectedMaritalStatus);
+    setIsMaritalStatusError(false);
   };
   console.log(selectedMaritalStatus);
+
+  const handleIsLocalGuardian = (event) => {
+    setIsLocalGuardian(event);
+  };
+
+  const handleIsSameAddress = (event) => {
+    setIsSameAddress(event);
+  };
 
   // handle functions end
 
@@ -132,12 +161,17 @@ const StudentRegister = () => {
           {/* student's info form input start */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <StudentsInfo
+              isClassError={isClassError}
+              isBloodGroupError={isBloodGroupError}
+              isGenderError={isGenderError}
+              isMaritalStatusError={isMaritalStatusError}
               handleChangeSelectedClass={handleChangeSelectedClass}
               handleChangeGender={handleChangeGender}
               handeleSelectedBloodGroup={handeleSelectedBloodGroup}
               handeleSelectedMaritalStatus={handeleSelectedMaritalStatus}
               studentsDateOfBirth={studentsDateOfBirth}
               handleStudentsDateOfBirth={handleStudentsDateOfBirth}
+              selectedClass={selectedClass}
               errors={errors}
               register={register}
             />
@@ -170,7 +204,7 @@ const StudentRegister = () => {
             {/* login info form input end */}
 
             {/* form bottom start */}
-            <FormBottom />
+            <FormBottom handleRegisterClicked={handleRegisterClicked} />
             {/* form bottom end */}
           </form>
         </div>

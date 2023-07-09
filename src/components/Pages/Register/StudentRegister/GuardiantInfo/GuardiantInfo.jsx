@@ -11,6 +11,8 @@ const GuardiantInfo = ({
   handleMothersDateOfBirth,
   handleIsLocalGuardian,
   isLocalGuardian,
+  isFathersDateOfBirthError,
+  isMothersDateOfBirthError,
 }) => {
   return (
     <section>
@@ -73,19 +75,38 @@ const GuardiantInfo = ({
               />
             )}
             <div className="flex flex-col gap-1">
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DesktopDatePicker
-                  slotProps={{ textField: { size: "small" } }}
-                  label="Date of Birth"
-                  inputFormat="MM/dd/yyyy"
-                  value={fathersDateOfBirth}
-                  onChange={(selectedDate) => {
-                    handleFathersDateOfBirth(selectedDate);
-                  }}
-                />
-              </LocalizationProvider>
+              {isFathersDateOfBirthError ? (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DesktopDatePicker
+                    slotProps={{ textField: { size: "small" } }}
+                    label="Date of Birth"
+                    className="bg-red-300 rounded-sm"
+                    inputFormat="MM/dd/yyyy"
+                    value={fathersDateOfBirth}
+                    onChange={(selectedDate) => {
+                      handleFathersDateOfBirth(selectedDate);
+                    }}
+                  />
+                </LocalizationProvider>
+              ) : (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DesktopDatePicker
+                    slotProps={{ textField: { size: "small" } }}
+                    label="Date of Birth"
+                    inputFormat="MM/dd/yyyy"
+                    value={fathersDateOfBirth}
+                    onChange={(selectedDate) => {
+                      handleFathersDateOfBirth(selectedDate);
+                    }}
+                  />
+                </LocalizationProvider>
+              )}
               <label className="cursor-pointer flex items-center">
-                <input type="checkbox" className="checkbox checkbox-xs" />
+                <input
+                  {...register("ifFatherDied")}
+                  type="checkbox"
+                  className="checkbox checkbox-xs"
+                />
                 <span className="label-text ml-2">If Father Died</span>
               </label>
             </div>
@@ -203,19 +224,38 @@ const GuardiantInfo = ({
               />
             )}
             <div className="flex flex-col gap-1">
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DesktopDatePicker
-                  slotProps={{ textField: { size: "small" } }}
-                  label="Date of Birth"
-                  inputFormat="MM/dd/yyyy"
-                  value={mothersDateOfBirth}
-                  onChange={(selectedDate) => {
-                    handleMothersDateOfBirth(selectedDate);
-                  }}
-                />
-              </LocalizationProvider>
+              {isMothersDateOfBirthError ? (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DesktopDatePicker
+                    slotProps={{ textField: { size: "small" } }}
+                    label="Date of Birth"
+                    className="bg-red-300 rounded-sm"
+                    inputFormat="MM/dd/yyyy"
+                    value={mothersDateOfBirth}
+                    onChange={(selectedDate) => {
+                      handleMothersDateOfBirth(selectedDate);
+                    }}
+                  />
+                </LocalizationProvider>
+              ) : (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DesktopDatePicker
+                    slotProps={{ textField: { size: "small" } }}
+                    label="Date of Birth"
+                    inputFormat="MM/dd/yyyy"
+                    value={mothersDateOfBirth}
+                    onChange={(selectedDate) => {
+                      handleMothersDateOfBirth(selectedDate);
+                    }}
+                  />
+                </LocalizationProvider>
+              )}
               <label className="cursor-pointer flex items-center">
-                <input type="checkbox" className="checkbox checkbox-xs" />
+                <input
+                  {...register("ifMotherDied")}
+                  type="checkbox"
+                  className="checkbox checkbox-xs"
+                />
                 <span className="label-text  ml-2">If Mother Died</span>
               </label>
             </div>

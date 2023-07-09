@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import FormTop from "../FormTop/FormTop";
 import StudentsInfo from "./StudentsInfo/StudentsInfo";
 import GuardiantInfo from "./GuardiantInfo/GuardiantInfo";
-import AddressData from "../AddressData/AddressData";
 import LogInInfo from "../LogInInfo/LogInInfo";
 import FormBottom from "../FormBottom/FormBottom";
+import AddressData from "../AddressData/AddressData";
 
 const StudentRegister = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -19,13 +19,17 @@ const StudentRegister = () => {
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState(null);
-  const [isRegisterClicked, setIsRegisterClicked] = useState(false);
+  const [, setIsRegisterClicked] = useState(false);
   const [isClassError, setIsClassError] = useState(false);
   const [isGenderError, setIsGenderError] = useState(false);
   const [isBloodGroupError, setIsBloodGroupError] = useState(false);
   const [isMaritalStatusError, setIsMaritalStatusError] = useState(false);
-
-  console.log(isRegisterClicked);
+  const [isStudentsDateOfBirthError, setIsStudentsDateOfBirthError] =
+    useState(false);
+  const [isFathersDateOfBirthError, setIsFathersDateOfBirthError] =
+    useState(false);
+  const [isMothersDateOfBirthError, setIsMothersDateOfBirthError] =
+    useState(false);
 
   const handleRegisterClicked = () => {
     setIsRegisterClicked(true);
@@ -33,12 +37,18 @@ const StudentRegister = () => {
       selectedClass === null ||
       selectedGender === null ||
       selectedBloodGroup === null ||
-      selectedMaritalStatus === null
+      selectedMaritalStatus === null ||
+      studentsDateOfBirth === null ||
+      fathersDateOfBirth === null ||
+      mothersDateOfBirth === null
     ) {
       setIsClassError(true);
       setIsGenderError(true);
       setIsBloodGroupError(true);
       setIsMaritalStatusError(true);
+      setIsStudentsDateOfBirthError(true);
+      setIsFathersDateOfBirthError(true);
+      setIsMothersDateOfBirthError(true);
       return;
     }
 
@@ -54,12 +64,15 @@ const StudentRegister = () => {
   // handle functions start
 
   const handleStudentsDateOfBirth = (newValue) => {
+    setIsStudentsDateOfBirthError(false);
     setStudentsDateOfBirth(newValue);
   };
   const handleFathersDateOfBirth = (newValue) => {
+    setIsFathersDateOfBirthError(false);
     setFathersDateOfBirth(newValue);
   };
   const handleMothersDateOfBirth = (newValue) => {
+    setIsMothersDateOfBirthError(false);
     setMothersDateOfBirth(newValue);
   };
 
@@ -67,24 +80,20 @@ const StudentRegister = () => {
     setSelectedClass(selectedClass);
     setIsClassError(false);
   };
-  console.log(selectedClass);
   const handleChangeGender = (selectedGender) => {
     setSelectedGender(selectedGender);
     setIsGenderError(false);
   };
-  console.log(selectedGender);
 
   const handeleSelectedBloodGroup = (selectedBloodGroup) => {
     setSelectedBloodGroup(selectedBloodGroup);
     setIsBloodGroupError(false);
   };
-  console.log(selectedBloodGroup);
 
   const handeleSelectedMaritalStatus = (selectedMaritalStatus) => {
     setSelectedMaritalStatus(selectedMaritalStatus);
     setIsMaritalStatusError(false);
   };
-  console.log(selectedMaritalStatus);
 
   const handleIsLocalGuardian = (event) => {
     setIsLocalGuardian(event);
@@ -136,6 +145,137 @@ const StudentRegister = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    const localGuardian = {
+      localGuardiansNameInBangla: data.localGuardiansFullNameInBangla,
+      localGuardiansNameInEnglish: data.localGuardiansFullNameInEnglish,
+      relationWithLocalGuardians: data.relationWithLocalGuardian,
+      localGuardiansMobileNumber: data.localGuardiansMobileNumber,
+    };
+
+    const presentAddress = {
+      presentDivision: data.presentDivision,
+      presentDistrict: data.presentDistrict,
+      presentUpazilla: data.presentUpazilla,
+      presentCityCoporation: data.presentCityCoporation,
+      presentUnion: data.presentUnion,
+      presentWardNo: data.presentWardNo,
+      presentPostOffice: data.presentPostOffice,
+      presentPostCode: data.presentPostCode,
+    };
+    const permanentAddress = {
+      permanentDivision: data.permanentDivision,
+      permanentDistrict: data.permanentDistrict,
+      permanentUpazilla: data.permanentUpazilla,
+      permanentCityCoporation: data.permanentCityCoporation,
+      permanentUnion: data.permanentUnion,
+      permanentWardNo: data.permanentWardNo,
+      permanentPostOffice: data.permanentPostOffice,
+      permanentPostCode: data.permanentPostCode,
+    };
+
+    const presentAndPermanentAddress = {
+      presentAndPermanentDivision: data.presentAndPermanentDivision,
+      presentAndPermanentDistrict: data.presentAndPermanentDistrict,
+      presentAndPermanentUpazilla: data.presentAndPermanentUpazilla,
+      presentAndPermanentCityCoporation: data.presentAndPermanentCityCoporation,
+      presentAndPermanentUnion: data.presentAndPermanentUnion,
+      presentAndPermanentWardNo: data.presentAndPermanentWardNo,
+      presentAndPermanentPostOffice: data.presentAndPermanentPostOffice,
+      presentAndPermanentPostCode: data.presentAndPermanentPostCode,
+    };
+
+    const studentsInfo = {
+      studentsPhoto: "",
+      studentNameInBangla: data.studentsFullNameInBangla,
+      studentNameInEnglish: data.studentsFullNameInEnglish,
+      birthPlace: data.birthPlace,
+      studentsDateOfBirth,
+      nationality: data.nationality,
+      religion: data.religion,
+      class: selectedClass,
+      gender: selectedGender,
+      bloodGroup: selectedBloodGroup,
+      maritalStatus: selectedMaritalStatus,
+      studentsMobileNumber: data.studentsMobileNumber,
+      studentsEmail: data.studentsEmail,
+    };
+
+    const guardiantInfo = {
+      fathersInfo: {
+        fathersNameInBangla: data.fathersFullNameInBangla,
+        fathersNameInEnglish: data.fathersFullNameInEnglish,
+        fathersNIDNumber: data.fathersNIDNumber,
+        fathersDateOfBirth,
+        isFatherDied: data.ifFatherDied,
+        fathersMobileNumber: data.fathersMobileNumber,
+        fathersOccupation: data.fathersOccupation,
+      },
+      mothersInfo: {
+        mothersNameInBangla: data.mothersFullNameInBangla,
+        mothersNameInEnglish: data.mothersFullNameInEnglish,
+        mothersNIDNumber: data.mothersNIDNumber,
+        mothersDateOfBirth,
+        isMotherDied: data.ifMotherDied,
+        mothersMobileNumber: data.mothersMobileNumber,
+        mothersOccupation: data.mothersOccupation,
+      },
+      localGuardian:
+        data.localGuardiansFullNameInBangla &&
+        data.localGuardiansFullNameInEnglish &&
+        data.relationWithLocalGuardian &&
+        data.localGuardiansMobileNumber !== undefined
+          ? localGuardian
+          : null,
+    };
+    const address = {
+      presentAddress:
+        data.presentDivision &&
+        data.presentDistrict &&
+        data.presentUpazilla &&
+        data.presentCityCoporation &&
+        data.presentUnion &&
+        data.presentWardNo &&
+        data.presentPostOffice &&
+        data.presentPostCode !== undefined
+          ? presentAddress
+          : null,
+      permanentAddress:
+        data.permanentDivision &&
+        data.permanentDistrict &&
+        data.permanentUpazilla &&
+        data.permanentCityCoporation &&
+        data.permanentUnion &&
+        data.permanentWardNo &&
+        data.permanentPostOffice &&
+        data.permanentPostCode !== undefined
+          ? permanentAddress
+          : null,
+      presentAndPermanentAddress:
+        data.presentAndPermanentDivision &&
+        data.presentAndPermanentDistrict &&
+        data.presentAndPermanentUpazilla &&
+        data.presentAndPermanentCityCoporation &&
+        data.presentAndPermanentUnion &&
+        data.presentAndPermanentWardNo &&
+        data.presentAndPermanentPostOffice &&
+        data.presentAndPermanentPostCode !== undefined
+          ? presentAndPermanentAddress
+          : null,
+    };
+
+    const logInInfo = {
+      logInMobileNumber: data.logInMobileNumber,
+      logInPassword: data.logInPassword,
+      reTypeLogInPassword: data.reTypeLogInPassword,
+    };
+
+    const studentRegisteredDate = {
+      studentsInfo,
+      guardiantInfo,
+      address,
+      logInInfo,
+    };
+    console.log(studentRegisteredDate);
   };
 
   return (
@@ -161,6 +301,7 @@ const StudentRegister = () => {
           {/* student's info form input start */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <StudentsInfo
+              isStudentsDateOfBirthError={isStudentsDateOfBirthError}
               isClassError={isClassError}
               isBloodGroupError={isBloodGroupError}
               isGenderError={isGenderError}
@@ -179,6 +320,8 @@ const StudentRegister = () => {
 
             {/* guardian's info form input start */}
             <GuardiantInfo
+              isFathersDateOfBirthError={isFathersDateOfBirthError}
+              isMothersDateOfBirthError={isMothersDateOfBirthError}
               errors={errors}
               register={register}
               isLocalGuardian={isLocalGuardian}

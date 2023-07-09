@@ -18,11 +18,11 @@ const StudentsInfo = ({
   handleChangeGender,
   handeleSelectedMaritalStatus,
   handeleSelectedBloodGroup,
-  selectedClass,
   isClassError,
   isGenderError,
   isBloodGroupError,
   isMaritalStatusError,
+  isStudentsDateOfBirthError,
 }) => {
   return (
     <section>
@@ -97,17 +97,32 @@ const StudentsInfo = ({
             {...register("birthPlace", { required: true })}
           />
         )}
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DesktopDatePicker
-            slotProps={{ textField: { size: "small" } }}
-            label="Date of Birth"
-            inputFormat="MM/dd/yyyy"
-            value={studentsDateOfBirth}
-            onChange={(selectedDate) => {
-              handleStudentsDateOfBirth(selectedDate);
-            }}
-          />
-        </LocalizationProvider>
+        {isStudentsDateOfBirthError ? (
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              slotProps={{ textField: { size: "small" } }}
+              label="Date of Birth *"
+              inputFormat="MM/dd/yyyy"
+              className="bg-red-300 rounded-sm"
+              value={studentsDateOfBirth}
+              onChange={(selectedDate) => {
+                handleStudentsDateOfBirth(selectedDate);
+              }}
+            />
+          </LocalizationProvider>
+        ) : (
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              slotProps={{ textField: { size: "small" } }}
+              label="Date of Birth *"
+              inputFormat="MM/dd/yyyy"
+              value={studentsDateOfBirth}
+              onChange={(selectedDate) => {
+                handleStudentsDateOfBirth(selectedDate);
+              }}
+            />
+          </LocalizationProvider>
+        )}
         {errors.nationality ? (
           <>
             <Input

@@ -10,7 +10,21 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import TextField from "@mui/material/TextField";
 
-const TeachersInfo = ({ value, handleChange }) => {
+const TeachersInfo = ({
+  register,
+  errors,
+  handleChangeGender,
+  isGenderError,
+  isMaritalStatusError,
+  handeleSelectedMaritalStatus,
+  isBloodGroupError,
+  handeleSelectedBloodGroup,
+  teachersDateOfBirth,
+  handleTeachersDateOfBirth,
+  isDesignationError,
+  handleChangeSelectedDesignation,
+  isTeachersDateOfBirthError,
+}) => {
   return (
     <section>
       <p className="text-xl font-bold mt-5">Teacher's Info</p>
@@ -18,84 +32,352 @@ const TeachersInfo = ({ value, handleChange }) => {
         All information here will be teacher's information
       </p>
       <div className="flex flex-col gap-5 mb-5">
-        <Input size="md" label="Fullname in Bangla" />
-        <Input size="md" label="Fullname in English" />
-        <Input size="md" label="NID Number" />
+        {errors.teachersFullNameInBangla ? (
+          <>
+            <Input
+              size="md"
+              label="Fullname in Bangla *"
+              {...register("teachersFullNameInBangla", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Fullname in Bangla *"
+            {...register("teachersFullNameInBangla", { required: true })}
+          />
+        )}
+        {errors.teachersFullNameInEnglish ? (
+          <>
+            <Input
+              size="md"
+              label="Fullname in English *"
+              {...register("teachersFullNameInEnglish", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Fullname in English *"
+            {...register("teachersFullNameInEnglish", { required: true })}
+          />
+        )}
+        {errors.teachersNIDNumber ? (
+          <>
+            <Input
+              size="md"
+              label="NID Number *"
+              {...register("teachersNIDNumber", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="NID Number *"
+            {...register("teachersNIDNumber", { required: true })}
+          />
+        )}
       </div>
       <div className="grid grid-cols-2 gap-5 mb-5 border-b border-gray-500 pb-8 border-dashed">
-        <Input label="Birth Place" />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DesktopDatePicker
-            slotProps={{ textField: { size: "small" } }}
-            label="Date of Birth"
-            inputFormat="MM/dd/yyyy"
-            value={value}
-            onChange={handleChange}
-            renderInput={(params) => <TextField {...params} />}
+        {isTeachersDateOfBirthError ? (
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              slotProps={{ textField: { size: "small" } }}
+              label="Date of Birth"
+              className="bg-red-300 rounded-sm"
+              inputFormat="MM/dd/yyyy"
+              value={teachersDateOfBirth}
+              onChange={(selectedDate) => {
+                handleTeachersDateOfBirth(selectedDate);
+              }}
+            />
+          </LocalizationProvider>
+        ) : (
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              slotProps={{ textField: { size: "small" } }}
+              label="Date of Birth"
+              inputFormat="MM/dd/yyyy"
+              value={teachersDateOfBirth}
+              onChange={(selectedDate) => {
+                handleTeachersDateOfBirth(selectedDate);
+              }}
+            />
+          </LocalizationProvider>
+        )}
+        <div>
+          {isGenderError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handleChangeGender(selectedValue);
+              }}
+              size="md"
+              label="Gender"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Male">
+                Male
+              </Option>
+              <Option className="mb-2" value="Female">
+                Female
+              </Option>
+              <Option className="mb-2" value="Others">
+                Others
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handleChangeGender(selectedValue);
+              }}
+              size="md"
+              label="Gender"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Male">
+                Male
+              </Option>
+              <Option className="mb-2" value="Female">
+                Female
+              </Option>
+              <Option className="mb-2" value="Others">
+                Others
+              </Option>
+            </Select>
+          )}
+        </div>
+        {errors.nationality ? (
+          <>
+            <Input
+              size="md"
+              label="Nationality *"
+              {...register("nationality", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Nationality *"
+            {...register("nationality", { required: true })}
           />
-        </LocalizationProvider>
-        <Input label="Nationality" />
-        <Input label="Religion" />
+        )}
+        {errors.religion ? (
+          <>
+            <Input
+              size="md"
+              label="Religion *"
+              {...register("religion", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Religion *"
+            {...register("religion", { required: true })}
+          />
+        )}
         <div>
-          <Select
-            label="Select Your Designation"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2">Headmaster</Option>
-            <Option className="mb-2">Assistant Headmaster</Option>
-            <Option className="mb-2">Professor</Option>
-            <Option className="mb-2">Class Teacher</Option>
-            <Option className="mb-2">Assistant teacher</Option>
-          </Select>
+          {isDesignationError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handleChangeSelectedDesignation(selectedValue);
+              }}
+              label="Select Your Designation"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Headmaster">
+                Headmaster
+              </Option>
+              <Option className="mb-2" value="Assistant Headmaster">
+                Assistant Headmaster
+              </Option>
+              <Option className="mb-2" value="Professor">
+                Professor
+              </Option>
+              <Option className="mb-2" value="Class Teacher">
+                Class Teacher
+              </Option>
+              <Option className="mb-2" value="Assistant teacher">
+                Assistant teacher
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handleChangeSelectedDesignation(selectedValue);
+              }}
+              label="Select Your Designation"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Headmaster">
+                Headmaster
+              </Option>
+              <Option className="mb-2" value="Assistant Headmaster">
+                Assistant Headmaster
+              </Option>
+              <Option className="mb-2" value="Professor">
+                Professor
+              </Option>
+              <Option className="mb-2" value="Class Teacher">
+                Class Teacher
+              </Option>
+              <Option className="mb-2" value="Assistant teacher">
+                Assistant teacher
+              </Option>
+            </Select>
+          )}
+        </div>
+
+        {errors.subjectsClassTake ? (
+          <>
+            <Input
+              size="md"
+              label="Which Subjects Class Do You Take? *"
+              {...register("subjectsClassTake", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Which Subjects Class Do You Take? *"
+            {...register("subjectsClassTake", { required: true })}
+          />
+        )}
+        <div>
+          {isBloodGroupError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handeleSelectedBloodGroup(selectedValue);
+              }}
+              label="Blood Group"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="A +">
+                A +
+              </Option>
+              <Option className="mb-2" value="A -">
+                A -{" "}
+              </Option>
+              <Option className="mb-2" value="B +">
+                B +{" "}
+              </Option>
+              <Option className="mb-2" value="B -">
+                B -{" "}
+              </Option>
+              <Option className="mb-2" value="AB +">
+                AB +
+              </Option>
+              <Option className="mb-2" value="AB -">
+                AB -{" "}
+              </Option>
+              <Option className="mb-2" value="O +">
+                O +{" "}
+              </Option>
+              <Option className="mb-2" value="O -">
+                O -{" "}
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handeleSelectedBloodGroup(selectedValue);
+              }}
+              label="Blood Group"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="A +">
+                A +
+              </Option>
+              <Option className="mb-2" value="A -">
+                A -{" "}
+              </Option>
+              <Option className="mb-2" value="B +">
+                B +{" "}
+              </Option>
+              <Option className="mb-2" value="B -">
+                B -{" "}
+              </Option>
+              <Option className="mb-2" value="AB +">
+                AB +
+              </Option>
+              <Option className="mb-2" value="AB -">
+                AB -{" "}
+              </Option>
+              <Option className="mb-2" value="O +">
+                O +{" "}
+              </Option>
+              <Option className="mb-2" value="O -">
+                O -{" "}
+              </Option>
+            </Select>
+          )}
         </div>
         <div>
-          <Select
-            label="Gender"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2">Male</Option>
-            <Option className="mb-2">Female</Option>
-            <Option className="mb-2">Others</Option>
-          </Select>
-        </div>
-        <div>
-          <Select
-            label="Blood Group"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2">A - </Option>
-            <Option className="mb-2">A +</Option>
-            <Option className="mb-2">B - </Option>
-            <Option className="mb-2">B + </Option>
-            <Option className="mb-2">AB +</Option>
-            <Option className="mb-2">AB - </Option>
-            <Option className="mb-2">O - </Option>
-            <Option className="mb-2">O + </Option>
-          </Select>
-        </div>
-        <div>
-          <Select
-            label="Marital Status"
-            animate={{
-              mount: { y: 0 },
-              unmount: { y: 25 },
-            }}
-          >
-            <Option className="mb-2">Married</Option>
-            <Option className="mb-2">Unmarried </Option>
-          </Select>
-        </div>
-        <div className="col-span-2">
-          <Input size="md" label="Which Subjects Class Do You Take?" />
+          {isMaritalStatusError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handeleSelectedMaritalStatus(selectedValue);
+              }}
+              label="Marital Status"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Married">
+                Married
+              </Option>
+              <Option className="mb-2" value="Unmarried">
+                Unmarried{" "}
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handeleSelectedMaritalStatus(selectedValue);
+              }}
+              label="Marital Status"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="Married">
+                Married
+              </Option>
+              <Option className="mb-2" value="Unmarried">
+                Unmarried{" "}
+              </Option>
+            </Select>
+          )}
         </div>
         <div className="relative flex">
           <Menu placement="bottom-start">
@@ -110,20 +392,53 @@ const TeachersInfo = ({ value, handleChange }) => {
               </Button>
             </MenuHandler>
           </Menu>
-          <Input
-            type="tel"
-            size="md"
-            placeholder="Mobile Number"
-            className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-            labelProps={{
-              className: "before:content-none after:content-none",
-            }}
-            containerProps={{
-              className: "min-w-0",
-            }}
-          />
+          {errors.teachersMobileNumber ? (
+            <Input
+              error
+              {...register("teachersMobileNumber", { required: true })}
+              type="tel"
+              size="md"
+              placeholder="Teachers Mobile Number *"
+              className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+              containerProps={{
+                className: "min-w-0",
+              }}
+            />
+          ) : (
+            <Input
+              {...register("teachersMobileNumber", { required: true })}
+              type="tel"
+              size="md"
+              placeholder="Teachers Mobile Number *"
+              className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+              containerProps={{
+                className: "min-w-0",
+              }}
+            />
+          )}
         </div>
-        <Input label="Email" type="email" />
+        {errors.teachersEmail ? (
+          <>
+            <Input
+              size="md"
+              label="Teachers Email *"
+              {...register("teachersEmail", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Teachers Email *"
+            {...register("teachersEmail", { required: true })}
+          />
+        )}
       </div>
     </section>
   );

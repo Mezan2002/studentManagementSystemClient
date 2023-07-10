@@ -16,7 +16,7 @@ const TeacherRegister = () => {
   const [selectedGender, setSelectedGender] = useState(null);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState(null);
-  const [isRegisterClicked, setIsRegisterClicked] = useState(false);
+  const [, setIsRegisterClicked] = useState(false);
   const [isDesignationError, setIsDesignationError] = useState(false);
   const [selectedDesignation, setSelectedDesignation] = useState(null);
   const [isGenderError, setIsGenderError] = useState(false);
@@ -38,14 +38,22 @@ const TeacherRegister = () => {
       selectedMaritalStatus === null ||
       teachersDateOfBirth === null
     ) {
-      setIsDesignationError(true);
-      setIsGenderError(true);
-      setIsBloodGroupError(true);
-      setIsMaritalStatusError(true);
-      setIsTeachersDateOfBirthError(true);
-      return;
+      if (selectedDesignation === null) {
+        setIsDesignationError(true);
+      }
+      if (selectedGender === null) {
+        setIsGenderError(true);
+      }
+      if (selectedBloodGroup === null) {
+        setIsBloodGroupError(true);
+      }
+      if (selectedMaritalStatus === null) {
+        setIsMaritalStatusError(true);
+      }
+      if (teachersDateOfBirth === null) {
+        setIsTeachersDateOfBirthError(true);
+      }
     }
-
     // Continue with form submission logic if no errors
   };
 
@@ -102,7 +110,9 @@ const TeacherRegister = () => {
         .then((response) => {
           setTeachersImage(response.data.data.url);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 

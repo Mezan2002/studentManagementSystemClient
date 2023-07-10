@@ -46,14 +46,27 @@ const StudentRegister = () => {
       fathersDateOfBirth === null ||
       mothersDateOfBirth === null
     ) {
-      setIsClassError(true);
-      setIsGenderError(true);
-      setIsBloodGroupError(true);
-      setIsMaritalStatusError(true);
-      setIsStudentsDateOfBirthError(true);
-      setIsFathersDateOfBirthError(true);
-      setIsMothersDateOfBirthError(true);
-      return;
+      if (selectedClass === null) {
+        setIsClassError(true);
+      }
+      if (selectedGender === null) {
+        setIsGenderError(true);
+      }
+      if (selectedBloodGroup === null) {
+        setIsBloodGroupError(true);
+      }
+      if (selectedMaritalStatus === null) {
+        setIsMaritalStatusError(true);
+      }
+      if (studentsDateOfBirth === null) {
+        setIsStudentsDateOfBirthError(true);
+      }
+      if (fathersDateOfBirth === null) {
+        setIsFathersDateOfBirthError(true);
+      }
+      if (mothersDateOfBirth === null) {
+        setIsMothersDateOfBirthError(true);
+      }
     }
 
     // Continue with form submission logic if no errors

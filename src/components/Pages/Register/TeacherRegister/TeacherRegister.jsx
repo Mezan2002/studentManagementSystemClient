@@ -6,8 +6,10 @@ import FormTop from "../FormTop/FormTop";
 import AddressData from "../AddressData/AddressData";
 import LogInInfo from "../LogInInfo/LogInInfo";
 import FormBottom from "../FormBottom/FormBottom";
+import axios from "axios";
 
 const TeacherRegister = () => {
+  const [teachersImage, setTeachersImage] = useState("");
   const [isSameAddress, setIsSameAddress] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [teachersDateOfBirth, setTeachersDateOfBirth] = useState(null);
@@ -22,6 +24,8 @@ const TeacherRegister = () => {
   const [isMaritalStatusError, setIsMaritalStatusError] = useState(false);
   const [isTeachersDateOfBirthError, setIsTeachersDateOfBirthError] =
     useState(false);
+
+  const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
 
   // handle functions start
 
@@ -54,8 +58,6 @@ const TeacherRegister = () => {
     setTeachersDateOfBirth(selectedDate);
   };
 
-  console.log("Teachers Date Of Birth: ", teachersDateOfBirth);
-
   const handleChangeSelectedDesignation = (SelectedDesignation) => {
     setSelectedDesignation(SelectedDesignation);
     setIsDesignationError(false);
@@ -65,27 +67,24 @@ const TeacherRegister = () => {
     setSelectedGender(selectedGender);
     setIsGenderError(false);
   };
-  console.log(selectedGender);
 
   const handeleSelectedBloodGroup = (selectedBloodGroup) => {
     setSelectedBloodGroup(selectedBloodGroup);
     setIsBloodGroupError(false);
   };
-  console.log(selectedBloodGroup);
 
   const handeleSelectedMaritalStatus = (selectedMaritalStatus) => {
     setSelectedMaritalStatus(selectedMaritalStatus);
     setIsMaritalStatusError(false);
   };
-  console.log(selectedMaritalStatus);
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));
     }
-    /* const image = event.target.files[0];
-    const forlgata = new Forlgata();
-    forlgata.append("image", image);
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
 
     const config = {
       headers: {
@@ -97,22 +96,117 @@ const TeacherRegister = () => {
       axios
         .post(
           `https://api.imgbb.com/1/upload?key=${imageHostingKey}`,
-          forlgata,
+          formData,
           config
         )
         .then((response) => {
-          setProfilePic(response.data.data.url);
+          setTeachersImage(response.data.data.url);
         })
-        .catch((error) => {
-          console.log(error);
-        });
-    } */
+        .catch((error) => {});
+    }
   };
 
   // handle functions end
 
   const onSubmit = (data) => {
-    console.log(data);
+    const presentAddress = {
+      presentDivision: data.presentDivision,
+      presentDistrict: data.presentDistrict,
+      presentUpazilla: data.presentUpazilla,
+      presentCityCoporation: data.presentCityCoporation,
+      presentUnion: data.presentUnion,
+      presentWardNo: data.presentWardNo,
+      presentPostOffice: data.presentPostOffice,
+      presentPostCode: data.presentPostCode,
+    };
+    const permanentAddress = {
+      permanentDivision: data.permanentDivision,
+      permanentDistrict: data.permanentDistrict,
+      permanentUpazilla: data.permanentUpazilla,
+      permanentCityCoporation: data.permanentCityCoporation,
+      permanentUnion: data.permanentUnion,
+      permanentWardNo: data.permanentWardNo,
+      permanentPostOffice: data.permanentPostOffice,
+      permanentPostCode: data.permanentPostCode,
+    };
+
+    const presentAndPermanentAddress = {
+      presentAndPermanentDivision: data.presentAndPermanentDivision,
+      presentAndPermanentDistrict: data.presentAndPermanentDistrict,
+      presentAndPermanentUpazilla: data.presentAndPermanentUpazilla,
+      presentAndPermanentCityCoporation: data.presentAndPermanentCityCoporation,
+      presentAndPermanentUnion: data.presentAndPermanentUnion,
+      presentAndPermanentWardNo: data.presentAndPermanentWardNo,
+      presentAndPermanentPostOffice: data.presentAndPermanentPostOffice,
+      presentAndPermanentPostCode: data.presentAndPermanentPostCode,
+    };
+
+    const teachersInfo = {
+      teachersImage,
+      teachersNameInBangla: data.teachersFullNameInBangla,
+      teachersNameInEnglish: data.teachersFullNameInEnglish,
+      teachersNIDNumber: data.teachersNIDNumber,
+      teachersDateOfBirth,
+      gender: selectedGender,
+      nationality: data.nationality,
+      religion: data.religion,
+      teachersDesignaion: selectedDesignation,
+      teachersTakingClass: data.subjectsClassTake,
+      bloodGroup: selectedBloodGroup,
+      maritalStatus: selectedMaritalStatus,
+      teachersMobileNumber: data.teachersMobileNumber,
+      teachersEmail: data.teachersEmail,
+    };
+
+    const address = {
+      presentAddress:
+        data.presentDivision &&
+        data.presentDistrict &&
+        data.presentUpazilla &&
+        data.presentCityCoporation &&
+        data.presentUnion &&
+        data.presentWardNo &&
+        data.presentPostOffice &&
+        data.presentPostCode !== undefined
+          ? presentAddress
+          : null,
+      permanentAddress:
+        data.permanentDivision &&
+        data.permanentDistrict &&
+        data.permanentUpazilla &&
+        data.permanentCityCoporation &&
+        data.permanentUnion &&
+        data.permanentWardNo &&
+        data.permanentPostOffice &&
+        data.permanentPostCode !== undefined
+          ? permanentAddress
+          : null,
+      presentAndPermanentAddress:
+        data.presentAndPermanentDivision &&
+        data.presentAndPermanentDistrict &&
+        data.presentAndPermanentUpazilla &&
+        data.presentAndPermanentCityCoporation &&
+        data.presentAndPermanentUnion &&
+        data.presentAndPermanentWardNo &&
+        data.presentAndPermanentPostOffice &&
+        data.presentAndPermanentPostCode !== undefined
+          ? presentAndPermanentAddress
+          : null,
+    };
+
+    const logInInfo = {
+      logInMobileNumber: data.logInMobileNumber,
+      logInPassword: data.logInPassword,
+      reTypeLogInPassword: data.reTypeLogInPassword,
+    };
+
+    const teacherRegisteredData = {
+      teachersInfo,
+      address,
+      logInInfo,
+    };
+
+    console.log(teacherRegisteredData);
   };
 
   const isStudnet = false;

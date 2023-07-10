@@ -7,8 +7,10 @@ import GuardiantInfo from "./GuardiantInfo/GuardiantInfo";
 import LogInInfo from "../LogInInfo/LogInInfo";
 import FormBottom from "../FormBottom/FormBottom";
 import AddressData from "../AddressData/AddressData";
+import axios from "axios";
 
 const StudentRegister = () => {
+  const [studentsImage, setStudentsImage] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLocalGuardian, setIsLocalGuardian] = useState(false);
   const [isSameAddress, setIsSameAddress] = useState(false);
@@ -30,6 +32,8 @@ const StudentRegister = () => {
     useState(false);
   const [isMothersDateOfBirthError, setIsMothersDateOfBirthError] =
     useState(false);
+
+  const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
 
   const handleRegisterClicked = () => {
     setIsRegisterClicked(true);
@@ -105,17 +109,13 @@ const StudentRegister = () => {
 
   // handle functions end
 
-  /* console.log("Student DOB", studentsDateOfBirth);
-  console.log("Fathers DOB", fathersDateOfBirth);
-  console.log("Mothers DOB", mothersDateOfBirth);
- */
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedImage(URL.createObjectURL(event.target.files[0]));
     }
-    /* const image = event.target.files[0];
-    const forlgata = new Forlgata();
-    forlgata.append("image", image);
+    const image = event.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
 
     const config = {
       headers: {
@@ -127,21 +127,19 @@ const StudentRegister = () => {
       axios
         .post(
           `https://api.imgbb.com/1/upload?key=${imageHostingKey}`,
-          forlgata,
+          formData,
           config
         )
         .then((response) => {
-          setProfilePic(response.data.data.url);
+          setStudentsImage(response.data.data.url);
         })
         .catch((error) => {
           console.log(error);
         });
-    } */
+    }
   };
 
-  const isStudent = {
-    isStudent: true,
-  };
+  const isStudent = true;
 
   const onSubmit = (data) => {
     console.log(data);
@@ -185,7 +183,7 @@ const StudentRegister = () => {
     };
 
     const studentsInfo = {
-      studentsPhoto: "",
+      studentsImage,
       studentNameInBangla: data.studentsFullNameInBangla,
       studentNameInEnglish: data.studentsFullNameInEnglish,
       birthPlace: data.birthPlace,
@@ -269,13 +267,13 @@ const StudentRegister = () => {
       reTypeLogInPassword: data.reTypeLogInPassword,
     };
 
-    const studentRegisteredDate = {
+    const studentRegisteredData = {
       studentsInfo,
       guardiantInfo,
       address,
       logInInfo,
     };
-    console.log(studentRegisteredDate);
+    console.log(studentRegisteredData);
   };
 
   return (

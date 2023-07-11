@@ -24,6 +24,7 @@ const TeacherRegister = () => {
   const [isMaritalStatusError, setIsMaritalStatusError] = useState(false);
   const [isTeachersDateOfBirthError, setIsTeachersDateOfBirthError] =
     useState(false);
+  const [educationalQualification, setEducationalQualification] = useState([]);
 
   const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
 
@@ -166,6 +167,7 @@ const TeacherRegister = () => {
       maritalStatus: selectedMaritalStatus,
       teachersMobileNumber: data.teachersMobileNumber,
       teachersEmail: data.teachersEmail,
+      teachersEducationalQualification: educationalQualification,
     };
 
     const address = {
@@ -282,7 +284,9 @@ const TeacherRegister = () => {
 
             {/* educational qualification form input start */}
 
-            <EducationalQualification />
+            <EducationalQualification
+              setEducationalQualification={setEducationalQualification}
+            />
 
             {/* educational qualification form input end */}
 

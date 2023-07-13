@@ -7,8 +7,12 @@ import AddressData from "../AddressData/AddressData";
 import LogInInfo from "../LogInInfo/LogInInfo";
 import FormBottom from "../FormBottom/FormBottom";
 import axios from "axios";
+import { customDateOnly } from "../../../../utils/takingDateOnly";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const TeacherRegister = () => {
+  const navigate = useNavigate();
   const [teachersImage, setTeachersImage] = useState("");
   const [isSameAddress, setIsSameAddress] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -25,6 +29,12 @@ const TeacherRegister = () => {
   const [isTeachersDateOfBirthError, setIsTeachersDateOfBirthError] =
     useState(false);
   const [educationalQualification, setEducationalQualification] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
 
@@ -157,7 +167,7 @@ const TeacherRegister = () => {
       teachersNameInBangla: data.teachersFullNameInBangla,
       teachersNameInEnglish: data.teachersFullNameInEnglish,
       teachersNIDNumber: data.teachersNIDNumber,
-      teachersDateOfBirth,
+      teachersDateOfBirth: customDateOnly(teachersDateOfBirth),
       gender: selectedGender,
       nationality: data.nationality,
       religion: data.religion,
@@ -167,7 +177,6 @@ const TeacherRegister = () => {
       maritalStatus: selectedMaritalStatus,
       teachersMobileNumber: data.teachersMobileNumber,
       teachersEmail: data.teachersEmail,
-      teachersEducationalQualification: educationalQualification,
     };
 
     const address = {
@@ -216,19 +225,37 @@ const TeacherRegister = () => {
       userType: "teacher",
       teachersInfo,
       address,
+      teachersEducationalQualification: educationalQualification,
       logInInfo,
     };
 
     console.log(teacherRegisteredData);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: "Bearer your_token",
+      },
+    };
+
+    axios
+      .post(
+        "http://localhost:3000/registerUser",
+        JSON.stringify(teacherRegisteredData),
+        config
+      )
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire("Registered Successfully!", "", "success");
+          reset();
+          navigate("/login");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const isStudnet = false;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
   return (
     <section
       style={{

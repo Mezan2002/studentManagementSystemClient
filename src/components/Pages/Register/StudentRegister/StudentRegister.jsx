@@ -307,7 +307,7 @@ const StudentRegister = () => {
       )
       .then((res) => {
         if (res.data.acknowledged) {
-          Swal.fire("Sign Up Successfully!", "", "success");
+          Swal.fire("Registered Successfully!", "", "success");
           reset();
           // navigate("/");
         }

@@ -28,11 +28,20 @@ const LogInInfo = ({ register, errors }) => {
                   error
                   {...register("logInMobileNumber", {
                     required: true,
+                    minLength: {
+                      value: 11,
+                      message:
+                        "Mobile number must be at least 11 characters long",
+                    },
+                    maxLength: {
+                      value: 11,
+                      message: "Mobile number must not exceed 11 characters",
+                    },
                   })}
                   type="tel"
                   size="md"
                   placeholder="Log In Mobile Number *"
-                  className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
+                  className="rounded-l-none  focus:!border-t-red-500 placeholder:text-red-400 border !border-t-red-500"
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
@@ -44,6 +53,15 @@ const LogInInfo = ({ register, errors }) => {
                 <Input
                   {...register("logInMobileNumber", {
                     required: true,
+                    minLength: {
+                      value: 11,
+                      message:
+                        "Mobile number must be at least 11 characters long",
+                    },
+                    maxLength: {
+                      value: 11,
+                      message: "Mobile number must not exceed 11 characters",
+                    },
                   })}
                   type="tel"
                   size="md"
@@ -58,6 +76,11 @@ const LogInInfo = ({ register, errors }) => {
                 />
               )}
             </div>
+            <p className="-mt-3 text-red-400 text-sm font-semibold">
+              {errors.logInMobileNumber && (
+                <p>{errors.logInMobileNumber.message}</p>
+              )}
+            </p>
             <div className="grid grid-cols-2 gap-5">
               {errors.logInPassword ? (
                 <>

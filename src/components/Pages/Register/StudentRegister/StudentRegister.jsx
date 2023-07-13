@@ -8,6 +8,8 @@ import LogInInfo from "../LogInInfo/LogInInfo";
 import FormBottom from "../FormBottom/FormBottom";
 import AddressData from "../AddressData/AddressData";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { customDateOnly } from "../../../../utils/takingDateOnly";
 
 const StudentRegister = () => {
   const [studentsImage, setStudentsImage] = useState("");
@@ -74,6 +76,7 @@ const StudentRegister = () => {
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -200,7 +203,7 @@ const StudentRegister = () => {
       studentNameInBangla: data.studentsFullNameInBangla,
       studentNameInEnglish: data.studentsFullNameInEnglish,
       birthPlace: data.birthPlace,
-      studentsDateOfBirth,
+      studentsDateOfBirth: customDateOnly(studentsDateOfBirth),
       nationality: data.nationality,
       religion: data.religion,
       class: selectedClass,
@@ -216,7 +219,7 @@ const StudentRegister = () => {
         fathersNameInBangla: data.fathersFullNameInBangla,
         fathersNameInEnglish: data.fathersFullNameInEnglish,
         fathersNIDNumber: data.fathersNIDNumber,
-        fathersDateOfBirth,
+        fathersDateOfBirth: customDateOnly(fathersDateOfBirth),
         isFatherDied: data.ifFatherDied,
         fathersMobileNumber: data.fathersMobileNumber,
         fathersOccupation: data.fathersOccupation,
@@ -225,7 +228,7 @@ const StudentRegister = () => {
         mothersNameInBangla: data.mothersFullNameInBangla,
         mothersNameInEnglish: data.mothersFullNameInEnglish,
         mothersNIDNumber: data.mothersNIDNumber,
-        mothersDateOfBirth,
+        mothersDateOfBirth: customDateOnly(mothersDateOfBirth),
         isMotherDied: data.ifMotherDied,
         mothersMobileNumber: data.mothersMobileNumber,
         mothersOccupation: data.mothersOccupation,
@@ -281,12 +284,35 @@ const StudentRegister = () => {
     };
 
     const studentRegisteredData = {
+      userType: "student",
       studentsInfo,
       guardiantInfo,
       address,
       logInInfo,
     };
     console.log(studentRegisteredData);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: "Bearer your_token",
+      },
+    };
+
+    axios
+      .post(
+        "http://localhost:3000/registerUser",
+        JSON.stringify(studentRegisteredData),
+        config
+      )
+      .then((res) => {
+        if (res.data.acknowledged) {
+          Swal.fire("Sign Up Successfully!", "", "success");
+          reset();
+          // navigate("/");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

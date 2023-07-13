@@ -213,6 +213,7 @@ const TeacherRegister = () => {
     };
 
     const teacherRegisteredData = {
+      userType: "teacher",
       teachersInfo,
       address,
       logInInfo,

@@ -377,49 +377,78 @@ const StudentsInfo = ({
             </Select>
           )}
         </div>
-        <div className="relative flex">
-          <Menu placement="bottom-start">
-            <MenuHandler>
-              <Button
-                ripple={false}
-                variant="text"
-                color="blue-gray"
-                className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
-              >
-                +880
-              </Button>
-            </MenuHandler>
-          </Menu>
-          {errors.studentsMobileNumber ? (
-            <Input
-              error
-              {...register("studentsMobileNumber", { required: true })}
-              type="tel"
-              size="md"
-              placeholder="Students Mobile Number *"
-              className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              containerProps={{
-                className: "min-w-0",
-              }}
-            />
-          ) : (
-            <Input
-              {...register("studentsMobileNumber", { required: true })}
-              type="tel"
-              size="md"
-              placeholder="Students Mobile Number *"
-              className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
-              labelProps={{
-                className: "before:content-none after:content-none",
-              }}
-              containerProps={{
-                className: "min-w-0",
-              }}
-            />
-          )}
+        <div>
+          <div className="relative flex">
+            <Menu placement="bottom-start">
+              <MenuHandler>
+                <Button
+                  ripple={false}
+                  variant="text"
+                  color="blue-gray"
+                  className="flex h-10 items-center gap-2 rounded-r-none border border-r-0 border-blue-gray-200 bg-blue-gray-500/10 pl-3"
+                >
+                  +880
+                </Button>
+              </MenuHandler>
+            </Menu>
+            {errors.studentsMobileNumber ? (
+              <Input
+                error
+                {...register("studentsMobileNumber", {
+                  required: true,
+                  minLength: {
+                    value: 11,
+                    message:
+                      "Mobile number must be at least 11 characters long",
+                  },
+                  maxLength: {
+                    value: 11,
+                    message: "Mobile number must not exceed 11 characters",
+                  },
+                })}
+                type="tel"
+                size="md"
+                placeholder="Students Mobile Number *"
+                className="rounded-l-none focus:!border-t-red-500 placeholder:text-red-400 !border-t-red-500"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+                containerProps={{
+                  className: "min-w-0",
+                }}
+              />
+            ) : (
+              <Input
+                {...register("studentsMobileNumber", {
+                  required: true,
+                  minLength: {
+                    value: 11,
+                    message:
+                      "Mobile number must be at least 11 characters long",
+                  },
+                  maxLength: {
+                    value: 11,
+                    message: "Mobile number must not exceed 11 characters",
+                  },
+                })}
+                type="tel"
+                size="md"
+                placeholder="Students Mobile Number *"
+                className="rounded-l-none !border-t-blue-gray-200 focus:!border-t-blue-500"
+                labelProps={{
+                  className: "before:content-none after:content-none",
+                }}
+                containerProps={{
+                  className: "min-w-0",
+                }}
+              />
+            )}
+          </div>
+          <p className="text-red-400 text-sm font-semibold">
+            {errors.studentsMobileNumber && (
+              <p>{errors.studentsMobileNumber.message}</p>
+            )}
+          </p>
         </div>
         {errors.studentsEmail ? (
           <>

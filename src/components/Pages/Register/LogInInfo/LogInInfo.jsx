@@ -1,6 +1,6 @@
 import { Button, Input, Menu, MenuHandler } from "@material-tailwind/react";
 
-const LogInInfo = ({ register, errors }) => {
+const LogInInfo = ({ register, errors, isPhoneNumberExist }) => {
   return (
     <section>
       <p className="text-xl font-bold mt-5">Login Info</p>
@@ -23,7 +23,7 @@ const LogInInfo = ({ register, errors }) => {
                   </Button>
                 </MenuHandler>
               </Menu>
-              {errors.logInMobileNumber ? (
+              {errors.logInMobileNumber || isPhoneNumberExist ? (
                 <Input
                   error
                   {...register("logInMobileNumber", {
@@ -51,18 +51,22 @@ const LogInInfo = ({ register, errors }) => {
                 />
               ) : (
                 <Input
-                  {...register("logInMobileNumber", {
-                    required: true,
-                    minLength: {
-                      value: 11,
-                      message:
-                        "Mobile number must be at least 11 characters long",
-                    },
-                    maxLength: {
-                      value: 11,
-                      message: "Mobile number must not exceed 11 characters",
-                    },
-                  })}
+                  {...register(
+                    "logInMobileNumber",
+
+                    {
+                      required: true,
+                      minLength: {
+                        value: 11,
+                        message:
+                          "Mobile number must be at least 11 characters long",
+                      },
+                      maxLength: {
+                        value: 11,
+                        message: "Mobile number must not exceed 11 characters",
+                      },
+                    }
+                  )}
                   type="tel"
                   size="md"
                   placeholder="Log In Mobile Number *"

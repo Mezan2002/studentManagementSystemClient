@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { customDateOnly } from "../../../../utils/takingDateOnly";
 
 const StudentRegister = () => {
+  const [isPhoneNumberExist, setIsPhoneNumberExist] = useState(false);
   const [studentsImage, setStudentsImage] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLocalGuardian, setIsLocalGuardian] = useState(false);
@@ -283,36 +284,52 @@ const StudentRegister = () => {
       reTypeLogInPassword: data.reTypeLogInPassword,
     };
 
-    const studentRegisteredData = {
-      userType: "student",
-      studentsInfo,
-      guardiantInfo,
-      address,
-      logInInfo,
-    };
-    console.log(studentRegisteredData);
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: "Bearer your_token",
-      },
-    };
-
     axios
-      .post(
-        "http://localhost:3000/registerUser",
-        JSON.stringify(studentRegisteredData),
-        config
+      .get(
+        `http://localhost:3000/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
       )
       .then((res) => {
-        if (res.data.acknowledged) {
-          Swal.fire("Registered Successfully!", "", "success");
-          reset();
-          // navigate("/");
+        if (res.data === true) {
+          setIsPhoneNumberExist(true);
+          Swal.fire(
+            "Opps!!!",
+            "you have already registered with this log in phone number, please try with another phone number and press register again!",
+            "error"
+          );
+          return;
+        } else {
+          const studentRegisteredData = {
+            userType: "student",
+            studentsInfo,
+            guardiantInfo,
+            address,
+            logInInfo,
+          };
+          console.log(studentRegisteredData);
+
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+              // Authorization: "Bearer your_token",
+            },
+          };
+
+          axios
+            .post(
+              "http://localhost:3000/registerUser",
+              JSON.stringify(studentRegisteredData),
+              config
+            )
+            .then((res) => {
+              if (res.data.acknowledged) {
+                Swal.fire("Registered Successfully!", "", "success");
+                reset();
+                // navigate("/");
+              }
+            })
+            .catch((err) => console.log(err));
         }
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   return (
@@ -380,7 +397,11 @@ const StudentRegister = () => {
             {/* address info form input end */}
 
             {/* login info form input start */}
-            <LogInInfo errors={errors} register={register} />
+            <LogInInfo
+              errors={errors}
+              register={register}
+              isPhoneNumberExist={isPhoneNumberExist}
+            />
             {/* login info form input end */}
 
             {/* form bottom start */}

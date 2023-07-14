@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const TeacherRegister = () => {
   const navigate = useNavigate();
+  const [isPhoneNumberExist, setIsPhoneNumberExist] = useState(false);
   const [teachersImage, setTeachersImage] = useState("");
   const [isSameAddress, setIsSameAddress] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -65,7 +66,6 @@ const TeacherRegister = () => {
         setIsTeachersDateOfBirthError(true);
       }
     }
-    // Continue with form submission logic if no errors
   };
 
   const handleIsSameAddress = (event) => {
@@ -221,37 +221,53 @@ const TeacherRegister = () => {
       reTypeLogInPassword: data.reTypeLogInPassword,
     };
 
-    const teacherRegisteredData = {
-      userType: "teacher",
-      teachersInfo,
-      address,
-      teachersEducationalQualification: educationalQualification,
-      logInInfo,
-    };
-
-    console.log(teacherRegisteredData);
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        // Authorization: "Bearer your_token",
-      },
-    };
-
     axios
-      .post(
-        "http://localhost:3000/registerUser",
-        JSON.stringify(teacherRegisteredData),
-        config
+      .get(
+        `http://localhost:3000/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
       )
       .then((res) => {
-        if (res.data.acknowledged) {
-          Swal.fire("Registered Successfully!", "", "success");
-          reset();
-          navigate("/login");
+        if (res.data === true) {
+          setIsPhoneNumberExist(true);
+          Swal.fire(
+            "Opps!!!",
+            "you have already registered with this log in phone number, please try with another phone number and press register again!",
+            "error"
+          );
+          return;
+        } else {
+          const teacherRegisteredData = {
+            userType: "teacher",
+            teachersInfo,
+            address,
+            teachersEducationalQualification: educationalQualification,
+            logInInfo,
+          };
+
+          console.log(teacherRegisteredData);
+
+          const config = {
+            headers: {
+              "Content-Type": "application/json",
+              // Authorization: "Bearer your_token",
+            },
+          };
+
+          axios
+            .post(
+              "http://localhost:3000/registerUser",
+              JSON.stringify(teacherRegisteredData),
+              config
+            )
+            .then((res) => {
+              if (res.data.acknowledged) {
+                Swal.fire("Registered Successfully!", "", "success");
+                reset();
+                navigate("/login");
+              }
+            })
+            .catch((err) => console.log(err));
         }
-      })
-      .catch((err) => console.log(err));
+      });
   };
 
   const isStudnet = false;
@@ -313,6 +329,7 @@ const TeacherRegister = () => {
             {/* educational qualification form input start */}
 
             <EducationalQualification
+              educationalQualification={educationalQualification}
               setEducationalQualification={setEducationalQualification}
             />
 
@@ -320,7 +337,11 @@ const TeacherRegister = () => {
 
             {/* login info form input start */}
 
-            <LogInInfo register={register} errors={errors} />
+            <LogInInfo
+              register={register}
+              errors={errors}
+              isPhoneNumberExist={isPhoneNumberExist}
+            />
 
             {/* login info form input end */}
 

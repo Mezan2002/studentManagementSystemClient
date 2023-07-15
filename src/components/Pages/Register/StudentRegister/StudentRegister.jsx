@@ -305,7 +305,6 @@ const StudentRegister = () => {
             address,
             logInInfo,
           };
-          console.log(studentRegisteredData);
 
           const config = {
             headers: {

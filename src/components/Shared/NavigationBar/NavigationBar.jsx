@@ -1,29 +1,67 @@
-import React, { useState, useEffect } from "react";
 import {
-  Navbar,
-  MobileNav,
-  Typography,
+  Avatar,
   Button,
+  Collapse,
   IconButton,
-  MenuList,
-  MenuItem,
   Menu,
   MenuHandler,
-  Avatar,
+  MenuItem,
+  MenuList,
+  Navbar,
+  Typography,
 } from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
 
 import {
-  UserCircleIcon,
   ChevronDownIcon,
   Cog6ToothIcon,
-  InboxArrowDownIcon,
   LifebuoyIcon,
   PowerIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  fetchUser,
+  logoutUser,
+} from "../../../features/loggedInUser/loggedInUserSlice";
 
 export default function NavigationBar() {
+  const dispatch = useDispatch();
   const [openNav, setOpenNav] = useState(false);
+  const [usersName, setUsersName] = useState("");
+  const [usersType, setUsersType] = useState("");
+  const [usersImage, setUsersImage] = useState("");
+
+  // * get users data start
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
+  useEffect(() => {
+    dispatch(fetchUser());
+    if (user?.userType === "teacher") {
+      setUsersName(user?.teachersInfo?.teachersNameInEnglish);
+      setUsersType("teacher");
+      setUsersImage(user?.teachersInfo?.teachersImage);
+    } else if (user?.userType === "student") {
+      setUsersName(user?.studentsInfo?.studentNameInEnglish);
+      setUsersType("student");
+      setUsersImage(user?.studentsInfo?.studentsImage);
+    }
+  }, [
+    dispatch,
+    user?.userType,
+    user?.studentsInfo?.studentsImage,
+    user?.teachersInfo?.teachersImage,
+    user?.teachersInfo?.teachersNameInEnglish,
+    user?.studentsInfo?.studentNameInEnglish,
+  ]);
+  // * get users data end
+
+  // * handle log out start
+  const handleLogOut = () => {
+    dispatch(logoutUser());
+    localStorage.removeItem("token");
+  };
+  // * handle log out end
 
   useEffect(() => {
     window.addEventListener(
@@ -42,16 +80,13 @@ export default function NavigationBar() {
       icon: Cog6ToothIcon,
     },
     {
-      label: "Inbox",
-      icon: InboxArrowDownIcon,
-    },
-    {
       label: "Help",
       icon: LifebuoyIcon,
     },
     {
-      label: "Sign Out",
+      label: "Log Out",
       icon: PowerIcon,
+      handler: handleLogOut,
     },
   ];
 
@@ -117,6 +152,18 @@ export default function NavigationBar() {
           Contact Us
         </a>
       </Typography>
+      {user && (
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className="p-1 font-normal"
+        >
+          <Link to="/dashboard" className="flex items-center">
+            Dashboard
+          </Link>
+        </Typography>
+      )}
     </ul>
   );
 
@@ -137,7 +184,7 @@ export default function NavigationBar() {
               size="sm"
               alt="candice wu"
               className="border border-blue-500 p-0.5"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+              src={usersImage}
             />
             <ChevronDownIcon
               strokeWidth={2.5}
@@ -148,7 +195,7 @@ export default function NavigationBar() {
           </Button>
         </MenuHandler>
         <MenuList className="p-1">
-          {profileMenuItems.map(({ label, icon }, key) => {
+          {profileMenuItems.map(({ label, icon, handler }, key) => {
             const isLastItem = key === profileMenuItems.length - 1;
             return (
               <MenuItem
@@ -168,6 +215,7 @@ export default function NavigationBar() {
                   as="span"
                   variant="small"
                   className="font-normal"
+                  onClick={handler}
                   color={isLastItem ? "red" : "inherit"}
                 >
                   {label}
@@ -179,7 +227,6 @@ export default function NavigationBar() {
       </Menu>
     );
   }
-
   return (
     <>
       <Navbar className="sticky bg-transparent top-0 z-40 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 border-0">
@@ -192,24 +239,31 @@ export default function NavigationBar() {
           </a>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            <Link to="/login">
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Log In</span>
-              </Button>
-            </Link>
-            <Link to="register">
-              <Button
-                variant="gradient"
-                size="sm"
-                className="hidden lg:inline-block"
-              >
-                <span>Register</span>
-              </Button>
-            </Link>
+            {user.message ? (
+              <>
+                {" "}
+                <Link to="/login">
+                  <Button
+                    variant="gradient"
+                    size="sm"
+                    className="hidden lg:inline-block"
+                  >
+                    <span>Log In</span>
+                  </Button>
+                </Link>
+                <Link to="register">
+                  <Button
+                    variant="gradient"
+                    size="sm"
+                    className="hidden lg:inline-block"
+                  >
+                    <span>Register</span>
+                  </Button>
+                </Link>{" "}
+              </>
+            ) : (
+              <ProfileMenu />
+            )}
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -247,22 +301,26 @@ export default function NavigationBar() {
                 </svg>
               )}
             </IconButton>
-            <ProfileMenu />
           </div>
         </div>
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
-          <Link to="/login">
-            <Button variant="gradient" size="sm" fullWidth className="mb-2">
-              <span>Log In</span>
-            </Button>
-          </Link>
-          <Link to="/register">
-            <Button variant="gradient" size="sm" fullWidth className="mb-2">
-              <span>Register</span>
-            </Button>
-          </Link>
-        </MobileNav>
+          {user.message ? (
+            <>
+              {" "}
+              <Link to="/login">
+                <Button variant="gradient" size="sm" fullWidth className="mb-2">
+                  <span>Log In</span>
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="gradient" size="sm" fullWidth className="mb-2">
+                  <span>Register</span>
+                </Button>
+              </Link>{" "}
+            </>
+          ) : null}
+        </Collapse>
       </Navbar>
     </>
   );

@@ -7,7 +7,6 @@ const initialState = {
   errorMessage: "",
 };
 
-
 // * logged out user start
 
 export const logoutUser = () => {
@@ -56,7 +55,6 @@ const loggedInUserSlice = createSlice({
   },
 });
 // * logged in user end
-
 
 export const { clearLoggedInUser } = loggedInUserSlice.actions;
 export default loggedInUserSlice.reducer;

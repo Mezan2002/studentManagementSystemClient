@@ -31,18 +31,23 @@ const Login = () => {
 
   const onSubmit = (data) => {
     const url = `http://localhost:3000/logInUser?phoneNumber=${data.phoneNumberForLogIn}&password=${data.passwordForLogIn}`;
-
-    axios.get(url).then((res) => {
-      if (res.data.message) {
-        Swal.fire("Opps!!!", `${res.data.message}`, "error");
-      } else {
-        localStorage.setItem("token", res.data);
-        reset();
-        navigate("/dashboard");
-        dispatch(fetchUser());
-        Swal.fire("Logged In Successfully!", "", "success");
-      }
-    });
+    axios
+      .get(url, {
+        headers: {
+          authorization: "Bearer helloWorldIAmGoingToLoggedIn",
+        },
+      })
+      .then((res) => {
+        if (res.data.message) {
+          Swal.fire("Opps!!!", `${res.data.message}`, "error");
+        } else {
+          localStorage.setItem("token", res.data);
+          reset();
+          navigate("/dashboard");
+          dispatch(fetchUser());
+          Swal.fire("Logged In Successfully!", "", "success");
+        }
+      });
   };
 
   return (

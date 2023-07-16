@@ -1,11 +1,11 @@
-import { Card, Input, Checkbox, Typography } from "@material-tailwind/react";
+import { Card, Checkbox, Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { fetchUser } from "../../../features/loggedInUser/loggedInUserSlice";
-import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Login = () => {
       } else {
         localStorage.setItem("token", res.data);
         reset();
-        // navigate("/");
+        navigate("/dashboard");
         dispatch(fetchUser());
         Swal.fire("Logged In Successfully!", "", "success");
       }

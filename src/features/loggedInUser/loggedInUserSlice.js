@@ -7,6 +7,19 @@ const initialState = {
   errorMessage: "",
 };
 
+
+// * logged out user start
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    // Perform any additional logout logic if needed
+    dispatch(loggedInUserSlice.actions.clearLoggedInUser());
+  };
+};
+
+// * logged out user end
+
+// * logged in user start
 export const fetchUser = createAsyncThunk(
   "loggedInUser/fetchLoggedInUser",
   async () => {
@@ -25,6 +38,11 @@ export const fetchUser = createAsyncThunk(
 const loggedInUserSlice = createSlice({
   name: "loggedInUser",
   initialState,
+  reducers: {
+    clearLoggedInUser: (state) => {
+      state.loggedInUser = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {
       state.isLoading = true;
@@ -37,5 +55,8 @@ const loggedInUserSlice = createSlice({
     });
   },
 });
+// * logged in user end
 
+
+export const { clearLoggedInUser } = loggedInUserSlice.actions;
 export default loggedInUserSlice.reducer;

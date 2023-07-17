@@ -1,11 +1,15 @@
 import { Checkbox, Typography } from "@material-tailwind/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const FormBottom = ({ handleRegisterClicked }) => {
+  const [isAgreeWithTerms, setIsAgreeWithTerms] = useState(false);
+
   return (
     <section>
       <div className="flex items-center justify-between">
         <Checkbox
+          onClick={(event) => setIsAgreeWithTerms(event.target.checked)}
           label={
             <Typography
               variant="small"
@@ -35,6 +39,7 @@ const FormBottom = ({ handleRegisterClicked }) => {
         </Typography>
       </div>
       <button
+        disabled={!isAgreeWithTerms}
         onClick={handleRegisterClicked}
         type="submit"
         className="btn btn-block mt-10 bg-[#2196F3] text-white hover:bg-[#2196F3]"

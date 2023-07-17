@@ -3,13 +3,24 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../../../../features/loggedInUser/loggedInUserSlice";
 
-const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
+const StudentsDashboardLeft = ({
+  usersName,
+  usersType,
+  usersImage,
+  isPayment,
+  setIsPayment,
+  handlePayment,
+  handleMainDashboard,
+  isMainDashboard,
+}) => {
   const dispatch = useDispatch();
 
+  // * handler functions start
   const handleLogOut = () => {
     dispatch(logoutUser());
     localStorage.removeItem("token");
   };
+  // * handler functions end
   return (
     <section>
       <div className="">
@@ -28,7 +39,12 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
           </div>
           <div className="mb-16">
             <div className="mt-8">
-              <div className="flex items-center justify-between cursor-pointer bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
+              <div
+                onClick={handleMainDashboard}
+                className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                  isMainDashboard && "bg-white"
+                } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+              >
                 <div className="flex items-center">
                   <img
                     loading="lazy"
@@ -136,7 +152,12 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
+              <div
+                onClick={handlePayment}
+                className={`flex items-center justify-between cursor-pointer ${
+                  isPayment && "bg-white"
+                } hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+              >
                 <div className="flex items-center">
                   <img
                     loading="lazy"

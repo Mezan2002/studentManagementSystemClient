@@ -152,7 +152,7 @@ export default function NavigationBar() {
           Contact Us
         </a>
       </Typography>
-      {user && (
+      {!user.message && (
         <Typography
           as="li"
           variant="small"

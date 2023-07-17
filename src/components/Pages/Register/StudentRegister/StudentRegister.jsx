@@ -1,15 +1,16 @@
 // import axios from "axios";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import FormTop from "../FormTop/FormTop";
-import StudentsInfo from "./StudentsInfo/StudentsInfo";
-import GuardiantInfo from "./GuardiantInfo/GuardiantInfo";
-import LogInInfo from "../LogInInfo/LogInInfo";
-import FormBottom from "../FormBottom/FormBottom";
-import AddressData from "../AddressData/AddressData";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { customDateOnly } from "../../../../utils/takingDateOnly";
+import AddressData from "../AddressData/AddressData";
+import FormBottom from "../FormBottom/FormBottom";
+import FormTop from "../FormTop/FormTop";
+import LogInInfo from "../LogInInfo/LogInInfo";
+import GuardiantInfo from "./GuardiantInfo/GuardiantInfo";
+import StudentsInfo from "./StudentsInfo/StudentsInfo";
 
 const StudentRegister = () => {
   const [isPhoneNumberExist, setIsPhoneNumberExist] = useState(false);
@@ -35,8 +36,11 @@ const StudentRegister = () => {
     useState(false);
   const [isMothersDateOfBirthError, setIsMothersDateOfBirthError] =
     useState(false);
+  const [isLoginPassAndReTypePassSame, setIsLoginPassAndReTypePassSame] =
+    useState(true);
 
   const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
+  const navigate = useNavigate();
 
   const handleRegisterClicked = () => {
     setIsRegisterClicked(true);
@@ -159,6 +163,14 @@ const StudentRegister = () => {
   const isStudent = true;
 
   const onSubmit = (data) => {
+    const isLogInPassAndReTypePassNotSame =
+      data.logInPassword !== data.reTypeLogInPassword;
+
+    if (data.logInPassword && data.reTypeLogInPassword) {
+      if (isLogInPassAndReTypePassNotSame) {
+        setIsLoginPassAndReTypePassSame(false);
+      }
+    }
     console.log(data);
     const localGuardian = {
       localGuardiansNameInBangla: data.localGuardiansFullNameInBangla,
@@ -297,6 +309,12 @@ const StudentRegister = () => {
             "error"
           );
           return;
+        } else if (isLogInPassAndReTypePassNotSame) {
+          Swal.fire(
+            "Opps!!!",
+            "your log in password and retype password is not same please check that again!",
+            "error"
+          );
         } else {
           const studentRegisteredData = {
             userType: "student",
@@ -323,7 +341,7 @@ const StudentRegister = () => {
               if (res.data.acknowledged) {
                 Swal.fire("Registered Successfully!", "", "success");
                 reset();
-                // navigate("/");
+                navigate("/login");
               }
             })
             .catch((err) => console.log(err));
@@ -399,6 +417,7 @@ const StudentRegister = () => {
             <LogInInfo
               errors={errors}
               register={register}
+              isLoginPassAndReTypePassSame={isLoginPassAndReTypePassSame}
               isPhoneNumberExist={isPhoneNumberExist}
             />
             {/* login info form input end */}

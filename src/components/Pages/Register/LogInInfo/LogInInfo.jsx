@@ -1,6 +1,39 @@
 import { Button, Input, Menu, MenuHandler } from "@material-tailwind/react";
+import { useState } from "react";
 
-const LogInInfo = ({ register, errors, isPhoneNumberExist }) => {
+const LogInInfo = ({
+  register,
+  errors,
+  isPhoneNumberExist,
+  isLoginPassAndReTypePassSame,
+}) => {
+  // const [showPassword, setShowPassword] = useState(true);
+  const [passwordToggle, setPasswordToggle] = useState(true);
+  const [reTypePasswordToggle, setReTypePasswordToggle] = useState(true);
+
+  const handleShowPassword = () => {
+    setPasswordToggle(!passwordToggle);
+    if (passwordToggle) {
+      const input = document.getElementById("password");
+      input.setAttribute("type", "text");
+      console.log(input.type);
+    } else {
+      const input = document.getElementById("password");
+      input.setAttribute("type", "password");
+      console.log(input.type);
+    }
+  };
+  const handleReTypePassword = () => {
+    setReTypePasswordToggle(!reTypePasswordToggle);
+    if (reTypePasswordToggle) {
+      const input = document.getElementById("reTypePassword");
+      input.setAttribute("type", "text");
+    } else {
+      const input = document.getElementById("reTypePassword");
+      input.setAttribute("type", "password");
+    }
+  };
+
   return (
     <section>
       <p className="text-xl font-bold mt-5">Login Info</p>
@@ -86,43 +119,85 @@ const LogInInfo = ({ register, errors, isPhoneNumberExist }) => {
               )}
             </p>
             <div className="grid grid-cols-2 gap-5">
-              {errors.logInPassword ? (
+              {errors.logInPassword ||
+              isLoginPassAndReTypePassSame === false ? (
                 <>
                   <Input
+                    id="password"
                     size="md"
                     type="password"
                     label="Set Log In Password *"
-                    icon={<img src="https://i.ibb.co/bRFKd1D/eye.png" />}
+                    icon={
+                      <img
+                        onClick={handleShowPassword}
+                        src={
+                          passwordToggle
+                            ? "https://i.ibb.co/bRFKd1D/eye.png"
+                            : "https://i.ibb.co/nLfF2nW/hide.png"
+                        }
+                      />
+                    }
                     {...register("logInPassword", { required: true })}
                     error
                   />
                 </>
               ) : (
                 <Input
+                  id="password"
                   size="md"
-                  icon={<img src="https://i.ibb.co/bRFKd1D/eye.png" />}
+                  icon={
+                    <img
+                      onClick={handleShowPassword}
+                      src={
+                        passwordToggle
+                          ? "https://i.ibb.co/bRFKd1D/eye.png"
+                          : "https://i.ibb.co/nLfF2nW/hide.png"
+                      }
+                    />
+                  }
                   type="password"
                   label="Set Log In Password *"
                   {...register("logInPassword", { required: true })}
                 />
               )}
-              {errors.reTypeLogInPassword ? (
+              {errors.reTypeLogInPassword ||
+              isLoginPassAndReTypePassSame === false ? (
                 <>
                   <Input
+                    id="reTypePassword"
                     size="md"
                     type="password"
                     label="Re-type Log In Password *"
-                    icon={<img src="https://i.ibb.co/nLfF2nW/hide.png" />}
+                    icon={
+                      <img
+                        onClick={handleReTypePassword}
+                        src={
+                          showPassword
+                            ? "https://i.ibb.co/bRFKd1D/eye.png"
+                            : "https://i.ibb.co/nLfF2nW/hide.png"
+                        }
+                      />
+                    }
                     {...register("reTypeLogInPassword", { required: true })}
                     error
                   />
                 </>
               ) : (
                 <Input
+                  id="reTypePassword"
                   size="md"
                   type="password"
                   label="Re-type Log In Password *"
-                  icon={<img src="https://i.ibb.co/nLfF2nW/hide.png" />}
+                  icon={
+                    <img
+                      onClick={handleReTypePassword}
+                      src={
+                        reTypePasswordToggle
+                          ? "https://i.ibb.co/bRFKd1D/eye.png"
+                          : "https://i.ibb.co/nLfF2nW/hide.png"
+                      }
+                    />
+                  }
                   {...register("reTypeLogInPassword", { required: true })}
                 />
               )}

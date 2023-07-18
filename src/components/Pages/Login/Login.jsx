@@ -2,7 +2,7 @@ import { Card, Checkbox, Input, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { fetchUser } from "../../../features/loggedInUser/loggedInUserSlice";
@@ -10,6 +10,7 @@ import { fetchUser } from "../../../features/loggedInUser/loggedInUserSlice";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [passwordToggle, setPasswordToggle] = useState(true);
   const {
     register,
@@ -41,11 +42,18 @@ const Login = () => {
         if (res.data.message) {
           Swal.fire("Opps!!!", `${res.data.message}`, "error");
         } else {
-          localStorage.setItem("token", res.data);
+          localStorage.setItem("token", res.data.token);
           reset();
-          navigate("/dashboard");
           dispatch(fetchUser());
           Swal.fire("Logged In Successfully!", "", "success");
+          console.log(res.data.userType);
+          if (res.data.userType === "student") {
+            navigate("/studentsDashboard");
+          } else if (res.data.userType === "teacher") {
+            navigate("/teachersDashboard");
+          } else if (res.data.userType === "admin") {
+            navigate("/adminDashboard");
+          }
         }
       });
   };

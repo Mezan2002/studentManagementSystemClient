@@ -159,9 +159,21 @@ export default function NavigationBar() {
           color="blue-gray"
           className="p-1 font-normal"
         >
-          <Link to="/dashboard" className="flex items-center">
-            Dashboard
-          </Link>
+          {usersType === "student" && (
+            <Link to="/studentsDashboard" className="flex items-center">
+              Dashboard
+            </Link>
+          )}
+          {usersType === "teacher" && (
+            <Link to="/teachersDashboard" className="flex items-center">
+              Dashboard
+            </Link>
+          )}
+          {usersType === "admin" && (
+            <Link to="/adminDashboard" className="flex items-center">
+              Dashboard
+            </Link>
+          )}
         </Typography>
       )}
     </ul>
@@ -239,7 +251,7 @@ export default function NavigationBar() {
           </a>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            {user.message ? (
+            {user.message && (
               <>
                 {" "}
                 <Link to="/login">
@@ -261,9 +273,8 @@ export default function NavigationBar() {
                   </Button>
                 </Link>{" "}
               </>
-            ) : (
-              <ProfileMenu />
             )}
+            {user.userType && <ProfileMenu />}
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"

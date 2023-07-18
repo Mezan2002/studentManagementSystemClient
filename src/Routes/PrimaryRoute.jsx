@@ -1,11 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "../components/Pages/Dashboard/Dashboard";
+import PaymentFor from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentFor";
+import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
+import TeachersMainDashboard from "../components/Pages/Dashboard/TeachersDashboard/TeachersMainDashboard/TeachersMainDashboard";
 import Home from "../components/Pages/Home/Home";
 import Login from "../components/Pages/Login/Login";
 import Register from "../components/Pages/Register/Register";
 import StudentRegister from "../components/Pages/Register/StudentRegister/StudentRegister";
 import TeacherRegister from "../components/Pages/Register/TeacherRegister/TeacherRegister";
 import Main from "../layouts/Main/Main";
+import StudentDashboardLayout from "../layouts/StudentDashboardLayout/StudentDashboardLayout";
+import TeachersDashboardLayout from "../layouts/TeachersDashboardLayout/TeachersDashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -35,7 +39,27 @@ export const router = createBrowserRouter([
     element: <TeacherRegister></TeacherRegister>,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard></Dashboard>
+    path: "/studentsDashboard",
+    element: <StudentDashboardLayout></StudentDashboardLayout>,
+    children: [
+      {
+        path: "/studentsDashboard",
+        element: <StudentsMainDashboard></StudentsMainDashboard>,
+      },
+      {
+        path: "/studentsDashboard/payment-for",
+        element: <PaymentFor></PaymentFor>,
+      },
+    ],
+  },
+  {
+    path: "/teachersDashboard",
+    element: <TeachersDashboardLayout></TeachersDashboardLayout>,
+    children: [
+      {
+        path: "/teachersDashboard",
+        element: <TeachersMainDashboard></TeachersMainDashboard>,
+      },
+    ],
   },
 ]);

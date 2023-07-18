@@ -1,19 +1,26 @@
+import { useEffect, useState } from "react";
 import { FaAngleRight, FaAngleUp } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logoutUser } from "../../../../../features/loggedInUser/loggedInUserSlice";
 
-const StudentsDashboardLeft = ({
-  usersName,
-  usersType,
-  usersImage,
-  isPayment,
-  setIsPayment,
-  handlePayment,
-  handleMainDashboard,
-  isMainDashboard,
-}) => {
+const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const [isDashboard, setIsDashboard] = useState(true);
+  const [isPayment, setIsPayment] = useState(false);
+
+  const currentPathName = location.pathname;
+
+  useEffect(() => {
+    if (currentPathName === "/studentsDashboard") {
+      setIsDashboard(true);
+      setIsPayment(false);
+    } else if (currentPathName === "/studentsDashboard/payment-for") {
+      setIsPayment(true);
+      setIsDashboard(false);
+    }
+  }, [currentPathName]);
 
   // * handler functions start
   const handleLogOut = () => {
@@ -39,29 +46,30 @@ const StudentsDashboardLeft = ({
           </div>
           <div className="mb-16">
             <div className="mt-8">
-              <div
-                onClick={handleMainDashboard}
-                className={`flex items-center hover:bg-white justify-between cursor-pointer ${
-                  isMainDashboard && "bg-white"
-                } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
-              >
-                <div className="flex items-center">
-                  <img
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Dashboard</p>
+              <Link to="/studentsDashboard">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isDashboard && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      loading="lazy"
+                      draggable={false}
+                      src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Dashboard</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
+              </Link>
               <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
                 <div className="flex items-center">
                   <img
@@ -152,29 +160,30 @@ const StudentsDashboardLeft = ({
                   </p>
                 </div>
               </div>
-              <div
-                onClick={handlePayment}
-                className={`flex items-center justify-between cursor-pointer ${
-                  isPayment && "bg-white"
-                } hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
-              >
-                <div className="flex items-center">
-                  <img
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/k8QDS68/warning-3.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Do My Payments</p>
+              <Link to="/studentsDashboard/payment-for">
+                <div
+                  className={`flex items-center justify-between cursor-pointer ${
+                    isPayment && "bg-white"
+                  } hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      loading="lazy"
+                      draggable={false}
+                      src="https://i.ibb.co/k8QDS68/warning-3.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Do My Payments</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

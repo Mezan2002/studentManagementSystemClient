@@ -1,7 +1,7 @@
 import React from "react";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 
-const StudentsMainDashboard = () => {
+const TeachersMainDashboard = () => {
   return (
     <section
       style={{
@@ -64,4 +64,4 @@ const StudentsMainDashboard = () => {
   );
 };
 
-export default StudentsMainDashboard;
+export default TeachersMainDashboard;

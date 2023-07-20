@@ -1,7 +1,20 @@
-import { Card } from "@material-tailwind/react";
-import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import PaymentCard from "./PaymentCard/PaymentCard";
+import "./PaymentFor.css";
 
 const PaymentFor = () => {
+  const [paymentOccaisons, setPaymentOccaisons] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/getPaymentOccasions").then((res) => {
+      if (res.data.length > 0) {
+        setPaymentOccaisons(res.data);
+      }
+    });
+  }, []);
+
+  console.log(paymentOccaisons);
+
   return (
     <section
       style={{
@@ -21,53 +34,19 @@ const PaymentFor = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center mt-16">
-            <h2 className="text-4xl mb-9 font-medium bg-black text-white p-3 rounded-xl">
-              You want to make the payment for
-            </h2>
+          <div className="mt-24">
             <div className="grid grid-cols-3 gap-10">
-              <Card className="w-96 p-10 relative text-center cursor-pointer">
-                <div className="absolute h-20 w-20 bg-green-400 rounded-full text-white flex items-center justify-center font-semibold top-3 right-4">
-                  <p>Paid</p>
-                </div>
-                <img
-                  src="https://i.ibb.co/wSjmSzX/registered.png"
-                  alt="profile-picture"
-                  className="w-10/12 mx-auto"
+              {paymentOccaisons.map((payment) => (
+                <PaymentCard
+                  key={payment._id}
+                  paymentId={payment._id}
+                  paymentTitle={payment?.paymentTitle}
+                  paymentAmount={payment?.paymentAmount}
+                  paymentStartsDate={payment?.paymentStartsDate}
+                  paymentEndsDate={payment?.paymentEndsDate}
+                  paymentFor={payment?.paymentFor}
                 />
-
-                <h2 className="text-3xl mt-6 font-semibold py-2 px-4 rounded-xl bg-[#2196F3] text-white">
-                  Registration Fee
-                </h2>
-              </Card>
-              <Card className="w-96 p-10 relative text-center cursor-pointer">
-                <div className="absolute h-20 w-20 bg-red-400 rounded-full text-white flex items-center justify-center font-semibold top-3 right-4">
-                  <p>Unpaid</p>
-                </div>
-                <img
-                  src="https://i.ibb.co/6gwKXdD/money.png"
-                  alt="profile-picture"
-                  className="w-10/12 mx-auto"
-                />
-
-                <h2 className="text-3xl mt-6 font-semibold py-2 px-4 rounded-xl bg-[#2196F3] text-white">
-                  Monthly Fee
-                </h2>
-              </Card>
-              <Card className="w-96 p-10 relative text-center cursor-pointer">
-                <div className="absolute h-20 w-20 bg-red-400 rounded-full text-white flex items-center justify-center font-semibold top-3 right-4">
-                  <p>Unpaid</p>
-                </div>
-                <img
-                  src="https://i.ibb.co/WtHLCnB/marking.png"
-                  alt="profile-picture"
-                  className="w-10/12 mx-auto"
-                />
-
-                <h2 className="text-3xl mt-6 font-semibold py-2 px-4 rounded-xl bg-[#2196F3] text-white">
-                  Exam Fee
-                </h2>
-              </Card>
+              ))}
             </div>
           </div>
         </div>

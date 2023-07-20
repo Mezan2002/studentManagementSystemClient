@@ -104,6 +104,8 @@ const Login = () => {
                   {...register("passwordForLogIn", { required: true })}
                   icon={
                     <img
+                      draggable="false"
+                      loading="lazy"
                       onClick={handleShowPassword}
                       src={
                         passwordToggle
@@ -121,6 +123,8 @@ const Login = () => {
                   {...register("passwordForLogIn", { required: true })}
                   icon={
                     <img
+                      draggable="false"
+                      loading="lazy"
                       onClick={handleShowPassword}
                       src={
                         passwordToggle

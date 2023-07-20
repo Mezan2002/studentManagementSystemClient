@@ -129,6 +129,8 @@ const LogInInfo = ({
                     label="Set Log In Password *"
                     icon={
                       <img
+                        draggable="false"
+                        loading="lazy"
                         onClick={handleShowPassword}
                         src={
                           passwordToggle
@@ -147,6 +149,8 @@ const LogInInfo = ({
                   size="md"
                   icon={
                     <img
+                      draggable="false"
+                      loading="lazy"
                       onClick={handleShowPassword}
                       src={
                         passwordToggle
@@ -170,6 +174,8 @@ const LogInInfo = ({
                     label="Re-type Log In Password *"
                     icon={
                       <img
+                        draggable="false"
+                        loading="lazy"
                         onClick={handleReTypePassword}
                         src={
                           showPassword
@@ -190,6 +196,8 @@ const LogInInfo = ({
                   label="Re-type Log In Password *"
                   icon={
                     <img
+                      draggable="false"
+                      loading="lazy"
                       onClick={handleReTypePassword}
                       src={
                         reTypePasswordToggle

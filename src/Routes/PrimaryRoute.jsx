@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import PaymentFor from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentFor";
+import PaymentSuccess from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentSuccess/PaymentSuccess";
 import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
 import TeachersMainDashboard from "../components/Pages/Dashboard/TeachersDashboard/TeachersMainDashboard/TeachersMainDashboard";
 import Home from "../components/Pages/Home/Home";
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/studentsDashboard/payment-for",
         element: <PaymentFor></PaymentFor>,
+      },
+      {
+        path: "/studentsDashboard/payment/success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
     ],
   },

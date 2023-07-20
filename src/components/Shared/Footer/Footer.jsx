@@ -30,6 +30,8 @@ const Footer = () => {
           <div className="w-5/12">
             <a href="" className="w-10">
               <img
+                draggable="false"
+                loading="lazy"
                 src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
                 alt="deuty high school and college logo"
                 className="w-32"

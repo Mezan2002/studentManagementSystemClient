@@ -245,6 +245,8 @@ export default function NavigationBar() {
         <div className="flex items-center justify-between text-blue-gray-900">
           <a href="" className="w-12">
             <img
+              draggable="false"
+              loading="lazy"
               src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
               alt="deuty high school and college logo"
             />

@@ -28,6 +28,8 @@ const Register = () => {
             className="w-96 p-10 text-center cursor-pointer"
           >
             <img
+              draggable="false"
+              loading="lazy"
               src="https://i.ibb.co/sPHvXQ8/teacher-1.png"
               alt="profile-picture"
               className=""
@@ -42,6 +44,8 @@ const Register = () => {
             className="w-96 p-10 text-center cursor-pointer"
           >
             <img
+              draggable="false"
+              loading="lazy"
               src="https://i.ibb.co/c6nK5w1/student-2.png"
               alt="profile-picture"
               className=""

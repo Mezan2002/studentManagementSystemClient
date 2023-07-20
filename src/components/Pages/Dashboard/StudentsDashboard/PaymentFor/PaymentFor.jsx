@@ -28,6 +28,8 @@ const PaymentFor = () => {
             <div className="flex items-start justify-between">
               <h2 className="text-5xl font-bold">Payment For</h2>
               <img
+                draggable="false"
+                loading="lazy"
                 src="https://i.ibb.co/gmgtqjm/setting.png"
                 alt=""
                 className="w-10"

@@ -12,6 +12,8 @@ const FormTop = ({
       <div className="flex items-center justify-between">
         <div className="mb-10 flex items-start w-10/12">
           <img
+            draggable="false"
+            loading="lazy"
             src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
             alt="deuty high school and college logo"
             className="w-32 mb-3"
@@ -56,6 +58,8 @@ const FormTop = ({
                 </h2>
                 <figure>
                   <img
+                    draggable="false"
+                    loading="lazy"
                     loading="lazy"
                     draggable={false}
                     src={` ${
@@ -83,6 +87,8 @@ const FormTop = ({
             </>
           ) : (
             <img
+              draggable="false"
+              loading="lazy"
               loading="lazy"
               draggable={false}
               src={selectedImage}

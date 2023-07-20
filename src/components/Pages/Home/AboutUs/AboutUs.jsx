@@ -1,5 +1,5 @@
-import { Button } from "@material-tailwind/react";
 import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import { Button } from "@material-tailwind/react";
 
 const AboutUs = () => {
   return (
@@ -25,11 +25,15 @@ const AboutUs = () => {
         <div className="relative">
           <div className="">
             <img
+              draggable="false"
+              loading="lazy"
               src="https://i.ibb.co/Pz9k54h/pexels-max-fischer-5212338-3.jpg"
               alt=""
               className="rounded-3xl absolute right-5 top-20 "
             />
             <img
+              draggable="false"
+              loading="lazy"
               src="https://i.ibb.co/PQsjtYY/pexels-fauxels-3184644-2.jpg"
               alt=""
               className="rounded-3xl w-6/12 absolute top-80 left-28 border-white border-8"

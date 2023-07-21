@@ -8,6 +8,11 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isDashboard, setIsDashboard] = useState(true);
+  const [isRoutine, setIsRoutine] = useState(true);
+  const [isResult, setIsResult] = useState(true);
+  const [isNotice, setIsNotice] = useState(true);
+  const [isComplain, setIsComplain] = useState(true);
+  const [isAttendence, setIsAttendence] = useState(true);
   const [isPayment, setIsPayment] = useState(false);
 
   const currentPathName = location.pathname;
@@ -15,10 +20,60 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
   useEffect(() => {
     if (currentPathName === "/studentsDashboard") {
       setIsDashboard(true);
+      setIsRoutine(false);
+      setIsResult(false);
+      setIsNotice(false);
+      setIsAttendence(false);
+      setIsComplain(false);
       setIsPayment(false);
-    } else if (currentPathName === "/studentsDashboard/payment-for") {
-      setIsPayment(true);
+    } else if (currentPathName === "/studentsDashboard/payment") {
       setIsDashboard(false);
+      setIsRoutine(false);
+      setIsResult(false);
+      setIsNotice(false);
+      setIsAttendence(false);
+      setIsComplain(false);
+      setIsPayment(true);
+    } else if (currentPathName === "/studentsDashboard/routine") {
+      setIsDashboard(false);
+      setIsRoutine(true);
+      setIsResult(false);
+      setIsNotice(false);
+      setIsAttendence(false);
+      setIsComplain(false);
+      setIsPayment(false);
+    } else if (currentPathName === "/studentsDashboard/notice") {
+      setIsDashboard(false);
+      setIsRoutine(false);
+      setIsResult(false);
+      setIsNotice(true);
+      setIsAttendence(false);
+      setIsComplain(false);
+      setIsPayment(false);
+    } else if (currentPathName === "/studentsDashboard/complain") {
+      setIsDashboard(false);
+      setIsRoutine(false);
+      setIsResult(false);
+      setIsNotice(false);
+      setIsAttendence(false);
+      setIsComplain(true);
+      setIsPayment(false);
+    } else if (currentPathName === "/studentsDashboard/result") {
+      setIsDashboard(false);
+      setIsRoutine(false);
+      setIsResult(true);
+      setIsNotice(false);
+      setIsAttendence(false);
+      setIsComplain(false);
+      setIsPayment(false);
+    } else if (currentPathName === "/studentsDashboard/attendence") {
+      setIsDashboard(false);
+      setIsRoutine(false);
+      setIsResult(false);
+      setIsNotice(false);
+      setIsAttendence(true);
+      setIsComplain(false);
+      setIsPayment(false);
     }
   }, [currentPathName]);
 
@@ -29,8 +84,8 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
   };
   // * handler functions end
   return (
-    <section>
-      <div className="">
+    <section className="relative">
+      <div className="fixed w-[320px] top-0 left-0 bottom-0 right-0">
         <div className="py-10 px-2">
           <div>
             <Link to="/">
@@ -58,8 +113,6 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      loading="lazy"
-                      draggable={false}
                       src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
                       alt=""
                       className="w-6 mr-5"
@@ -74,107 +127,127 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                   </div>
                 </div>
               </Link>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/9q0gqLy/group-1.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">My Classes</p>
+              <Link to="/studentsDashboard/attendence">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isAttendence && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/kc5J7qr/attendance.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Attendance</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
+              </Link>
+              <Link to="/studentsDashboard/result">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isResult && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/wLM6J64/exam.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">See Result</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/VB6vMNZ/web-content.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">See My Result</p>
+              </Link>
+              <Link to="/studentsDashboard/routine">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isRoutine && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/b2nLV67/routine-1.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Routine</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
+              </Link>
+              <Link to="/studentsDashboard/notice">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isNotice && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/BsfRCwH/notice.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">See Notices</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/4NzJXFy/request.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">See Notices</p>
+              </Link>
+              <Link to="/studentsDashboard/complain">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isComplain && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/y8sbVR2/sad-face.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Complain</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/2YJKmJj/warning-1.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Put a Complain</p>
-                </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/Jd44Yf4/warning-4.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Check My Attendance</p>
-                </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
-              <Link to="/studentsDashboard/payment-for">
+              </Link>
+              <Link to="/studentsDashboard/payment">
                 <div
                   className={`flex items-center justify-between cursor-pointer ${
                     isPayment && "bg-white"
@@ -184,13 +257,11 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      loading="lazy"
-                      draggable={false}
-                      src="https://i.ibb.co/k8QDS68/warning-3.png"
+                      src="https://i.ibb.co/HFh9HxK/wallet.png"
                       alt=""
                       className="w-6 mr-5"
                     />
-                    <p className="">Do My Payments</p>
+                    <p className="">Payments</p>
                   </div>
                   <div>
                     <p>
@@ -213,8 +284,6 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                       <img
                         draggable="false"
                         loading="lazy"
-                        loading="lazy"
-                        draggable={false}
                         src={usersImage}
                         alt=""
                       />
@@ -244,8 +313,6 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src="https://i.ibb.co/gmgtqjm/setting.png"
                     alt=""
                     className="w-6 mr-5"
@@ -258,8 +325,6 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src="https://i.ibb.co/9HN4m7D/customer-support-1.png"
                     alt=""
                     className="w-6 mr-5"
@@ -275,8 +340,6 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src="https://i.ibb.co/X33zMfq/exit-1.png"
                     alt=""
                     className="w-6 mr-5"

@@ -1,8 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
+import Attendence from "../components/Pages/Dashboard/StudentsDashboard/Attendence/Attendence";
+import Complain from "../components/Pages/Dashboard/StudentsDashboard/Complain/Complain";
+import Notice from "../components/Pages/Dashboard/StudentsDashboard/Notice/Notice";
 import PaymentCancel from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentCancel/PaymentCancel";
 import PaymentFail from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentFail/PaymentFail";
 import PaymentFor from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentFor";
 import PaymentSuccess from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentSuccess/PaymentSuccess";
+import Result from "../components/Pages/Dashboard/StudentsDashboard/Result/Result";
+import Routine from "../components/Pages/Dashboard/StudentsDashboard/Routine/Routine";
 import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
 import TeachersMainDashboard from "../components/Pages/Dashboard/TeachersDashboard/TeachersMainDashboard/TeachersMainDashboard";
 import Home from "../components/Pages/Home/Home";
@@ -50,7 +55,27 @@ export const router = createBrowserRouter([
         element: <StudentsMainDashboard></StudentsMainDashboard>,
       },
       {
-        path: "/studentsDashboard/payment-for",
+        path: "/studentsDashboard/attendence",
+        element: <Attendence></Attendence>,
+      },
+      {
+        path: "/studentsDashboard/routine",
+        element: <Routine></Routine>,
+      },
+      {
+        path: "/studentsDashboard/notice",
+        element: <Notice></Notice>,
+      },
+      {
+        path: "/studentsDashboard/complain",
+        element: <Complain></Complain>,
+      },
+      {
+        path: "/studentsDashboard/result",
+        element: <Result></Result>,
+      },
+      {
+        path: "/studentsDashboard/payment",
         element: <PaymentFor></PaymentFor>,
       },
       {

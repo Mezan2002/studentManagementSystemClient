@@ -1,0 +1,48 @@
+.calendar {
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.dates {
+  /* background-color: black; */
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+.date-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  border: 1px solid #7c7c7c;
+  cursor: pointer;
+}
+
+.date-box.disabled {
+  background-color: #cacaca;
+  pointer-events: none;
+}
+
+.date-box.selected {
+  background-color: #007bff;
+  color: #fff;
+}

@@ -52,8 +52,8 @@ const StudentsMainDashboard = () => {
             </div>
           </div>
           <div className="mt-16">
-            <div className="grid grid-cols-3 gap-10">
-              <div className="card bg-white relative">
+            <div className="grid grid-cols-5 gap-10">
+              <div className="card shadow-2xl bg-white relative col-span-2">
                 <img
                   src="https://i.pinimg.com/originals/20/1f/be/201fbec525e6bf75a8dac7f67a404107.jpg"
                   alt=""
@@ -74,7 +74,9 @@ const StudentsMainDashboard = () => {
                     </p>
                   </div>
                   <div className="mt-10">
-                    <h2 className="text-2xl font-bold mb-5">Students Info</h2>
+                    <h2 className="text-xl font-semibold mb-5">
+                      Students Info
+                    </h2>
                     <p className="text-base font-medium flex items-center justify-between">
                       Name : <span>{studentsName}</span>
                     </p>
@@ -100,13 +102,15 @@ const StudentsMainDashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-span-2">
-                <div className="card bg-white">
+              <div className="col-span-3">
+                <div className="card shadow-2xl bg-white">
                   <div className="card-body">
-                    <h1 className="text-2xl font-semibold">Class Routine</h1>
+                    <h1 className="text-2xl mb-4 font-semibold">
+                      Class Routine
+                    </h1>
                     <div>
                       <div className="overflow-x-auto">
-                        <table className="table table-zebra text-[18px]">
+                        <table className="table table-zebra">
                           {/* head */}
                           <thead>
                             <tr>

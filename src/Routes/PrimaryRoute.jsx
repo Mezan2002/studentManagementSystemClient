@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import PaymentCancel from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentCancel/PaymentCancel";
+import PaymentFail from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentFail/PaymentFail";
 import PaymentFor from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentFor";
 import PaymentSuccess from "../components/Pages/Dashboard/StudentsDashboard/PaymentFor/PaymentSuccess/PaymentSuccess";
 import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
       {
         path: "/studentsDashboard/payment/success",
         element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/studentsDashboard/payment/fail",
+        element: <PaymentFail></PaymentFail>,
+      },
+      {
+        path: "/studentsDashboard/payment/cancel",
+        element: <PaymentCancel></PaymentCancel>,
       },
     ],
   },

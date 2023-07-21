@@ -18,6 +18,10 @@ const PaymentSuccess = () => {
       });
   }, [transactionId]);
 
+  if (!paymentInfo) {
+    return <div>No Payments have Done.</div>;
+  }
+
   const utcDateTimeString = paymentInfo.paidAt;
 
   if (!utcDateTimeString) {

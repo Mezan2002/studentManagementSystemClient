@@ -23,11 +23,14 @@ const StudentsMainDashboard = () => {
   const studentsName = user?.studentsInfo?.studentNameInEnglish;
   const studentsImage = user?.studentsInfo?.studentsImage;
   const studentsClass = user?.studentsInfo?.class;
+  const studentsSection = user?.studentsInfo?.section;
   const studentsPhoneNumber = user?.studentsInfo?.studentsMobileNumber;
   const studentsEmail = user?.studentsInfo?.studentsEmail;
   const studentsBloodGroup = user?.studentsInfo?.bloodGroup;
   const studentsGender = user?.studentsInfo?.gender;
   const studentsDateOfBirth = user?.studentsInfo?.studentsDateOfBirth;
+
+  console.log(studentsSection);
 
   console.log(studentsAddress);
   return (
@@ -74,7 +77,7 @@ const StudentsMainDashboard = () => {
                     </p>
                   </div>
                   <div className="mt-10">
-                    <h2 className="text-xl font-semibold mb-5">
+                    <h2 className="text-xl font-semibold mb-5 text-left">
                       Students Info
                     </h2>
                     <p className="text-base font-medium flex items-center justify-between">
@@ -85,7 +88,10 @@ const StudentsMainDashboard = () => {
                     </p>
 
                     <p className="text-base font-medium flex items-center justify-between">
-                      Class : <span>{studentsClass}</span>
+                      Class :{" "}
+                      <span>
+                        {studentsClass} / {studentsSection}
+                      </span>
                     </p>
                     <p className="text-base font-medium flex items-center justify-between">
                       Phone Number : <span>{studentsPhoneNumber}</span>

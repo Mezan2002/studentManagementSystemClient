@@ -79,24 +79,6 @@ const StudentsInfo = ({
             {...register("birthCertificateNumber", { required: true })}
           />
         )}
-      </div>
-      <div className="grid grid-cols-2 gap-5 mb-5 border-b border-gray-500 pb-8 border-dashed">
-        {errors.birthPlace ? (
-          <>
-            <Input
-              size="md"
-              label="Birth Place *"
-              {...register("birthPlace", { required: true })}
-              error
-            />
-          </>
-        ) : (
-          <Input
-            size="md"
-            label="Birth Place *"
-            {...register("birthPlace", { required: true })}
-          />
-        )}
         {isStudentsDateOfBirthError ? (
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
@@ -123,38 +105,8 @@ const StudentsInfo = ({
             />
           </LocalizationProvider>
         )}
-        {errors.nationality ? (
-          <>
-            <Input
-              size="md"
-              label="Nationality *"
-              {...register("nationality", { required: true })}
-              error
-            />
-          </>
-        ) : (
-          <Input
-            size="md"
-            label="Nationality *"
-            {...register("nationality", { required: true })}
-          />
-        )}
-        {errors.religion ? (
-          <>
-            <Input
-              size="md"
-              label="Religion *"
-              {...register("religion", { required: true })}
-              error
-            />
-          </>
-        ) : (
-          <Input
-            size="md"
-            label="Religion *"
-            {...register("religion", { required: true })}
-          />
-        )}
+      </div>
+      <div className="grid grid-cols-2 gap-5 mb-5 border-b border-gray-500 pb-8 border-dashed">
         <div>
           {isClassError ? (
             <Select
@@ -213,6 +165,71 @@ const StudentsInfo = ({
             </Select>
           )}
         </div>
+        {errors.section ? (
+          <>
+            <Input
+              size="md"
+              label="Section *"
+              {...register("section", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Section *"
+            {...register("section", { required: true })}
+          />
+        )}
+        {errors.birthPlace ? (
+          <>
+            <Input
+              size="md"
+              label="Birth Place *"
+              {...register("birthPlace", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Birth Place *"
+            {...register("birthPlace", { required: true })}
+          />
+        )}
+        {errors.nationality ? (
+          <>
+            <Input
+              size="md"
+              label="Nationality *"
+              {...register("nationality", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Nationality *"
+            {...register("nationality", { required: true })}
+          />
+        )}
+
+        {errors.religion ? (
+          <>
+            <Input
+              size="md"
+              label="Religion *"
+              {...register("religion", { required: true })}
+              error
+            />
+          </>
+        ) : (
+          <Input
+            size="md"
+            label="Religion *"
+            {...register("religion", { required: true })}
+          />
+        )}
         <div>
           {isGenderError ? (
             <Select

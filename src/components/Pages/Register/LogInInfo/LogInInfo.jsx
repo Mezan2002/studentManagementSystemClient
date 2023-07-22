@@ -7,7 +7,6 @@ const LogInInfo = ({
   isPhoneNumberExist,
   isLoginPassAndReTypePassSame,
 }) => {
-  // const [showPassword, setShowPassword] = useState(true);
   const [passwordToggle, setPasswordToggle] = useState(true);
   const [reTypePasswordToggle, setReTypePasswordToggle] = useState(true);
 
@@ -178,7 +177,7 @@ const LogInInfo = ({
                         loading="lazy"
                         onClick={handleReTypePassword}
                         src={
-                          showPassword
+                          reTypePasswordToggle
                             ? "https://i.ibb.co/bRFKd1D/eye.png"
                             : "https://i.ibb.co/nLfF2nW/hide.png"
                         }

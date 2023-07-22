@@ -1,4 +1,6 @@
+import { Button, ButtonGroup } from "@material-tailwind/react";
 import React from "react";
+import "./Notice.css";
 
 const Notice = () => {
   return (
@@ -22,7 +24,96 @@ const Notice = () => {
               />
             </div>
           </div>
-          <div className="mt-24 flex items-center justify-center"></div>
+          <div className="mt-24">
+            <div className="card bg-white shadow-2xl">
+              <div className="card-body">
+                <div className="overflow-x-auto">
+                  <table className="table table-zebra">
+                    {/* head */}
+                    <thead>
+                      <tr>
+                        <th>Serial No.</th>
+                        <th>Notice Title</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {/* row 1 */}
+                      <tr>
+                        <th>1</th>
+                        <td>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit.
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                          <ButtonGroup type size="sm">
+                            <Button>See Notice</Button>
+                            <Button>Download Notice</Button>
+                          </ButtonGroup>
+                        </td>
+                      </tr>
+                      {/* row 2 */}
+                      <tr>
+                        <th>2</th>
+                        <td>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit.
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                          <ButtonGroup type size="sm">
+                            <Button>See Notice</Button>
+                            <Button>Download Notice</Button>
+                          </ButtonGroup>
+                        </td>
+                      </tr>
+                      {/* row 3 */}
+                      <tr>
+                        <th>3</th>
+                        <td>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing
+                          elit.
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                          <ButtonGroup type size="sm">
+                            <Button>See Notice</Button>
+                            <Button>Download Notice</Button>
+                          </ButtonGroup>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

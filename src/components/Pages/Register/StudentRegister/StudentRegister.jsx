@@ -220,6 +220,7 @@ const StudentRegister = () => {
       nationality: data.nationality,
       religion: data.religion,
       class: selectedClass,
+      section: data.section,
       gender: selectedGender,
       bloodGroup: selectedBloodGroup,
       maritalStatus: selectedMaritalStatus,

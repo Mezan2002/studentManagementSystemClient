@@ -14,6 +14,7 @@ const StudentDashboardLayout = () => {
   const usersName = user?.studentsInfo?.studentNameInEnglish;
   const usersType = "student";
   const usersImage = user?.studentsInfo?.studentsImage;
+  const studentsClass = user?.studentsInfo?.class;
 
   return (
     <section>
@@ -24,6 +25,7 @@ const StudentDashboardLayout = () => {
               usersImage={usersImage}
               usersName={usersName}
               usersType={usersType}
+              studentsClass={studentsClass}
             ></StudentsDashboardLeft>
           </div>
           <Outlet></Outlet>

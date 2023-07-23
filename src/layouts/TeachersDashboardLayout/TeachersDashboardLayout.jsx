@@ -28,7 +28,7 @@ const TeachersDashboardLayout = () => {
     user?.teachersInfo?.teachersImage,
     user?.teachersInfo?.teachersNameInEnglish,
     user?.studentsInfo?.studentNameInEnglish,
-    user?.teachersInfo.teachersDesignaion,
+    user?.teachersInfo?.teachersDesignaion,
   ]);
 
   return (

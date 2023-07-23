@@ -85,7 +85,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
 
   return (
     <section>
-      <div className="">
+      <div className="fixed w-[320px] top-0 left-0 bottom-0 right-0">
         <div className="py-10 px-2">
           <div>
             <Link to="/">
@@ -137,7 +137,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/9q0gqLy/group-1.png"
+                      src="https://i.ibb.co/WxyMQmS/training.png"
                       alt=""
                       className="w-6 mr-5"
                     />
@@ -161,7 +161,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/Jd44Yf4/warning-4.png"
+                      src="https://i.ibb.co/kc5J7qr/attendance.png"
                       alt=""
                       className="w-6 mr-5"
                     />
@@ -185,7 +185,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/4NzJXFy/request.png"
+                      src="https://i.ibb.co/wLM6J64/exam.png"
                       alt=""
                       className="w-6 mr-5"
                     />
@@ -209,7 +209,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/VB6vMNZ/web-content.png"
+                      src="https://i.ibb.co/1LvNkn7/case-study.png"
                       alt=""
                       className="w-6 mr-5"
                     />
@@ -233,7 +233,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/2YJKmJj/warning-1.png"
+                      src="https://i.ibb.co/ySnQkBH/notice-1.png"
                       alt=""
                       className="w-6 mr-5"
                     />
@@ -257,7 +257,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/k8QDS68/warning-3.png"
+                      src="https://i.ibb.co/y8sbVR2/sad-face.png"
                       alt=""
                       className="w-6 mr-5"
                     />

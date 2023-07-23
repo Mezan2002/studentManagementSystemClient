@@ -53,7 +53,7 @@ const TeachersMainDashboard = () => {
               <div className="grid grid-cols-5 gap-10">
                 <div className="card shadow-2xl bg-white relative col-span-2">
                   <img
-                    src="https://i.pinimg.com/originals/20/1f/be/201fbec525e6bf75a8dac7f67a404107.jpg"
+                    src="https://i.ibb.co/DK1TNdJ/pexels-max-fischer-5212360.jpg"
                     alt=""
                     className="rounded-t-2xl"
                   />

@@ -220,7 +220,7 @@ const StudentRegister = () => {
       nationality: data.nationality,
       religion: data.religion,
       class: selectedClass,
-      section: data.section,
+      section: data.section.toUpperCase(),
       gender: selectedGender,
       bloodGroup: selectedBloodGroup,
       maritalStatus: selectedMaritalStatus,

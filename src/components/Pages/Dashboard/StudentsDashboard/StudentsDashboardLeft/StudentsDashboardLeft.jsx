@@ -4,7 +4,12 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logoutUser } from "../../../../../features/loggedInUser/loggedInUserSlice";
 
-const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
+const StudentsDashboardLeft = ({
+  usersName,
+  usersType,
+  usersImage,
+  studentsClass,
+}) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isDashboard, setIsDashboard] = useState(true);
@@ -293,7 +298,7 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
                     <h2 className="font-semibold text-sm">{usersName}</h2>
                     <p className="text-gray-600 font-medium text-sm capitalize">
                       {" "}
-                      {usersType}
+                      {usersType} / {studentsClass}
                     </p>
                   </div>
                 </div>

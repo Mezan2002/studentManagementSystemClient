@@ -19,7 +19,7 @@ const TeachersDashboardLayout = () => {
   useEffect(() => {
     if (user?.userType === "teacher") {
       setUsersName(user?.teachersInfo?.teachersNameInEnglish);
-      setUsersType("teacher");
+      setUsersType(user?.teachersInfo.teachersDesignaion);
       setUsersImage(user?.teachersInfo?.teachersImage);
     }
   }, [
@@ -28,6 +28,7 @@ const TeachersDashboardLayout = () => {
     user?.teachersInfo?.teachersImage,
     user?.teachersInfo?.teachersNameInEnglish,
     user?.studentsInfo?.studentNameInEnglish,
+    user?.teachersInfo.teachersDesignaion,
   ]);
 
   return (

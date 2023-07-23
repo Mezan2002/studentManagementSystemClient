@@ -9,6 +9,12 @@ import PaymentSuccess from "../components/Pages/Dashboard/StudentsDashboard/Paym
 import Result from "../components/Pages/Dashboard/StudentsDashboard/Result/Result";
 import Routine from "../components/Pages/Dashboard/StudentsDashboard/Routine/Routine";
 import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
+import ComplainAStudent from "../components/Pages/Dashboard/TeachersDashboard/ComplainAStudent/ComplainAStudent";
+import MakeResult from "../components/Pages/Dashboard/TeachersDashboard/MakeResult/MakeResult";
+import MyClasses from "../components/Pages/Dashboard/TeachersDashboard/MyClasses/MyClasses";
+import PublishNotice from "../components/Pages/Dashboard/TeachersDashboard/PublishNotice/PublishNotice";
+import SeeResults from "../components/Pages/Dashboard/TeachersDashboard/SeeResults/SeeResults";
+import TakeAttendence from "../components/Pages/Dashboard/TeachersDashboard/TakeAttendence/TakeAttendence";
 import TeachersMainDashboard from "../components/Pages/Dashboard/TeachersDashboard/TeachersMainDashboard/TeachersMainDashboard";
 import Home from "../components/Pages/Home/Home";
 import Login from "../components/Pages/Login/Login";
@@ -99,6 +105,30 @@ export const router = createBrowserRouter([
       {
         path: "/teachersDashboard",
         element: <TeachersMainDashboard></TeachersMainDashboard>,
+      },
+      {
+        path: "/teachersDashboard/my-classes",
+        element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "/teachersDashboard/take-attendance",
+        element: <TakeAttendence></TakeAttendence>,
+      },
+      {
+        path: "/teachersDashboard/make-result",
+        element: <MakeResult></MakeResult>,
+      },
+      {
+        path: "/teachersDashboard/see-results",
+        element: <SeeResults></SeeResults>,
+      },
+      {
+        path: "/teachersDashboard/publish-notice",
+        element: <PublishNotice></PublishNotice>,
+      },
+      {
+        path: "/teachersDashboard/complain-about-studnet",
+        element: <ComplainAStudent></ComplainAStudent>,
       },
     ],
   },

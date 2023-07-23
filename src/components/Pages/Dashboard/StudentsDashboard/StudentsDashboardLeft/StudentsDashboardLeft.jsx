@@ -8,11 +8,11 @@ const StudentsDashboardLeft = ({ usersName, usersType, usersImage }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isDashboard, setIsDashboard] = useState(true);
-  const [isRoutine, setIsRoutine] = useState(true);
-  const [isResult, setIsResult] = useState(true);
-  const [isNotice, setIsNotice] = useState(true);
-  const [isComplain, setIsComplain] = useState(true);
-  const [isAttendence, setIsAttendence] = useState(true);
+  const [isRoutine, setIsRoutine] = useState(false);
+  const [isResult, setIsResult] = useState(false);
+  const [isNotice, setIsNotice] = useState(false);
+  const [isComplain, setIsComplain] = useState(false);
+  const [isAttendence, setIsAttendence] = useState(false);
   const [isPayment, setIsPayment] = useState(false);
 
   const currentPathName = location.pathname;

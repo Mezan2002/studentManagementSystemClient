@@ -1,14 +1,87 @@
+import { useEffect, useState } from "react";
 import { FaAngleRight, FaAngleUp } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { logoutUser } from "../../../../../features/loggedInUser/loggedInUserSlice";
 const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const [isDashboard, setIsDashboard] = useState(true);
+  const [isMyClasses, setIsMyClasses] = useState(false);
+  const [isTakeAttendence, setIsTakeAttendence] = useState(false);
+  const [isMakeResult, setIsMakeResult] = useState(false);
+  const [isSeeResults, setIsSeeResults] = useState(false);
+  const [isPublishNotice, setIsPublishNotice] = useState(false);
+  const [isComplainAStudent, setIsComplainAStudent] = useState(false);
 
   const handleLogOut = () => {
     dispatch(logoutUser());
     localStorage.removeItem("token");
   };
+  const currentPathName = location.pathname;
+
+  useEffect(() => {
+    if (currentPathName === "/teachersDashboard") {
+      setIsDashboard(true);
+      setIsMyClasses(false);
+      setIsTakeAttendence(false);
+      setIsMakeResult(false);
+      setIsPublishNotice(false);
+      setIsSeeResults(false);
+      setIsComplainAStudent(false);
+    } else if (currentPathName === "/teachersDashboard/my-classes") {
+      setIsDashboard(false);
+      setIsMyClasses(true);
+      setIsTakeAttendence(false);
+      setIsMakeResult(false);
+      setIsPublishNotice(false);
+      setIsSeeResults(false);
+      setIsComplainAStudent(false);
+    } else if (currentPathName === "/teachersDashboard/take-attendance") {
+      setIsDashboard(false);
+      setIsMyClasses(false);
+      setIsTakeAttendence(true);
+      setIsMakeResult(false);
+      setIsPublishNotice(false);
+      setIsSeeResults(false);
+      setIsComplainAStudent(false);
+    } else if (currentPathName === "/teachersDashboard/make-result") {
+      setIsDashboard(false);
+      setIsMyClasses(false);
+      setIsTakeAttendence(false);
+      setIsMakeResult(true);
+      setIsPublishNotice(false);
+      setIsSeeResults(false);
+      setIsComplainAStudent(false);
+    } else if (currentPathName === "/teachersDashboard/see-result") {
+      setIsDashboard(false);
+      setIsMyClasses(false);
+      setIsTakeAttendence(false);
+      setIsMakeResult(false);
+      setIsSeeResults(true);
+      setIsPublishNotice(false);
+      setIsComplainAStudent(false);
+    } else if (currentPathName === "/teachersDashboard/publish-notice") {
+      setIsDashboard(false);
+      setIsMyClasses(false);
+      setIsTakeAttendence(false);
+      setIsMakeResult(false);
+      setIsSeeResults(false);
+      setIsPublishNotice(true);
+      setIsComplainAStudent(false);
+    } else if (
+      currentPathName === "/teachersDashboard/complain-about-studnet"
+    ) {
+      setIsDashboard(false);
+      setIsMyClasses(false);
+      setIsTakeAttendence(false);
+      setIsMakeResult(false);
+      setIsPublishNotice(false);
+      setIsSeeResults(false);
+      setIsComplainAStudent(true);
+    }
+  }, [currentPathName]);
 
   return (
     <section>
@@ -30,146 +103,174 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
           </div>
           <div className="mb-16">
             <div className="mt-8">
-              <div className="flex items-center justify-between cursor-pointer bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Dashboard</p>
+              <Link to="/teachersDashboard">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isDashboard && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Dashboard</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
+              </Link>
+              <Link to="/teachersDashboard/my-classes">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isMyClasses && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/9q0gqLy/group-1.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">My Classes</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/9q0gqLy/group-1.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">My Classes</p>
+              </Link>
+              <Link to="/teachersDashboard/take-attendance">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isTakeAttendence && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/Jd44Yf4/warning-4.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Take Attendance</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
+              </Link>
+              <Link to="/teachersDashboard/make-result">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isMakeResult && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/4NzJXFy/request.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Make Result</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/VB6vMNZ/web-content.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">See Results</p>
+              </Link>
+              <Link to="/teachersDashboard/see-results">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isSeeResults && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/VB6vMNZ/web-content.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">See Results</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
+              </Link>
+              <Link to="/teachersDashboard/publish-notice">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isPublishNotice && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/2YJKmJj/warning-1.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Publish Notice</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/4NzJXFy/request.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Make Result</p>
+              </Link>
+              <Link to="/teachersDashboard/complain-about-studnet">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isComplainAStudent && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/k8QDS68/warning-3.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">Complain a Student</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/2YJKmJj/warning-1.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Publish Notice</p>
-                </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/Jd44Yf4/warning-4.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Take Attendance</p>
-                </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between cursor-pointer hover:bg-white 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl">
-                <div className="flex items-center">
-                  <img
-                    draggable="false"
-                    loading="lazy"
-                    loading="lazy"
-                    draggable={false}
-                    src="https://i.ibb.co/k8QDS68/warning-3.png"
-                    alt=""
-                    className="w-6 mr-5"
-                  />
-                  <p className="">Complain a Student</p>
-                </div>
-                <div>
-                  <p>
-                    {" "}
-                    <FaAngleRight></FaAngleRight>{" "}
-                  </p>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -183,8 +284,6 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                       <img
                         draggable="false"
                         loading="lazy"
-                        loading="lazy"
-                        draggable={false}
                         src={usersImage}
                         alt=""
                       />
@@ -214,8 +313,6 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src="https://i.ibb.co/gmgtqjm/setting.png"
                     alt=""
                     className="w-6 mr-5"
@@ -228,8 +325,6 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src="https://i.ibb.co/9HN4m7D/customer-support-1.png"
                     alt=""
                     className="w-6 mr-5"
@@ -245,8 +340,6 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src="https://i.ibb.co/X33zMfq/exit-1.png"
                     alt=""
                     className="w-6 mr-5"

@@ -18,6 +18,8 @@ const PaymentSuccess = () => {
       });
   }, [transactionId]);
 
+  console.log(paymentInfo);
+
   if (!paymentInfo) {
     return <div>No Payments have Done.</div>;
   }
@@ -101,33 +103,49 @@ const PaymentSuccess = () => {
                   <div className="divider my-2"></div>
                   <div className="mb-10">
                     <div>
-                      <h2 className="text-lg font-semibold">Payment Info</h2>
+                      <h2 className="text-lg font-bold text-left">
+                        Payment Info
+                      </h2>
                       <div className="font-medium">
-                        <p className="flex justify-between">
+                        <p className="flex justify-between font-semibold">
                           User Name :{" "}
-                          <span className="">
+                          <span className="font-medium">
                             {user?.studentsInfo?.studentNameInEnglish}
                           </span>
                         </p>
-                        <p className="flex justify-between">
-                          Payment For :{" "}
-                          <span className="">{paymentInfo.paymentFor} </span>
+                        <p className="flex justify-between font-semibold ">
+                          Exam Roll Number :{" "}
+                          <span className="font-medium">
+                            {paymentInfo?.studentRollNumber}
+                          </span>
                         </p>
-                        <p className="flex justify-between">
+                        <p className="flex justify-between font-semibold ">
+                          Exam Registration Number :{" "}
+                          <span className="font-medium">
+                            {paymentInfo?.studentRegistrationNumber}
+                          </span>
+                        </p>
+                        <p className="flex justify-between font-semibold">
+                          Payment For :{" "}
+                          <span className="font-medium">
+                            {paymentInfo.paymentFor}{" "}
+                          </span>
+                        </p>
+                        <p className="flex justify-between font-semibold">
                           Amount of Pay :{" "}
-                          <span className="text-right">
+                          <span className="font-medium">
                             {paymentInfo.paymentAmount}
                           </span>
                         </p>
-                        <p className="flex justify-between">
+                        <p className="flex justify-between font-semibold">
                           Transaction ID :{" "}
-                          <span className="text-right">
+                          <span className="font-medium">
                             {paymentInfo.transId}
                           </span>
                         </p>
-                        <p className="flex justify-between">
+                        <p className="flex justify-between font-semibold">
                           Payment At :{" "}
-                          <span className="text-right">
+                          <span className="font-medium">
                             {formattedDateTime}
                           </span>
                         </p>
@@ -135,8 +153,11 @@ const PaymentSuccess = () => {
                     </div>
                   </div>
                 </div>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-block" onClick={handleDownload}>
+                <div className="card-actions justify-end ">
+                  <button
+                    className="btn btn-block bg-black text-white hover:bg-black"
+                    onClick={handleDownload}
+                  >
                     Download Payment Info
                   </button>
                 </div>

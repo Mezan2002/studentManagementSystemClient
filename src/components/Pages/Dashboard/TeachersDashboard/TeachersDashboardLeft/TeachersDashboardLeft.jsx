@@ -54,7 +54,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsPublishNotice(false);
       setIsSeeResults(false);
       setIsComplainAStudent(false);
-    } else if (currentPathName === "/teachersDashboard/see-result") {
+    } else if (currentPathName === "/teachersDashboard/see-results") {
       setIsDashboard(false);
       setIsMyClasses(false);
       setIsTakeAttendence(false);

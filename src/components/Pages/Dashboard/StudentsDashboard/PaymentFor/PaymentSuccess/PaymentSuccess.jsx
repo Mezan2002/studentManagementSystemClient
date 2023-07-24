@@ -113,18 +113,22 @@ const PaymentSuccess = () => {
                             {user?.studentsInfo?.studentNameInEnglish}
                           </span>
                         </p>
-                        <p className="flex justify-between font-semibold ">
-                          Exam Roll Number :{" "}
-                          <span className="font-medium">
-                            {paymentInfo?.studentRollNumber}
-                          </span>
-                        </p>
-                        <p className="flex justify-between font-semibold ">
-                          Exam Registration Number :{" "}
-                          <span className="font-medium">
-                            {paymentInfo?.studentRegistrationNumber}
-                          </span>
-                        </p>
+                        {paymentInfo?.studentRollNumber && (
+                          <p className="flex justify-between font-semibold ">
+                            Exam Roll Number :{" "}
+                            <span className="font-medium">
+                              {paymentInfo?.studentRollNumber}
+                            </span>
+                          </p>
+                        )}
+                        {paymentInfo?.studentRegistrationNumber && (
+                          <p className="flex justify-between font-semibold ">
+                            Exam Registration Number :{" "}
+                            <span className="font-medium">
+                              {paymentInfo?.studentRegistrationNumber}
+                            </span>
+                          </p>
+                        )}
                         <p className="flex justify-between font-semibold">
                           Payment For :{" "}
                           <span className="font-medium">

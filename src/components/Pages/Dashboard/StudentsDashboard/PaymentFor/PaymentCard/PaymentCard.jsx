@@ -20,7 +20,28 @@ const PaymentCard = ({
   paymentEndsDate,
 }) => {
   const [usersPostCode, setUsersPostCode] = useState(null);
+  const [isPaid, setIsPaid] = useState(false);
+  const [userIsPaid, setUserIsPaid] = useState([]);
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
+  const userId = user._id;
+
+  axios
+    .get(`http://localhost:3000/user-is-paid/${userId}`)
+    .then((res) => {
+      setUserIsPaid(res.data);
+    })
+    .catch((err) => console.log(err));
+
+  const isPaidForPayment = userIsPaid.find(
+    (userPayment) =>
+      userPayment.paymentFor === paymentFor && userPayment.paid === true
+  );
+
+  useEffect(() => {
+    // Update the isPaid state based on the isPaidForPayment value
+    setIsPaid(isPaidForPayment);
+  }, [isPaidForPayment]);
+
   useEffect(() => {
     if (
       user?.address?.permanentAddress &&
@@ -44,9 +65,6 @@ const PaymentCard = ({
     userPhoneNumber: user?.studentsInfo?.studentsMobileNumber,
     usersPostCode,
   };
-
-  const [isPaid, setIsPaid] = useState(false);
-
   const handlePayNow = () => {
     const data = {
       paymentId,
@@ -65,6 +83,7 @@ const PaymentCard = ({
         window.location.replace(res.data.url);
       });
   };
+
   return (
     <div>
       <Card
@@ -142,6 +161,7 @@ const PaymentCard = ({
         }
         <CardFooter className="mt-12 p-0">
           <Button
+            disabled={isPaid}
             onClick={handlePayNow}
             size="lg"
             color="white"

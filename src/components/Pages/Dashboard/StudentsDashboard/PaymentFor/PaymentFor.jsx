@@ -1,20 +1,32 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import PaymentCard from "./PaymentCard/PaymentCard";
 import "./PaymentFor.css";
 
 const PaymentFor = () => {
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
+  const userId = user._id;
   const [paymentOccaisons, setPaymentOccaisons] = useState([]);
+  const [isPaid, setIsPaid] = useState(false);
+  const [userIsPaid, setUserIsPaid] = useState([]);
+  const [paymentTitle, setPaymentTitle] = useState("");
+
+  // console.log(isPaid);
   useEffect(() => {
     axios.get("http://localhost:3000/getPaymentOccasions").then((res) => {
       if (res.data.length > 0) {
         setPaymentOccaisons(res.data);
       }
     });
-  }, []);
 
-  console.log(paymentOccaisons);
-
+    axios
+      .get(`http://localhost:3000/user-is-paid/${userId}`)
+      .then((res) => {
+        setUserIsPaid(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [userId]);
   return (
     <section
       style={{
@@ -37,7 +49,7 @@ const PaymentFor = () => {
             </div>
           </div>
           <div className="mt-24">
-            <div className="grid grid-cols-3 gap-10">
+            {/* <div className="grid grid-cols-3 gap-10">
               {paymentOccaisons.map((payment) => (
                 <PaymentCard
                   key={payment._id}
@@ -49,6 +61,30 @@ const PaymentFor = () => {
                   paymentFor={payment?.paymentFor}
                 />
               ))}
+              
+            </div> */}
+            <div className="grid grid-cols-3 gap-10">
+              {paymentOccaisons.map((payment) => {
+                const isPaidForPayment = userIsPaid.find(
+                  (userPayment) =>
+                    userPayment.paymentFor === payment.paymentFor &&
+                    userPayment.paid === true
+                )?.isPaid;
+
+                return (
+                  <PaymentCard
+                    key={payment?._id}
+                    paymentId={payment?._id}
+                    paymentTitle={payment?.paymentTitle}
+                    paymentAmount={payment?.paymentAmount}
+                    paymentStartsDate={payment?.paymentStartsDate}
+                    paymentEndsDate={payment?.paymentEndsDate}
+                    paymentFor={payment?.paymentFor}
+                  >
+                    {isPaidForPayment ? <p>Paid</p> : <p>Not Paid</p>}
+                  </PaymentCard>
+                );
+              })}
             </div>
           </div>
         </div>

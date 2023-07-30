@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import TeachersDashboardLeft from "../../components/Pages/Dashboard/TeachersDashboard/TeachersDashboardLeft/TeachersDashboardLeft";

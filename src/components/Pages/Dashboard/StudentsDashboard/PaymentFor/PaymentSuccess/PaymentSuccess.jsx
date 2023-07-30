@@ -12,7 +12,9 @@ const PaymentSuccess = () => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/getUsersPayment/${transactionId}`)
+      .get(
+        `https://super-ray-shrug.cyclic.cloud/getUsersPayment/${transactionId}`
+      )
       .then((res) => {
         setPaymentInfo(res.data);
       });

@@ -23,7 +23,7 @@ export const fetchUser = createAsyncThunk(
   "loggedInUser/fetchLoggedInUser",
   async () => {
     const token = localStorage.getItem("token");
-    const url = "http://localhost:3000/getUser";
+    const url = "https://super-ray-shrug.cyclic.cloud/getUser";
     const response = await fetch(url, {
       headers: {
         authorization: `Bearer ${token}`,

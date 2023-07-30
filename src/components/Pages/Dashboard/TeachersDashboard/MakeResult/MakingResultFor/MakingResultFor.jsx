@@ -67,11 +67,15 @@ const MakingResultFor = ({
     };
 
     axios
-      .post("http://localhost:3000/make-result", JSON.stringify(formData), {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      .post(
+        "https://super-ray-shrug.cyclic.cloud/make-result",
+        JSON.stringify(formData),
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         if (res.data.acknowledged) {
           Swal.fire("Result Maked", "", "success");

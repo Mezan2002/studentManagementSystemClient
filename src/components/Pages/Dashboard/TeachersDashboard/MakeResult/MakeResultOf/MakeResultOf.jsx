@@ -21,7 +21,7 @@ const MakeResultOf = ({
     const sectionUpperCase = section.toUpperCase();
 
     try {
-      const urlWithRollAndReg = `http://localhost:3000/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
+      const urlWithRollAndReg = `https://super-ray-shrug.cyclic.cloud/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
       setStudentsRollNumber(rollNumber);
       setStudentsRegistrationNumber(registrationNumber);
       setSection(sectionUpperCase);
@@ -30,7 +30,7 @@ const MakeResultOf = ({
       setExamName(firstApiResponse.data.paymentFor);
       setSelectedStudent(userId);
 
-      const urlWithUserId = `http://localhost:3000/get-student-by-userId/${userId}`;
+      const urlWithUserId = `https://super-ray-shrug.cyclic.cloud/get-student-by-userId/${userId}`;
       const secondApiResponse = await axios.get(urlWithUserId);
       const studentData = secondApiResponse.data;
       setStudentToMakeResult(studentData);

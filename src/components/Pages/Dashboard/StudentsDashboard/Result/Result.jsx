@@ -9,7 +9,9 @@ const Result = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/get-single-result/${studentId}`)
+      .get(
+        `https://super-ray-shrug.cyclic.cloud/get-single-result/${studentId}`
+      )
       .then((res) => {
         setData(res.data);
       })

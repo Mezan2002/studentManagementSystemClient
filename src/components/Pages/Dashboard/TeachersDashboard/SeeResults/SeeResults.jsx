@@ -28,7 +28,7 @@ const SeeResults = () => {
     setSection(sectionUpperCase);
     axios
       .get(
-        `http://localhost:3000/get-results?resultOfClass=${selectedClass}&section=${sectionUpperCase}`
+        `https://super-ray-shrug.cyclic.cloud/get-results?resultOfClass=${selectedClass}&section=${sectionUpperCase}`
       )
       .then((res) => {
         setData(res.data);

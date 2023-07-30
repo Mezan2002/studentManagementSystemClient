@@ -15,7 +15,7 @@ const TakeAttendence = () => {
     if (section !== "") {
       axios
         .get(
-          `http://localhost:3000/getStudents?selectedClass=${selectedClass}&section=${sectionUppercase}`
+          `https://super-ray-shrug.cyclic.cloud/getStudents?selectedClass=${selectedClass}&section=${sectionUppercase}`
         )
         .then((res) => {
           setStudentsDataFromDB(
@@ -50,7 +50,7 @@ const TakeAttendence = () => {
 
     axios
       .post(
-        "http://localhost:3000/postAttendence",
+        "https://super-ray-shrug.cyclic.cloud/postAttendence",
         JSON.stringify(attendenceData),
         {
           headers: {

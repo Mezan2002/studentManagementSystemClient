@@ -1,15 +1,15 @@
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import TeachersInfo from "./TeachersInfo/TeachersInfo";
-import EducationalQualification from "./EducationalQualification/EducationalQualification";
-import FormTop from "../FormTop/FormTop";
-import AddressData from "../AddressData/AddressData";
-import LogInInfo from "../LogInInfo/LogInInfo";
-import FormBottom from "../FormBottom/FormBottom";
-import axios from "axios";
-import { customDateOnly } from "../../../../utils/takingDateOnly";
-import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { customDateOnly } from "../../../../utils/takingDateOnly";
+import AddressData from "../AddressData/AddressData";
+import FormBottom from "../FormBottom/FormBottom";
+import FormTop from "../FormTop/FormTop";
+import LogInInfo from "../LogInInfo/LogInInfo";
+import EducationalQualification from "./EducationalQualification/EducationalQualification";
+import TeachersInfo from "./TeachersInfo/TeachersInfo";
 
 const TeacherRegister = () => {
   const navigate = useNavigate();
@@ -223,7 +223,7 @@ const TeacherRegister = () => {
 
     axios
       .get(
-        `http://localhost:3000/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
+        `https://super-ray-shrug.cyclic.cloud/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
       )
       .then((res) => {
         if (res.data === true) {
@@ -254,7 +254,7 @@ const TeacherRegister = () => {
 
           axios
             .post(
-              "http://localhost:3000/registerUser",
+              "https://super-ray-shrug.cyclic.cloud/registerUser",
               JSON.stringify(teacherRegisteredData),
               config
             )

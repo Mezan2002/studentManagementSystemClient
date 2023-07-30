@@ -26,7 +26,7 @@ const PaymentCard = ({
   const userId = user._id;
 
   axios
-    .get(`http://localhost:3000/user-is-paid/${userId}`)
+    .get(`https://super-ray-shrug.cyclic.cloud/user-is-paid/${userId}`)
     .then((res) => {
       setUserIsPaid(res.data);
     })
@@ -73,11 +73,15 @@ const PaymentCard = ({
       userInfo,
     };
     axios
-      .post("http://localhost:3000/getPayment", JSON.stringify(data), {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      .post(
+        "https://super-ray-shrug.cyclic.cloud/getPayment",
+        JSON.stringify(data),
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
         window.location.replace(res.data.url);

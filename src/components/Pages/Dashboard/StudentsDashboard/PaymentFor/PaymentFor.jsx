@@ -14,14 +14,16 @@ const PaymentFor = () => {
 
   // console.log(isPaid);
   useEffect(() => {
-    axios.get("http://localhost:3000/getPaymentOccasions").then((res) => {
-      if (res.data.length > 0) {
-        setPaymentOccaisons(res.data);
-      }
-    });
+    axios
+      .get("https://super-ray-shrug.cyclic.cloud/getPaymentOccasions")
+      .then((res) => {
+        if (res.data.length > 0) {
+          setPaymentOccaisons(res.data);
+        }
+      });
 
     axios
-      .get(`http://localhost:3000/user-is-paid/${userId}`)
+      .get(`https://super-ray-shrug.cyclic.cloud/user-is-paid/${userId}`)
       .then((res) => {
         setUserIsPaid(res.data);
       })

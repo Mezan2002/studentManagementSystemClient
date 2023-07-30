@@ -7,7 +7,7 @@ const Notice = () => {
   const [notice, setNotice] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:3000/get-notice")
+      .get("https://super-ray-shrug.cyclic.cloud/get-notice")
       .then((res) => {
         setNotice(res.data);
       })

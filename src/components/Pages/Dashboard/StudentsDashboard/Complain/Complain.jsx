@@ -29,11 +29,15 @@ const Complain = () => {
     };
 
     axios
-      .post("http://localhost:3000/complain", JSON.stringify(complainsData), {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      .post(
+        "https://super-ray-shrug.cyclic.cloud/complain",
+        JSON.stringify(complainsData),
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         if (res.data.acknowledged) {
           reset();

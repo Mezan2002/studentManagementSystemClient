@@ -299,7 +299,7 @@ const StudentRegister = () => {
 
     axios
       .get(
-        `http://localhost:3000/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
+        `https://super-ray-shrug.cyclic.cloud/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
       )
       .then((res) => {
         if (res.data === true) {
@@ -333,7 +333,7 @@ const StudentRegister = () => {
 
           axios
             .post(
-              "http://localhost:3000/registerUser",
+              "https://super-ray-shrug.cyclic.cloud/registerUser",
               JSON.stringify(studentRegisteredData),
               config
             )

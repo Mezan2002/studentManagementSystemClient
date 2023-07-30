@@ -21,7 +21,7 @@ const Attendence = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/get-attendence?dateOfAttendence=${customSelectedDate}`
+        `https://super-ray-shrug.cyclic.cloud/get-attendence?dateOfAttendence=${customSelectedDate}`
       )
       .then((res) => {
         setData(res.data);

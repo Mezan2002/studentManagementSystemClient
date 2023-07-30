@@ -36,11 +36,15 @@ const PublishNotice = () => {
     console.log(noticeData);
 
     axios
-      .post("http://localhost:3000/make-notice", JSON.stringify(noticeData), {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      .post(
+        "https://super-ray-shrug.cyclic.cloud/make-notice",
+        JSON.stringify(noticeData),
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         if (res.data.acknowledged) {
           Swal.fire("Notice Published", "", "success");

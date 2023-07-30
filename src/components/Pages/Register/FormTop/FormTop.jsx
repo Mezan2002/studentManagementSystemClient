@@ -60,8 +60,6 @@ const FormTop = ({
                   <img
                     draggable="false"
                     loading="lazy"
-                    loading="lazy"
-                    draggable={false}
                     src={` ${
                       errors.uploadedPhoto
                         ? "https://i.ibb.co/4W5WZ2x/image-1.png"
@@ -89,8 +87,6 @@ const FormTop = ({
             <img
               draggable="false"
               loading="lazy"
-              loading="lazy"
-              draggable={false}
               src={selectedImage}
               alt=""
               className="imageDiv h-full w-full object-cover"

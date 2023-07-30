@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-const Complain = () => {
+const ComplainByTeacher = () => {
   const {
     register,
     reset,
@@ -12,18 +12,20 @@ const Complain = () => {
     formState: { errors },
   } = useForm();
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
-  const studentsName = user?.studentsInfo?.studentNameInEnglish;
-  const studentsClass = user?.studentsInfo?.class;
-  const studentsSection = user?.studentsInfo?.section;
-  const studentsId = user?._id;
+  console.log(user);
+  const teachersName = user?.teachersInfo?.teachersNameInEnglish;
+  const teachersDesignation = user?.teachersInfo?.teachersDesignaion;
+  const teachersTakingClass = user?.teachersInfo?.teachersTakingClass;
+  const teachersId = user?._id;
   const userType = user?.userType;
   const onSubmit = (data) => {
+    console.log(data);
     const complainsData = {
       userType,
-      studentsName,
-      studentsClass,
-      studentsSection,
-      studentsId,
+      teachersName,
+      teachersDesignation,
+      teachersTakingClass,
+      teachersId,
       subjectOfComplainment: data.subjectOfComplain,
       complain: data.complain,
     };
@@ -60,7 +62,7 @@ const Complain = () => {
         <div className="">
           <div>
             <div className="flex items-start justify-between">
-              <h2 className="text-5xl font-bold">Make a Complain</h2>
+              <h2 className="text-5xl font-bold">Complain</h2>
               <img
                 draggable="false"
                 loading="lazy"
@@ -119,4 +121,4 @@ const Complain = () => {
   );
 };
 
-export default Complain;
+export default ComplainByTeacher;

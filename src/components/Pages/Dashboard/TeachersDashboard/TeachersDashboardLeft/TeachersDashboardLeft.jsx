@@ -70,9 +70,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsSeeResults(false);
       setIsPublishNotice(true);
       setIsComplainAStudent(false);
-    } else if (
-      currentPathName === "/teachersDashboard/complain-about-studnet"
-    ) {
+    } else if (currentPathName === "/teachersDashboard/complain") {
       setIsDashboard(false);
       setIsMyClasses(false);
       setIsTakeAttendence(false);
@@ -247,7 +245,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                   </div>
                 </div>
               </Link>
-              <Link to="/teachersDashboard/complain-about-studnet">
+              <Link to="/teachersDashboard/complain">
                 <div
                   className={`flex items-center hover:bg-white justify-between cursor-pointer ${
                     isComplainAStudent && "bg-white"
@@ -261,7 +259,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                       alt=""
                       className="w-6 mr-5"
                     />
-                    <p className="">Complain a Student</p>
+                    <p className="">Complain</p>
                   </div>
                   <div>
                     <p>

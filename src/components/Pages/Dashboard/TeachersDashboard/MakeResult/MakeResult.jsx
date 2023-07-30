@@ -1,7 +1,7 @@
-import { Input, Option, Select } from "@material-tailwind/react";
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import MakeResultOf from "./MakeResultOf/MakeResultOf";
+import MakingResultFor from "./MakeResultOf/MakingResultFor/MakingResultFor";
 
 const MakeResult = () => {
   const {
@@ -10,42 +10,19 @@ const MakeResult = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [studentToMakeResult, setStudentToMakeResult] = useState(null);
+  const [studentsRollNumber, setStudentsRollNumber] = useState(null);
   const [isClassError, setIsClassError] = useState(false);
   const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState("");
+  const [examName, setExamName] = useState(null);
+  const [studentsRegistrationNumber, setStudentsRegistrationNumber] =
+    useState(null);
 
-  const onSubmit = (data) => {
-    const sectionUpperCase = data.section.toUpperCase();
-    const studentsData = {
-      sectionUpperCase,
-      selectedClass,
-      rollNumber: data.rollNumber,
-      registrationNumber: data.registrationNumber,
-    };
-    console.log(studentsData);
-    const url = `http://localhost:3000/get-students-for-making-result?studentRollNumber=${data.rollNumber}&studentRegistrationNumber=${data.registrationNumber}`;
-    axios
-      .get(url)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-
-    if (isClassError === true) {
-      return setIsClassError(true);
-    }
+  const onSubmit = async (data) => {
+    console.log(data);
   };
 
-  const handleGetResult = () => {
-    if (selectedClass === null) {
-      setIsClassError(true);
-    } else {
-      setIsClassError(false);
-    }
-  };
-
-  const handleChangeSelectedClass = (selectedClass) => {
-    setSelectedClass(selectedClass);
-  };
   return (
     <section
       style={{
@@ -67,134 +44,25 @@ const MakeResult = () => {
               />
             </div>
           </div>
-          <div className="mt-24 flex items-center justify-center">
-            <div className="card w-4/12 bg-white shadow-2xl">
-              <div className="card-body">
-                <div className="">
-                  <h2 className="text-left font-semibold text-xl mb-5">
-                    Making Result of
-                  </h2>
-                  <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className="flex flex-col gap-5"
-                  >
-                    {isClassError ? (
-                      <Select
-                        error
-                        onChange={(selectedValue) => {
-                          handleChangeSelectedClass(selectedValue);
-                        }}
-                        label="Select Your Class"
-                        animate={{
-                          mount: { y: 0 },
-                          unmount: { y: 25 },
-                        }}
-                      >
-                        <Option className="mb-2 text-xs" value="6">
-                          6
-                        </Option>
-                        <Option className="mb-2 text-xs" value="7">
-                          7
-                        </Option>
-                        <Option className="mb-2 text-xs" value="8">
-                          8
-                        </Option>
-                        <Option className="mb-2 text-xs" value="9">
-                          9
-                        </Option>
-                        <Option className="mb-2 text-xs" value="10">
-                          10
-                        </Option>
-                      </Select>
-                    ) : (
-                      <Select
-                        onChange={(selectedValue) => {
-                          handleChangeSelectedClass(selectedValue);
-                        }}
-                        label="Select Your Class"
-                        animate={{
-                          mount: { y: 0 },
-                          unmount: { y: 25 },
-                        }}
-                      >
-                        <Option className="mb-2 text-xs" value="6">
-                          6
-                        </Option>
-                        <Option className="mb-2 text-xs" value="7">
-                          7
-                        </Option>
-                        <Option className="mb-2 text-xs" value="8">
-                          8
-                        </Option>
-                        <Option className="mb-2 text-xs" value="9">
-                          9
-                        </Option>
-                        <Option className="mb-2 text-xs" value="10">
-                          10
-                        </Option>
-                      </Select>
-                    )}
-                    {errors.section ? (
-                      <>
-                        <Input
-                          size="lg"
-                          label="Section *"
-                          {...register("section", { required: true })}
-                          error
-                        />
-                      </>
-                    ) : (
-                      <Input
-                        size="lg"
-                        label="Section *"
-                        {...register("section", { required: true })}
-                      />
-                    )}
-                    {errors.rollNumber ? (
-                      <>
-                        <Input
-                          size="lg"
-                          label="Exam's Roll Number *"
-                          {...register("rollNumber", { required: true })}
-                          error
-                        />
-                      </>
-                    ) : (
-                      <Input
-                        size="lg"
-                        label="Exam's Roll Number *"
-                        {...register("rollNumber", { required: true })}
-                      />
-                    )}
-                    {errors.registrationNumber ? (
-                      <>
-                        <Input
-                          size="lg"
-                          label="Exam's Registration Number *"
-                          {...register("registrationNumber", {
-                            required: true,
-                          })}
-                          error
-                        />
-                      </>
-                    ) : (
-                      <Input
-                        size="lg"
-                        label="Exam's Registration Number *"
-                        {...register("registrationNumber", { required: true })}
-                      />
-                    )}
-                    <input
-                      onClick={handleGetResult}
-                      type="submit"
-                      value="Make Result"
-                      className="btn btn-block bg-black text-white hover:bg-black"
-                    />
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+          {studentToMakeResult === null ? (
+            <MakeResultOf
+              setExamName={setExamName}
+              setStudentsRollNumber={setStudentsRollNumber}
+              setStudentsRegistrationNumber={setStudentsRegistrationNumber}
+              setStudentToMakeResult={setStudentToMakeResult}
+            ></MakeResultOf>
+          ) : (
+            <MakingResultFor
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              errors={errors}
+              register={register}
+              examName={examName}
+              studentsRollNumber={studentsRollNumber}
+              studentsRegistrationNumber={studentsRegistrationNumber}
+              studentToMakeResult={studentToMakeResult}
+            ></MakingResultFor>
+          )}
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@ import PaymentSuccess from "../components/Pages/Dashboard/StudentsDashboard/Paym
 import Result from "../components/Pages/Dashboard/StudentsDashboard/Result/Result";
 import Routine from "../components/Pages/Dashboard/StudentsDashboard/Routine/Routine";
 import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
-import ComplainAStudent from "../components/Pages/Dashboard/TeachersDashboard/ComplainAStudent/ComplainAStudent";
+import ComplainByTeacher from "../components/Pages/Dashboard/TeachersDashboard/ComplainByTeacher/ComplainByTeacher";
 import MakeResult from "../components/Pages/Dashboard/TeachersDashboard/MakeResult/MakeResult";
 import MyClasses from "../components/Pages/Dashboard/TeachersDashboard/MyClasses/MyClasses";
 import PublishNotice from "../components/Pages/Dashboard/TeachersDashboard/PublishNotice/PublishNotice";
@@ -118,6 +118,10 @@ export const router = createBrowserRouter([
         path: "/teachersDashboard/make-result",
         element: <MakeResult></MakeResult>,
       },
+      /* {
+        path: "/teachersDashboard/making-result-for",
+        element: <MakingResultFor></MakingResultFor>,
+      }, */
       {
         path: "/teachersDashboard/see-results",
         element: <SeeResults></SeeResults>,
@@ -127,8 +131,8 @@ export const router = createBrowserRouter([
         element: <PublishNotice></PublishNotice>,
       },
       {
-        path: "/teachersDashboard/complain-about-studnet",
-        element: <ComplainAStudent></ComplainAStudent>,
+        path: "/teachersDashboard/complain",
+        element: <ComplainByTeacher></ComplainByTeacher>,
       },
     ],
   },

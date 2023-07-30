@@ -14,6 +14,7 @@ const MakingResultFor = ({
 }) => {
   const studnetsName = studentToMakeResult.studentsInfo.studentNameInEnglish;
   const studentsImage = studentToMakeResult.studentsInfo.studentsImage;
+  const studentId = studentToMakeResult._id;
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const teachersName = user?.teachersInfo?.teachersNameInEnglish;
   const teachersDesignation = user?.teachersInfo?.teachersDesignaion;
@@ -36,6 +37,7 @@ const MakingResultFor = ({
 
     const formData = {
       section,
+      studentId,
       studentOfClass: selectedClass,
       studnetsName,
       studentsImage,

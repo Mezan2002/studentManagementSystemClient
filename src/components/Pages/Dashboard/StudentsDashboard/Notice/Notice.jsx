@@ -1,8 +1,20 @@
 import { Button, ButtonGroup } from "@material-tailwind/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import "./Notice.css";
 
 const Notice = () => {
+  const [notice, setNotice] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/get-notice")
+      .then((res) => {
+        setNotice(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <section
       style={{
@@ -29,7 +41,6 @@ const Notice = () => {
               <div className="card-body">
                 <div className="overflow-x-auto">
                   <table className="table table-zebra">
-                    {/* head */}
                     <thead>
                       <tr>
                         <th>Serial No.</th>
@@ -45,69 +56,25 @@ const Notice = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {/* row 1 */}
-                      <tr>
-                        <th>1</th>
-                        <td>
-                          Lorem ipsum dolor sit amet consectetur, adipisicing
-                          elit.
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <ButtonGroup type size="sm">
-                            <Button>See Notice</Button>
-                            <Button>Download Notice</Button>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                      {/* row 2 */}
-                      <tr>
-                        <th>2</th>
-                        <td>
-                          Lorem ipsum dolor sit amet consectetur, adipisicing
-                          elit.
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <ButtonGroup type size="sm">
-                            <Button>See Notice</Button>
-                            <Button>Download Notice</Button>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                      {/* row 3 */}
-                      <tr>
-                        <th>3</th>
-                        <td>
-                          Lorem ipsum dolor sit amet consectetur, adipisicing
-                          elit.
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <ButtonGroup type size="sm">
-                            <Button>See Notice</Button>
-                            <Button>Download Notice</Button>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
+                      {notice.map((ntc, index) => (
+                        <tr key={index}>
+                          <th>{index + 1}</th>
+                          <td>{ntc.titleOfNotice}</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>
+                            <ButtonGroup type size="sm">
+                              <Button>See Notice</Button>
+                              <Button>Download Notice</Button>
+                            </ButtonGroup>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

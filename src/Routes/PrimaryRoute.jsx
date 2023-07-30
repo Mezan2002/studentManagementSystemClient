@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminMainDashboard from "../components/Pages/Dashboard/AdminDashboard/AdminMainDashboard/AdminMainDashboard";
 import Attendence from "../components/Pages/Dashboard/StudentsDashboard/Attendence/Attendence";
 import Complain from "../components/Pages/Dashboard/StudentsDashboard/Complain/Complain";
 import Notice from "../components/Pages/Dashboard/StudentsDashboard/Notice/Notice";
@@ -21,6 +22,7 @@ import Login from "../components/Pages/Login/Login";
 import Register from "../components/Pages/Register/Register";
 import StudentRegister from "../components/Pages/Register/StudentRegister/StudentRegister";
 import TeacherRegister from "../components/Pages/Register/TeacherRegister/TeacherRegister";
+import AdminDashboardLayout from "../layouts/AdminDashboardLayout/AdminDashboardLayout";
 import Main from "../layouts/Main/Main";
 import StudentDashboardLayout from "../layouts/StudentDashboardLayout/StudentDashboardLayout";
 import TeachersDashboardLayout from "../layouts/TeachersDashboardLayout/TeachersDashboardLayout";
@@ -118,10 +120,6 @@ export const router = createBrowserRouter([
         path: "/teachersDashboard/make-result",
         element: <MakeResult></MakeResult>,
       },
-      /* {
-        path: "/teachersDashboard/making-result-for",
-        element: <MakingResultFor></MakingResultFor>,
-      }, */
       {
         path: "/teachersDashboard/see-results",
         element: <SeeResults></SeeResults>,
@@ -133,6 +131,52 @@ export const router = createBrowserRouter([
       {
         path: "/teachersDashboard/complain",
         element: <ComplainByTeacher></ComplainByTeacher>,
+      },
+    ],
+  },
+  {
+    path: "/adminDashboard",
+    element: <AdminDashboardLayout></AdminDashboardLayout>,
+    children: [
+      {
+        path: "/adminDashboard",
+        element: <AdminMainDashboard></AdminMainDashboard>,
+      },
+      {
+        path: "/adminDashboard/attendence",
+        element: <Attendence></Attendence>,
+      },
+      {
+        path: "/adminDashboard/routine",
+        element: <Routine></Routine>,
+      },
+      {
+        path: "/adminDashboard/notice",
+        element: <Notice></Notice>,
+      },
+      {
+        path: "/adminDashboard/complain",
+        element: <Complain></Complain>,
+      },
+      {
+        path: "/adminDashboard/result",
+        element: <Result></Result>,
+      },
+      {
+        path: "/adminDashboard/payment",
+        element: <PaymentFor></PaymentFor>,
+      },
+      {
+        path: "/adminDashboard/payment/success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/adminDashboard/payment/fail",
+        element: <PaymentFail></PaymentFail>,
+      },
+      {
+        path: "/adminDashboard/payment/cancel",
+        element: <PaymentCancel></PaymentCancel>,
       },
     ],
   },

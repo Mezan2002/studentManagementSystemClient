@@ -1,27 +1,15 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import MakeResultOf from "./MakeResultOf/MakeResultOf";
-import MakingResultFor from "./MakeResultOf/MakingResultFor/MakingResultFor";
+import MakingResultFor from "./MakingResultFor/MakingResultFor";
 
 const MakeResult = () => {
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
   const [studentToMakeResult, setStudentToMakeResult] = useState(null);
   const [studentsRollNumber, setStudentsRollNumber] = useState(null);
-  const [isClassError, setIsClassError] = useState(false);
+  const [section, setSection] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedStudent, setSelectedStudent] = useState("");
   const [examName, setExamName] = useState(null);
   const [studentsRegistrationNumber, setStudentsRegistrationNumber] =
     useState(null);
-
-  const onSubmit = async (data) => {
-    console.log(data);
-  };
 
   return (
     <section
@@ -46,6 +34,8 @@ const MakeResult = () => {
           </div>
           {studentToMakeResult === null ? (
             <MakeResultOf
+              setSelectedClass={setSelectedClass}
+              setSection={setSection}
               setExamName={setExamName}
               setStudentsRollNumber={setStudentsRollNumber}
               setStudentsRegistrationNumber={setStudentsRegistrationNumber}
@@ -53,10 +43,8 @@ const MakeResult = () => {
             ></MakeResultOf>
           ) : (
             <MakingResultFor
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              errors={errors}
-              register={register}
+              section={section}
+              selectedClass={selectedClass}
               examName={examName}
               studentsRollNumber={studentsRollNumber}
               studentsRegistrationNumber={studentsRegistrationNumber}

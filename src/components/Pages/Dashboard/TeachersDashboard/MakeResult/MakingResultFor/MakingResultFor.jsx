@@ -5,15 +5,15 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const MakingResultFor = ({
-  register,
-  errors,
-  onSubmit,
+  selectedClass,
+  section,
   examName,
   studentToMakeResult,
   studentsRollNumber,
   studentsRegistrationNumber,
 }) => {
   const studnetsName = studentToMakeResult.studentsInfo.studentNameInEnglish;
+  const studentsImage = studentToMakeResult.studentsInfo.studentsImage;
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const teachersName = user?.teachersInfo?.teachersNameInEnglish;
   const teachersDesignation = user?.teachersInfo?.teachersDesignaion;
@@ -35,7 +35,10 @@ const MakingResultFor = ({
     const mathsWritten = form.mathsWritten.value;
 
     const formData = {
+      section,
+      studentOfClass: selectedClass,
       studnetsName,
+      studentsImage,
       examName,
       studentsRollNumber,
       studentsRegistrationNumber,
@@ -70,6 +73,7 @@ const MakingResultFor = ({
       .then((res) => {
         if (res.data.acknowledged) {
           Swal.fire("Result Maked", "", "success");
+          form.reset();
         }
       })
       .catch((err) => {
@@ -80,7 +84,7 @@ const MakingResultFor = ({
 
   return (
     <div>
-      <div className="mt-14 flex items-center justify-center">
+      <div className="mt-5 flex items-center justify-center">
         <div className="card w-5/12 bg-white shadow-2xl">
           <div className="card-body">
             <div className="">
@@ -142,6 +146,29 @@ const MakingResultFor = ({
                       readOnly
                       size="lg"
                     />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-5">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="font-bold text-xs">
+                        Student of Class *
+                      </span>
+                    </label>
+                    <Input
+                      defaultValue={selectedClass}
+                      disabled
+                      readOnly
+                      size="lg"
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="font-bold text-xs">
+                        Students of Section *
+                      </span>
+                    </label>
+                    <Input defaultValue={section} disabled readOnly size="lg" />
                   </div>
                 </div>
                 <div className="form-control ">

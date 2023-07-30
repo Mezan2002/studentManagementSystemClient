@@ -3,17 +3,14 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const MakeResultOf = ({
-  /* register,
-  handleSubmit,
-  errors,
-  onSubmit, */
+  setSelectedClass,
+  setSection,
   setExamName,
   setStudentToMakeResult,
   setStudentsRollNumber,
   setStudentsRegistrationNumber,
 }) => {
   const [isClassError, setIsClassError] = useState(false);
-  const [selectedClass, setSelectedClass] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState("");
   const handleGetResult = async (event) => {
     event.preventDefault();
@@ -21,31 +18,21 @@ const MakeResultOf = ({
     const section = form.section.value;
     const rollNumber = form.rollNumber.value;
     const registrationNumber = form.registrationNumber.value;
-
     const sectionUpperCase = section.toUpperCase();
 
-    const formData = {
-      selectedClass,
-      sectionUpperCase,
-      rollNumber,
-      registrationNumber,
-    };
-    console.log(formData);
     try {
       const urlWithRollAndReg = `http://localhost:3000/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
       setStudentsRollNumber(rollNumber);
       setStudentsRegistrationNumber(registrationNumber);
+      setSection(sectionUpperCase);
       const firstApiResponse = await axios.get(urlWithRollAndReg);
       const userId = firstApiResponse.data.userId;
-
       setExamName(firstApiResponse.data.paymentFor);
-
       setSelectedStudent(userId);
 
       const urlWithUserId = `http://localhost:3000/get-student-by-userId/${userId}`;
       const secondApiResponse = await axios.get(urlWithUserId);
       const studentData = secondApiResponse.data;
-
       setStudentToMakeResult(studentData);
 
       if (isClassError === true) {

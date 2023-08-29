@@ -223,7 +223,7 @@ const TeacherRegister = () => {
 
     axios
       .get(
-        `https://super-ray-shrug.cyclic.cloud/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
+        `https://atg-server-tau.vercel.app/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
       )
       .then((res) => {
         if (res.data === true) {
@@ -254,7 +254,7 @@ const TeacherRegister = () => {
 
           axios
             .post(
-              "https://super-ray-shrug.cyclic.cloud/registerUser",
+              "https://atg-server-tau.vercel.app/registerUser",
               JSON.stringify(teacherRegisteredData),
               config
             )

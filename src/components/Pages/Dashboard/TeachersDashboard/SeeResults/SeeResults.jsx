@@ -1,34 +1,28 @@
 import { Input, Option, Select } from "@material-tailwind/react";
 import axios from "axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const SeeResults = () => {
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [isClassError, setIsClassError] = useState(false);
-  const [selectedClass, setSelectedClass] = useState(null);
+  // const [selectedClass, setSelectedClass] = useState(null);
   const [data, setData] = useState([]);
   const [section, setSection] = useState("");
 
-  const handleButtonClicked = () => {
-    if (selectedClass === null) {
-      setIsClassError(true);
-    } else {
-      setIsClassError(false);
-    }
-  };
-
   const handleChangeSelectedClass = (selectedClass) => {
-    setSelectedClass(selectedClass);
+    setSection(selectedClass.toUpperCase());
   };
 
   const handleGetResult = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const section = form.section.value;
-    const sectionUpperCase = section.toUpperCase();
-    setSection(sectionUpperCase);
+
+    console.log(
+      `https://atg-server-tau.vercel.app/get-results?resultOfClass=${user?.teachersInfo?.teachersTakingClass}&section=${section}`
+    );
     axios
       .get(
-        `https://super-ray-shrug.cyclic.cloud/get-results?resultOfClass=${selectedClass}&section=${sectionUpperCase}`
+        `https://atg-server-tau.vercel.app/get-results?resultOfClass=${user?.teachersInfo?.teachersTakingClass}&section=${section}`
       )
       .then((res) => {
         setData(res.data);
@@ -37,8 +31,6 @@ const SeeResults = () => {
         console.log(err);
       });
   };
-
-  console.log(data);
 
   return (
     <section
@@ -53,7 +45,8 @@ const SeeResults = () => {
             <div>
               <div className="flex items-start justify-between">
                 <h2 className="text-2xl font-bold">
-                  Result of Class {selectedClass} {section}
+                  Result of Class {user?.teachersInfo?.teachersTakingClass}{" "}
+                  {section}
                 </h2>
                 <img
                   draggable="false"
@@ -100,8 +93,8 @@ const SeeResults = () => {
                                       {item.studnetsName}
                                     </div>
                                     <span className="bg-gray-300 p-1 text-xs rounded-lg">
-                                      Class: {item.studentOfClass}{" "}
-                                      {item.section}
+                                      Department: {item.studentOfClass} /
+                                      {item.section} semister
                                     </span>
                                     <div className="text-sm opacity-50"></div>
                                   </div>
@@ -152,6 +145,18 @@ const SeeResults = () => {
                         onSubmit={handleGetResult}
                         className="flex flex-col gap-5"
                       >
+                        <>
+                          <Input
+                            readOnly
+                            disabled
+                            // name="section"
+                            size="lg"
+                            defaultValue={
+                              user?.teachersInfo?.teachersTakingClass
+                            }
+                            label="Section"
+                          />
+                        </>
                         {isClassError ? (
                           <Select
                             required
@@ -159,26 +164,35 @@ const SeeResults = () => {
                             onChange={(selectedValue) => {
                               handleChangeSelectedClass(selectedValue);
                             }}
-                            label="Select Your Class"
+                            label="Select Your Semister"
                             animate={{
                               mount: { y: 0 },
                               unmount: { y: 25 },
                             }}
                           >
-                            <Option className="mb-2 text-xs" value="6">
-                              6
+                            <Option className="mb-2 text-xs" value="1st">
+                              1st
                             </Option>
-                            <Option className="mb-2 text-xs" value="7">
-                              7
+                            <Option className="mb-2 text-xs" value="2nd">
+                              2nd
                             </Option>
-                            <Option className="mb-2 text-xs" value="8">
-                              8
+                            <Option className="mb-2 text-xs" value="3rd">
+                              3rd
                             </Option>
-                            <Option className="mb-2 text-xs" value="9">
-                              9
+                            <Option className="mb-2 text-xs" value="4th">
+                              4th
                             </Option>
-                            <Option className="mb-2 text-xs" value="10">
-                              10
+                            <Option className="mb-2 text-xs" value="5th">
+                              5th
+                            </Option>
+                            <Option className="mb-2 text-xs" value="6th">
+                              6th
+                            </Option>
+                            <Option className="mb-2 text-xs" value="7th">
+                              7th
+                            </Option>
+                            <Option className="mb-2 text-xs" value="8th">
+                              8th
                             </Option>
                           </Select>
                         ) : (
@@ -187,39 +201,39 @@ const SeeResults = () => {
                             onChange={(selectedValue) => {
                               handleChangeSelectedClass(selectedValue);
                             }}
-                            label="Select Your Class"
+                            label="Select Your Semister"
                             animate={{
                               mount: { y: 0 },
                               unmount: { y: 25 },
                             }}
                           >
-                            <Option className="mb-2 text-xs" value="6">
-                              6
+                            <Option className="mb-2 text-xs" value="1st">
+                              1st
                             </Option>
-                            <Option className="mb-2 text-xs" value="7">
-                              7
+                            <Option className="mb-2 text-xs" value="2nd">
+                              2nd
                             </Option>
-                            <Option className="mb-2 text-xs" value="8">
-                              8
+                            <Option className="mb-2 text-xs" value="3rd">
+                              3rd
                             </Option>
-                            <Option className="mb-2 text-xs" value="9">
-                              9
+                            <Option className="mb-2 text-xs" value="4th">
+                              4th
                             </Option>
-                            <Option className="mb-2 text-xs" value="10">
-                              10
+                            <Option className="mb-2 text-xs" value="5th">
+                              5th
+                            </Option>
+                            <Option className="mb-2 text-xs" value="6th">
+                              6th
+                            </Option>
+                            <Option className="mb-2 text-xs" value="7th">
+                              7th
+                            </Option>
+                            <Option className="mb-2 text-xs" value="8th">
+                              8th
                             </Option>
                           </Select>
                         )}
-                        <>
-                          <Input
-                            required
-                            name="section"
-                            size="lg"
-                            label="Section"
-                          />
-                        </>
                         <input
-                          onClick={handleButtonClicked}
                           type="submit"
                           value="See Result"
                           className="btn btn-block bg-black text-white hover:bg-black"

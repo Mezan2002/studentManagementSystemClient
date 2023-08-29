@@ -31,7 +31,7 @@ const Login = () => {
   };
 
   const onSubmit = (data) => {
-    const url = `https://super-ray-shrug.cyclic.cloud/logInUser?phoneNumber=${data.phoneNumberForLogIn}&password=${data.passwordForLogIn}`;
+    const url = `https://atg-server-tau.vercel.app/logInUser?phoneNumber=${data.phoneNumberForLogIn}&password=${data.passwordForLogIn}`;
     axios
       .get(url, {
         headers: {

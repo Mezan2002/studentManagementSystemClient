@@ -15,6 +15,7 @@ const StudentsInfo = ({
   register,
   errors,
   handleChangeSelectedClass,
+  isSemisterError,
   handleChangeGender,
   handeleSelectedMaritalStatus,
   handeleSelectedBloodGroup,
@@ -22,6 +23,7 @@ const StudentsInfo = ({
   isGenderError,
   isBloodGroupError,
   isMaritalStatusError,
+  handleChangeSelectedSemister,
   isStudentsDateOfBirthError,
 }) => {
   return (
@@ -31,22 +33,6 @@ const StudentsInfo = ({
         All information here will be student's information
       </p>
       <div className="flex flex-col gap-5 mb-5">
-        {errors.studentsFullNameInBangla ? (
-          <>
-            <Input
-              size="md"
-              label="Full Name in Bangla *"
-              {...register("studentsFullNameInBangla", { required: true })}
-              error
-            />
-          </>
-        ) : (
-          <Input
-            size="md"
-            label="Full Name in Bangla *"
-            {...register("studentsFullNameInBangla", { required: true })}
-          />
-        )}
         {errors.studentsFullNameInEnglish ? (
           <>
             <Input
@@ -114,26 +100,17 @@ const StudentsInfo = ({
               onChange={(selectedValue) => {
                 handleChangeSelectedClass(selectedValue);
               }}
-              label="Select Your Class"
+              label="Select Your Department"
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },
               }}
             >
-              <Option className="mb-2" value="6">
-                6
+              <Option className="mb-2" value="CSE">
+                CSE
               </Option>
-              <Option className="mb-2" value="7">
-                7
-              </Option>
-              <Option className="mb-2" value="8">
-                8
-              </Option>
-              <Option className="mb-2" value="9">
-                9
-              </Option>
-              <Option className="mb-2" value="10">
-                10
+              <Option className="mb-2" value="BBA">
+                BBA
               </Option>
             </Select>
           ) : (
@@ -141,45 +118,94 @@ const StudentsInfo = ({
               onChange={(selectedValue) => {
                 handleChangeSelectedClass(selectedValue);
               }}
-              label="Select Your Class"
+              label="Select Your Department"
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },
               }}
             >
-              <Option className="mb-2" value="6">
-                6
+              <Option className="mb-2" value="CSE">
+                CSE
               </Option>
-              <Option className="mb-2" value="7">
-                7
-              </Option>
-              <Option className="mb-2" value="8">
-                8
-              </Option>
-              <Option className="mb-2" value="9">
-                9
-              </Option>
-              <Option className="mb-2" value="10">
-                10
+              <Option className="mb-2" value="BBA">
+                BBA
               </Option>
             </Select>
           )}
         </div>
-        {errors.section ? (
-          <>
-            <Input
-              size="md"
-              label="Section *"
-              {...register("section", { required: true })}
-              error
-            />
-          </>
+        {isSemisterError ? (
+          <Select
+            error
+            onChange={(selectedValue) => {
+              handleChangeSelectedSemister(selectedValue);
+            }}
+            label="Select Semister"
+            animate={{
+              mount: { y: 0 },
+              unmount: { y: 25 },
+            }}
+          >
+            <Option className="mb-2 text-xs" value="1st">
+              1st
+            </Option>
+            <Option className="mb-2 text-xs" value="2nd">
+              2nd
+            </Option>
+            <Option className="mb-2 text-xs" value="3rd">
+              3rd
+            </Option>
+            <Option className="mb-2 text-xs" value="4th">
+              4th
+            </Option>
+            <Option className="mb-2 text-xs" value="5th">
+              5th
+            </Option>
+            <Option className="mb-2 text-xs" value="6th">
+              6th
+            </Option>
+            <Option className="mb-2 text-xs" value="7th">
+              7th
+            </Option>
+            <Option className="mb-2 text-xs" value="8th">
+              8th
+            </Option>
+          </Select>
         ) : (
-          <Input
-            size="md"
-            label="Section *"
-            {...register("section", { required: true })}
-          />
+          <Select
+            onChange={(selectedValue) => {
+              handleChangeSelectedSemister(selectedValue);
+            }}
+            label="Select Semister"
+            animate={{
+              mount: { y: 0 },
+              unmount: { y: 25 },
+            }}
+          >
+            <Option className="mb-2 text-xs" value="1st">
+              1st
+            </Option>
+            <Option className="mb-2 text-xs" value="2nd">
+              2nd
+            </Option>
+            <Option className="mb-2 text-xs" value="3rd">
+              3rd
+            </Option>
+            <Option className="mb-2 text-xs" value="4th">
+              4th
+            </Option>
+            <Option className="mb-2 text-xs" value="5th">
+              5th
+            </Option>
+            <Option className="mb-2 text-xs" value="6th">
+              6th
+            </Option>
+            <Option className="mb-2 text-xs" value="7th">
+              7th
+            </Option>
+            <Option className="mb-2 text-xs" value="8th">
+              8th
+            </Option>
+          </Select>
         )}
         {errors.birthPlace ? (
           <>

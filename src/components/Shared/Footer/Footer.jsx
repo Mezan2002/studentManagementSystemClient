@@ -32,8 +32,8 @@ const Footer = () => {
               <img
                 draggable="false"
                 loading="lazy"
-                src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
-                alt="deuty high school and college logo"
+                src="https://aiict.edu.bd/wp-content/uploads/2022/09/aiict-logo-1-2.png"
+                alt="AIICT's logo"
                 className="w-32"
               />
             </a>
@@ -73,8 +73,8 @@ const Footer = () => {
             variant="small"
             className="mb-4 text-center font-normal text-blue-gray-900 md:mb-0"
           >
-            &copy; {currentYear} All Rights Reserved by Deuty High School and
-            College
+            &copy; {currentYear} All Rights Reserved by AHSANULLAH INSTITUTE OF
+            INFORMATION & COMMUNICATION TECHNOLOGY (AIICT)
           </Typography>
           <div className="flex gap-4 text-blue-gray-900 sm:justify-center">
             <Typography

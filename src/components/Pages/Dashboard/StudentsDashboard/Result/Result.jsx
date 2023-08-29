@@ -1,6 +1,6 @@
 import { Input } from "@material-tailwind/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Result = () => {
@@ -9,9 +9,7 @@ const Result = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get(
-        `https://super-ray-shrug.cyclic.cloud/get-single-result/${studentId}`
-      )
+      .get(`https://atg-server-tau.vercel.app/get-single-result/${studentId}`)
       .then((res) => {
         setData(res.data);
       })

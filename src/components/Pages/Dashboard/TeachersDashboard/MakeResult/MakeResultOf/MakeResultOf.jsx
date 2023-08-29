@@ -1,36 +1,38 @@
 import { Input, Option, Select } from "@material-tailwind/react";
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const MakeResultOf = ({
-  setSelectedClass,
+  section,
+  selectedClass,
   setSection,
   setExamName,
   setStudentToMakeResult,
   setStudentsRollNumber,
   setStudentsRegistrationNumber,
 }) => {
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [isClassError, setIsClassError] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState("");
   const handleGetResult = async (event) => {
     event.preventDefault();
     const form = event.target;
-    const section = form.section.value;
     const rollNumber = form.rollNumber.value;
     const registrationNumber = form.registrationNumber.value;
-    const sectionUpperCase = section.toUpperCase();
 
     try {
-      const urlWithRollAndReg = `https://super-ray-shrug.cyclic.cloud/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
+      const urlWithRollAndReg = `http://localhost:5001/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
       setStudentsRollNumber(rollNumber);
       setStudentsRegistrationNumber(registrationNumber);
-      setSection(sectionUpperCase);
+      // setSection(sectionUpperCase);
       const firstApiResponse = await axios.get(urlWithRollAndReg);
+      console.log(firstApiResponse);
       const userId = firstApiResponse.data.userId;
       setExamName(firstApiResponse.data.paymentFor);
       setSelectedStudent(userId);
 
-      const urlWithUserId = `https://super-ray-shrug.cyclic.cloud/get-student-by-userId/${userId}`;
+      const urlWithUserId = `http://localhost:5001/get-student-by-userId/${userId}`;
       const secondApiResponse = await axios.get(urlWithUserId);
       const studentData = secondApiResponse.data;
       setStudentToMakeResult(studentData);
@@ -51,8 +53,9 @@ const MakeResultOf = ({
     }
   };
 
-  const handleChangeSelectedClass = (selectedClass) => {
-    setSelectedClass(selectedClass);
+  const handleChangeSelectedClass = (selectedValue) => {
+    // const sectionUpperCase = section.toUpperCase();
+    setSection(selectedValue.toUpperCase());
   };
   return (
     <div>
@@ -70,26 +73,35 @@ const MakeResultOf = ({
                     onChange={(selectedValue) => {
                       handleChangeSelectedClass(selectedValue);
                     }}
-                    label="Select Your Class"
+                    label="Select Semister"
                     animate={{
                       mount: { y: 0 },
                       unmount: { y: 25 },
                     }}
                   >
-                    <Option className="mb-2 text-xs" value="6">
-                      6
+                    <Option className="mb-2 text-xs" value="1st">
+                      1st
                     </Option>
-                    <Option className="mb-2 text-xs" value="7">
-                      7
+                    <Option className="mb-2 text-xs" value="2nd">
+                      2nd
                     </Option>
-                    <Option className="mb-2 text-xs" value="8">
-                      8
+                    <Option className="mb-2 text-xs" value="3rd">
+                      3rd
                     </Option>
-                    <Option className="mb-2 text-xs" value="9">
-                      9
+                    <Option className="mb-2 text-xs" value="4th">
+                      4th
                     </Option>
-                    <Option className="mb-2 text-xs" value="10">
-                      10
+                    <Option className="mb-2 text-xs" value="5th">
+                      5th
+                    </Option>
+                    <Option className="mb-2 text-xs" value="6th">
+                      6th
+                    </Option>
+                    <Option className="mb-2 text-xs" value="7th">
+                      7th
+                    </Option>
+                    <Option className="mb-2 text-xs" value="8th">
+                      8th
                     </Option>
                   </Select>
                 ) : (
@@ -97,32 +109,38 @@ const MakeResultOf = ({
                     onChange={(selectedValue) => {
                       handleChangeSelectedClass(selectedValue);
                     }}
-                    label="Select Your Class"
+                    label="Select Semister"
                     animate={{
                       mount: { y: 0 },
                       unmount: { y: 25 },
                     }}
                   >
-                    <Option className="mb-2 text-xs" value="6">
-                      6
+                    <Option className="mb-2 text-xs" value="1st">
+                      1st
                     </Option>
-                    <Option className="mb-2 text-xs" value="7">
-                      7
+                    <Option className="mb-2 text-xs" value="2nd">
+                      2nd
                     </Option>
-                    <Option className="mb-2 text-xs" value="8">
-                      8
+                    <Option className="mb-2 text-xs" value="3rd">
+                      3rd
                     </Option>
-                    <Option className="mb-2 text-xs" value="9">
-                      9
+                    <Option className="mb-2 text-xs" value="4th">
+                      4th
                     </Option>
-                    <Option className="mb-2 text-xs" value="10">
-                      10
+                    <Option className="mb-2 text-xs" value="5th">
+                      5th
+                    </Option>
+                    <Option className="mb-2 text-xs" value="6th">
+                      6th
+                    </Option>
+                    <Option className="mb-2 text-xs" value="7th">
+                      7th
+                    </Option>
+                    <Option className="mb-2 text-xs" value="8th">
+                      8th
                     </Option>
                   </Select>
                 )}
-                <>
-                  <Input required name="section" size="lg" label="Section" />
-                </>
 
                 <>
                   <Input

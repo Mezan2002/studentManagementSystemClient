@@ -14,22 +14,23 @@ const FormTop = ({
           <img
             draggable="false"
             loading="lazy"
-            src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
-            alt="deuty high school and college logo"
+            src="https://aiict.edu.bd/wp-content/uploads/2022/09/aiict-logo-1-2.png"
+            alt="AIICT's logo"
             className="w-32 mb-3"
           />
           <div className="ml-3">
-            <h2 className="text-3xl font-bold">
-              Deuty High School and College
+            <h2 className="text-xl font-bold">
+              AHSANULLAH INSTITUTE OF INFORMATION & COMMUNICATION TECHNOLOGY
             </h2>
-            <h2 className="text-lg font-medium">
-              Phone Number : +8801234567891 | EIIN Number : 127777
+            <h2 className="text-sm font-medium">
+              Phone Number : +8801787658138
             </h2>
-            <h2 className="text-lg font-medium">
-              Website : www.deuty-high-school-and-college.com
+            <h2 className="text-sm font-medium">
+              Website : https://aiict.edu.bd/
             </h2>
-            <h2 className="text-lg font-medium">
-              Location : Rangpur to Pirgachha Road, Deuty Bazar
+            <h2 className="text-xs font-medium">
+              Location : House # B-91, Road # E-2. Eastern Housing, Pallabi,
+              Mirpur, Dhaka-1216.
             </h2>
           </div>
         </div>

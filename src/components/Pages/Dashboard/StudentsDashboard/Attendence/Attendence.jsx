@@ -1,6 +1,6 @@
 import axios from "axios";
 import { addDays, format, isSameMonth, startOfWeek } from "date-fns";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { customDateOnly } from "../../../../../utils/takingDateOnly";
 import "./Attendence.css";
 
@@ -21,7 +21,7 @@ const Attendence = () => {
   useEffect(() => {
     axios
       .get(
-        `https://super-ray-shrug.cyclic.cloud/get-attendence?dateOfAttendence=${customSelectedDate}`
+        `https://atg-server-tau.vercel.app/get-attendence?dateOfAttendence=${customSelectedDate}`
       )
       .then((res) => {
         setData(res.data);

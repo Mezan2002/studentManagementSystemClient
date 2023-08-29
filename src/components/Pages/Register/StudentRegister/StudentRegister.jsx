@@ -27,6 +27,8 @@ const StudentRegister = () => {
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState(null);
   const [, setIsRegisterClicked] = useState(false);
   const [isClassError, setIsClassError] = useState(false);
+  const [semister, setSemister] = useState(null);
+  const [isSemisterError, setIsSemisterError] = useState(false);
   const [isGenderError, setIsGenderError] = useState(false);
   const [isBloodGroupError, setIsBloodGroupError] = useState(false);
   const [isMaritalStatusError, setIsMaritalStatusError] = useState(false);
@@ -41,11 +43,13 @@ const StudentRegister = () => {
 
   const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
   const navigate = useNavigate();
+  console.log();
 
   const handleRegisterClicked = () => {
     setIsRegisterClicked(true);
     if (
       selectedClass === null ||
+      semister === null ||
       selectedGender === null ||
       selectedBloodGroup === null ||
       selectedMaritalStatus === null ||
@@ -55,6 +59,9 @@ const StudentRegister = () => {
     ) {
       if (selectedClass === null) {
         setIsClassError(true);
+      }
+      if (semister === null) {
+        setIsSemisterError(true);
       }
       if (selectedGender === null) {
         setIsGenderError(true);
@@ -104,6 +111,10 @@ const StudentRegister = () => {
   const handleChangeSelectedClass = (selectedClass) => {
     setSelectedClass(selectedClass);
     setIsClassError(false);
+  };
+  const handleChangeSelectedSemister = (selectedSemister) => {
+    setSemister(selectedSemister);
+    setIsSemisterError(false);
   };
   const handleChangeGender = (selectedGender) => {
     setSelectedGender(selectedGender);
@@ -220,7 +231,7 @@ const StudentRegister = () => {
       nationality: data.nationality,
       religion: data.religion,
       class: selectedClass,
-      section: data.section.toUpperCase(),
+      section: semister.toUpperCase(),
       gender: selectedGender,
       bloodGroup: selectedBloodGroup,
       maritalStatus: selectedMaritalStatus,
@@ -299,7 +310,7 @@ const StudentRegister = () => {
 
     axios
       .get(
-        `https://super-ray-shrug.cyclic.cloud/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
+        `https://atg-server-tau.vercel.app/isNumberExist?phoneNumber=${logInInfo.logInMobileNumber}`
       )
       .then((res) => {
         if (res.data === true) {
@@ -333,7 +344,7 @@ const StudentRegister = () => {
 
           axios
             .post(
-              "https://super-ray-shrug.cyclic.cloud/registerUser",
+              "https://atg-server-tau.vercel.app/registerUser",
               JSON.stringify(studentRegisteredData),
               config
             )
@@ -372,6 +383,8 @@ const StudentRegister = () => {
           {/* student's info form input start */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <StudentsInfo
+              isSemisterError={isSemisterError}
+              handleChangeSelectedSemister={handleChangeSelectedSemister}
               isStudentsDateOfBirthError={isStudentsDateOfBirthError}
               isClassError={isClassError}
               isBloodGroupError={isBloodGroupError}

@@ -86,16 +86,16 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       <div className="fixed w-[320px] top-0 left-0 bottom-0 right-0">
         <div className="py-10 px-2">
           <div>
-            <Link to="/">
+            <Link>
               <div className="flex flex-row items-center justify-center">
                 <img
                   draggable="false"
                   loading="lazy"
-                  src="https://i.ibb.co/NLx196P/download-removebg-preview.png"
-                  alt=""
+                  src="https://aiict.edu.bd/wp-content/uploads/2022/09/aiict-logo-1-2.png"
+                  alt="AIICT's logo"
                   className="w-14"
                 />
-                <p className="text-5xl ml-2 font-bold">DHSC</p>
+                <p className="text-5xl ml-2 font-bold">AIICT</p>
               </div>
             </Link>
           </div>

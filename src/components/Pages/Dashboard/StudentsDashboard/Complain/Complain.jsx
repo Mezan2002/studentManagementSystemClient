@@ -30,7 +30,7 @@ const Complain = () => {
 
     axios
       .post(
-        "https://super-ray-shrug.cyclic.cloud/complain",
+        "https://atg-server-tau.vercel.app/complain",
         JSON.stringify(complainsData),
         {
           headers: {

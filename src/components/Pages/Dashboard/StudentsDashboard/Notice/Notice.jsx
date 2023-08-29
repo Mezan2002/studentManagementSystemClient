@@ -1,13 +1,13 @@
 import { Button, ButtonGroup } from "@material-tailwind/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Notice.css";
 
 const Notice = () => {
   const [notice, setNotice] = useState([]);
   useEffect(() => {
     axios
-      .get("https://super-ray-shrug.cyclic.cloud/get-notice")
+      .get("https://atg-server-tau.vercel.app/get-notice")
       .then((res) => {
         setNotice(res.data);
       })

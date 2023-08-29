@@ -23,7 +23,7 @@ export const fetchUser = createAsyncThunk(
   "loggedInUser/fetchLoggedInUser",
   async () => {
     const token = localStorage.getItem("token");
-    const url = "https://super-ray-shrug.cyclic.cloud/getUser";
+    const url = "https://atg-server-tau.vercel.app/getUser";
     const response = await fetch(url, {
       headers: {
         authorization: `Bearer ${token}`,

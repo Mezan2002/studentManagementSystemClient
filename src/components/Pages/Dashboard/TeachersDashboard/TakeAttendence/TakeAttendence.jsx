@@ -1,21 +1,23 @@
 import { Card } from "@material-tailwind/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { customDateOnly } from "../../../../../utils/takingDateOnly";
 
 const TakeAttendence = () => {
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [studentsDataFromDB, setStudentsDataFromDB] = useState([]);
   const [isClassSelected, setIsClassSelected] = useState(false);
-  const [section, setSection] = useState("");
+  // const [section, setSection] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
-  const sectionUppercase = section.toUpperCase();
+  const sectionUppercase = selectedClass.toUpperCase();
   const date = new Date();
   useEffect(() => {
-    if (section !== "") {
+    if (selectedClass !== "") {
       axios
         .get(
-          `https://super-ray-shrug.cyclic.cloud/getStudents?selectedClass=${selectedClass}&section=${sectionUppercase}`
+          `http://localhost:5001/getStudents?selectedClass=${user?.teachersInfo?.teachersTakingClass}&section=${sectionUppercase}`
         )
         .then((res) => {
           setStudentsDataFromDB(
@@ -23,7 +25,15 @@ const TakeAttendence = () => {
           );
         });
     }
-  }, [sectionUppercase, selectedClass, section]);
+  }, [
+    sectionUppercase,
+    user?.teachersInfo?.teachersTakingClass,
+    selectedClass,
+  ]);
+
+  console.log(
+    `http://localhost:5001/getStudents?selectedClass=${user?.teachersInfo?.teachersTakingClass}&section=${sectionUppercase}`
+  );
 
   const handleSelectClass = (selectedClass) => {
     setSelectedClass(selectedClass);
@@ -48,9 +58,11 @@ const TakeAttendence = () => {
       students: studentsDataFromDB,
     };
 
+    console.log(studentsDataFromDB);
+
     axios
       .post(
-        "https://super-ray-shrug.cyclic.cloud/postAttendence",
+        "https://atg-server-tau.vercel.app/postAttendence",
         JSON.stringify(attendenceData),
         {
           headers: {
@@ -71,26 +83,32 @@ const TakeAttendence = () => {
 
   const classesInfo = [
     {
-      class: "6",
-      section: ["A", "B", "C"],
+      section: "1st",
     },
     {
-      class: "7",
-      section: ["A", "B", "C"],
+      section: "2nd",
     },
     {
-      class: "8",
-      section: ["A", "B", "C"],
+      section: "3rd",
     },
     {
-      class: "9",
-      section: ["", "Humanities", "Business Studies"],
+      section: "4th",
     },
     {
-      class: "10",
-      section: ["Science", "", ""],
+      section: "5th",
+    },
+    {
+      section: "6th",
+    },
+    {
+      section: "7th",
+    },
+    {
+      section: "8th",
     },
   ];
+
+  console.log(selectedClass);
   return (
     <section
       style={{
@@ -106,22 +124,16 @@ const TakeAttendence = () => {
               <p className="text-3xl font-bold"> {customDateOnly(date)} </p>
             </div>
           </div>
-          {section === "" ? (
+          {selectedClass === "" ? (
             <div className="mt-20">
-              {isClassSelected ? (
-                <>
+              {/* {isClassSelected ? ( */}
+              {/* <>
                   {" "}
                   <h2 className="text-4xl mb-5 font-medium">
                     Now select the section
                   </h2>
                   <div className={`flex items-center justify-center mt-20`}>
-                    <Card
-                      className={`p-10 text-center cursor-pointer ${
-                        selectedClass === "9" || selectedClass === "10"
-                          ? "w-5/12"
-                          : "w-3/12"
-                      }`}
-                    >
+                    <Card className={`p-10 text-center cursor-pointer w-2/12`}>
                       <>
                         {isClassSelected && (
                           <>
@@ -178,37 +190,38 @@ const TakeAttendence = () => {
                       </>
                     </Card>
                   </div>{" "}
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <h2 className="text-4xl mb-5 font-medium">
-                    Want to take attendence of class
-                  </h2>
-                  <div
-                    className={`grid grid-cols-${classesInfo.length} gap-10 mt-20`}
-                  >
-                    {classesInfo.map((cls) => {
-                      return (
-                        <>
-                          <Card
-                            key={cls.class}
-                            onClick={() => handleSelectClass(cls.class)}
-                            className=" p-10 text-center cursor-pointer"
-                          >
-                            <>
-                              <p className="text-xl font-medium">Class</p>
-                              <h2 className="text-9xl mt-6 font-semibold">
-                                {cls.class}
-                              </h2>
-                            </>
-                          </Card>
-                        </>
-                      );
-                    })}
-                  </div>
-                </>
-              )}
+                </> */}
+              {/* ) : ( */}
+              <>
+                {" "}
+                <h2 className="text-4xl mb-5 font-medium">
+                  Want to take attendence of{" "}
+                  {user?.teachersInfo?.teachersTakingClass}, Select the Semister
+                </h2>
+                <div className={`grid grid-cols-8 gap-10 mt-20`}>
+                  {classesInfo.map((section) => {
+                    return (
+                      <>
+                        <Card
+                          key={section.section}
+                          onClick={() => handleSelectClass(section.section)}
+                          className=" p-10 text-center flex items-center justify-center cursor-pointer"
+                        >
+                          <>
+                            {/*  <p className="text-xl text-center font-medium">
+                              Semister
+                            </p> */}
+                            <h2 className="text-4xl font-semibold">
+                              {section.section}
+                            </h2>
+                          </>
+                        </Card>
+                      </>
+                    );
+                  })}
+                </div>
+              </>
+              {/* )} */}
             </div>
           ) : (
             <div className="mt-10">

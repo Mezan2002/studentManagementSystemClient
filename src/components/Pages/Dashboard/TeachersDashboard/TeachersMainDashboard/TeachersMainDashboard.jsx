@@ -51,7 +51,7 @@ const TeachersMainDashboard = () => {
             </div>
             <div className="mt-16">
               <div className="grid grid-cols-5 gap-10">
-                <div className="card shadow-2xl bg-white relative col-span-2">
+                <div className="card shadow-2xl bg-white relative col-span-3">
                   <img
                     src="https://i.ibb.co/DK1TNdJ/pexels-max-fischer-5212360.jpg"
                     alt=""
@@ -101,92 +101,67 @@ const TeachersMainDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-span-3">
-                  <div className="card shadow-2xl bg-white">
+                <div className="col-span-2">
+                  <div className="card shadow-2xl bg-green-50">
                     <div className="card-body">
-                      <h1 className="text-2xl mb-4 font-semibold">
-                        My Classes
-                      </h1>
-                      <div>
-                        <div className="overflow-x-auto">
-                          <table className="table table-zebra">
-                            {/* head */}
-                            <thead>
-                              <tr>
-                                <th>Days</th>
-                                <th>1st</th>
-                                <th>2nd</th>
-                                <th>3rd</th>
-                                <th>4th</th>
-                                <th>5th</th>
-                                <th>6th</th>
-                                <th>7th</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th>Sat</th>
-                                <td>Bangla 2nd</td>
-                                <td>ICT</td>
-                                <td>Math</td>
-                                <td className="bg-green-100">English 1st</td>
-                                <td>Bangla 1st</td>
-                                <td>Religion</td>
-                                <td>Science</td>
-                              </tr>
-                              <tr>
-                                <th>Sun</th>
-                                <td>ICT</td>
-                                <td>Math</td>
-                                <td>Religion</td>
-                                <td className="bg-green-100">English 1st</td>
-                                <td>Bangla 2nd</td>
-                                <td>Science</td>
-                                <td>Bangla 1st</td>
-                              </tr>
-                              <tr>
-                                <th>Mon</th>
-                                <td>Religion</td>
-                                <td>Bangla 1st</td>
-                                <td>ICT</td>
-                                <td>Science</td>
-                                <td>Math</td>
-                                <td className="bg-green-100">English 1st</td>
-                                <td>Bangla 2nd</td>
-                              </tr>
-                              <tr>
-                                <th>Tue</th>
-                                <td>Religion</td>
-                                <td>Bangla 2nd</td>
-                                <td>Science</td>
-                                <td>ICT</td>
-                                <td>Math</td>
-                                <td className="bg-green-100">English 1st</td>
-                                <td>Bangla 1st</td>
-                              </tr>
-                              <tr>
-                                <th>Wed</th>
-                                <td>Science</td>
-                                <td className="bg-green-100">English 1st</td>
-                                <td>Math</td>
-                                <td>Religion</td>
-                                <td>Bangla 2nd</td>
-                                <td>Bangla 1st</td>
-                                <td>ICT</td>
-                              </tr>
-                              <tr>
-                                <th>Thu</th>
-                                <td>Bangla 2nd</td>
-                                <td>Science</td>
-                                <td>Religion</td>
-                                <td className="bg-green-100">English 1st</td>
-                                <td>Bangla 1st</td>
-                                <td>ICT</td>
-                                <td>Math</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                      <h1 className="text-2xl mb-4 font-semibold">Analytics</h1>
+                      <div className="flex gap-6 mt-4 items-start justify-around">
+                        <div>
+                          <div
+                            className="radial-progress"
+                            style={{
+                              "--value": "80",
+                              "--size": "10rem",
+                              "--thickness": "1rem",
+                            }}
+                          >
+                            80%
+                          </div>
+                          <div>
+                            <h3 className="text-center mt-5 text-xl font-medium">
+                              Performence
+                            </h3>
+                          </div>
                         </div>
+                        <div>
+                          <div
+                            className="radial-progress"
+                            style={{
+                              "--value": "80",
+                              "--size": "10rem",
+                              "--thickness": "1rem",
+                            }}
+                          >
+                            80%
+                          </div>
+                          <div>
+                            <h3 className="text-center mt-5 text-xl font-medium">
+                              Attendence
+                            </h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center justify-center mt-2 mb-4">
+                        <div
+                          className="radial-progress"
+                          style={{
+                            "--value": "80",
+                            "--size": "10rem",
+                            "--thickness": "1rem",
+                          }}
+                        >
+                          80%
+                        </div>
+                        <div>
+                          <h3 className="text-center mt-5 text-xl font-medium">
+                            Expertise
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="">
+                        <h2 className="text-3xl font-semibold flex items-center justify-between w-full">
+                          Average <span>80%</span>{" "}
+                        </h2>
                       </div>
                     </div>
                   </div>

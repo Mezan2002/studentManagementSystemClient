@@ -8,14 +8,12 @@ const PaymentFor = () => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const userId = user._id;
   const [paymentOccaisons, setPaymentOccaisons] = useState([]);
-  const [isPaid, setIsPaid] = useState(false);
   const [userIsPaid, setUserIsPaid] = useState([]);
-  const [paymentTitle, setPaymentTitle] = useState("");
 
   // console.log(isPaid);
   useEffect(() => {
     axios
-      .get("https://super-ray-shrug.cyclic.cloud/getPaymentOccasions")
+      .get("https://atg-server-tau.vercel.app/getPaymentOccasions")
       .then((res) => {
         if (res.data.length > 0) {
           setPaymentOccaisons(res.data);
@@ -23,7 +21,7 @@ const PaymentFor = () => {
       });
 
     axios
-      .get(`https://super-ray-shrug.cyclic.cloud/user-is-paid/${userId}`)
+      .get(`https://atg-server-tau.vercel.app/user-is-paid/${userId}`)
       .then((res) => {
         setUserIsPaid(res.data);
       })

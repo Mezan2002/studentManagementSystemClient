@@ -68,7 +68,7 @@ const MakingResultFor = ({
 
     axios
       .post(
-        "https://super-ray-shrug.cyclic.cloud/make-result",
+        "https://atg-server-tau.vercel.app/make-result",
         JSON.stringify(formData),
         {
           headers: {

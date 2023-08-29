@@ -37,7 +37,7 @@ const PublishNotice = () => {
 
     axios
       .post(
-        "https://super-ray-shrug.cyclic.cloud/make-notice",
+        "https://atg-server-tau.vercel.app/make-notice",
         JSON.stringify(noticeData),
         {
           headers: {

@@ -12,9 +12,7 @@ const PaymentSuccess = () => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   useEffect(() => {
     axios
-      .get(
-        `https://super-ray-shrug.cyclic.cloud/getUsersPayment/${transactionId}`
-      )
+      .get(`https://atg-server-tau.vercel.app/getUsersPayment/${transactionId}`)
       .then((res) => {
         setPaymentInfo(res.data);
       });

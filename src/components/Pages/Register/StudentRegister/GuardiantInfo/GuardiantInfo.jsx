@@ -26,22 +26,6 @@ const GuardiantInfo = ({
             <p className="text-base text-gray-600 font-semibold">
               Father's Info
             </p>
-            {errors.fathersFullNameInBangla ? (
-              <>
-                <Input
-                  size="md"
-                  label="Full Name in Bangla *"
-                  {...register("fathersFullNameInBangla", { required: true })}
-                  error
-                />
-              </>
-            ) : (
-              <Input
-                size="md"
-                label="Full Name in Bangla *"
-                {...register("fathersFullNameInBangla", { required: true })}
-              />
-            )}
             {errors.fathersFullNameInEnglish ? (
               <>
                 <Input
@@ -204,22 +188,6 @@ const GuardiantInfo = ({
             <p className="text-base text-gray-600 font-semibold">
               Mother's Info
             </p>
-            {errors.mothersFullNameInBangla ? (
-              <>
-                <Input
-                  size="md"
-                  label="Full Name in Bangla *"
-                  {...register("mothersFullNameInBangla", { required: true })}
-                  error
-                />
-              </>
-            ) : (
-              <Input
-                size="md"
-                label="Full Name in Bangla *"
-                {...register("mothersFullNameInBangla", { required: true })}
-              />
-            )}
             {errors.mothersFullNameInEnglish ? (
               <>
                 <Input

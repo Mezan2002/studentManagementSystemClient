@@ -8,7 +8,6 @@ import {
 } from "@material-tailwind/react";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import TextField from "@mui/material/TextField";
 
 const TeachersInfo = ({
   register,
@@ -32,22 +31,6 @@ const TeachersInfo = ({
         All information here will be teacher's information
       </p>
       <div className="flex flex-col gap-5 mb-5">
-        {errors.teachersFullNameInBangla ? (
-          <>
-            <Input
-              size="md"
-              label="Fullname in Bangla *"
-              {...register("teachersFullNameInBangla", { required: true })}
-              error
-            />
-          </>
-        ) : (
-          <Input
-            size="md"
-            label="Fullname in Bangla *"
-            {...register("teachersFullNameInBangla", { required: true })}
-          />
-        )}
         {errors.teachersFullNameInEnglish ? (
           <>
             <Input
@@ -228,20 +211,26 @@ const TeachersInfo = ({
                 unmount: { y: 25 },
               }}
             >
-              <Option className="mb-2" value="Headmaster">
-                Headmaster
+              <Option className="mb-2" value="Principal">
+                Principal
               </Option>
-              <Option className="mb-2" value="Assistant Headmaster">
-                Assistant Headmaster
+              <Option className="mb-2" value="Assistant Principal">
+                Assistant Principal
               </Option>
-              <Option className="mb-2" value="Professor">
-                Professor
+              <Option className="mb-2" value="Senior Lecturer">
+                Senior Lecturer
               </Option>
-              <Option className="mb-2" value="Class Teacher">
-                Class Teacher
+              <Option className="mb-2" value="Lecturer">
+                Lecturer
               </Option>
-              <Option className="mb-2" value="Assistant teacher">
-                Assistant teacher
+              <Option className="mb-2" value="Assistant Lecturer">
+                Assistant Lecturer
+              </Option>
+              <Option className="mb-2" value="Adjunct Lecturer">
+                Adjunct Lecturer
+              </Option>
+              <Option className="mb-2" value="Guest Lecturer">
+                Guest Lecturer
               </Option>
             </Select>
           )}
@@ -251,7 +240,7 @@ const TeachersInfo = ({
           <>
             <Input
               size="md"
-              label="Which Subjects Class Do You Take? *"
+              label="Department *"
               {...register("subjectsClassTake", { required: true })}
               error
             />
@@ -259,7 +248,7 @@ const TeachersInfo = ({
         ) : (
           <Input
             size="md"
-            label="Which Subjects Class Do You Take? *"
+            label="Department *"
             {...register("subjectsClassTake", { required: true })}
           />
         )}

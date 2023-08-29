@@ -1,16 +1,19 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import MakeResultOf from "./MakeResultOf/MakeResultOf";
 import MakingResultFor from "./MakingResultFor/MakingResultFor";
 
 const MakeResult = () => {
+  const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [studentToMakeResult, setStudentToMakeResult] = useState(null);
   const [studentsRollNumber, setStudentsRollNumber] = useState(null);
   const [section, setSection] = useState(null);
-  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedClass, setSelectedClass] = useState(
+    user?.teachersInfo?.teachersTakingClass
+  );
   const [examName, setExamName] = useState(null);
   const [studentsRegistrationNumber, setStudentsRegistrationNumber] =
     useState(null);
-
   return (
     <section
       style={{
@@ -34,8 +37,9 @@ const MakeResult = () => {
           </div>
           {studentToMakeResult === null ? (
             <MakeResultOf
-              setSelectedClass={setSelectedClass}
+              section={section}
               setSection={setSection}
+              selectedClass={selectedClass}
               setExamName={setExamName}
               setStudentsRollNumber={setStudentsRollNumber}
               setStudentsRegistrationNumber={setStudentsRegistrationNumber}

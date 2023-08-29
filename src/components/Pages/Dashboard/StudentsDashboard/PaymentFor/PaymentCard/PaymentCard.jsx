@@ -26,7 +26,7 @@ const PaymentCard = ({
   const userId = user._id;
 
   axios
-    .get(`https://super-ray-shrug.cyclic.cloud/user-is-paid/${userId}`)
+    .get(`https://atg-server-tau.vercel.app/user-is-paid/${userId}`)
     .then((res) => {
       setUserIsPaid(res.data);
     })
@@ -69,12 +69,13 @@ const PaymentCard = ({
     const data = {
       paymentId,
       userId: user._id,
+      user: { ...user },
       paymentTitle,
       userInfo,
     };
     axios
       .post(
-        "https://super-ray-shrug.cyclic.cloud/getPayment",
+        "https://atg-server-tau.vercel.app/getPayment",
         JSON.stringify(data),
         {
           headers: {

@@ -10,6 +10,7 @@ import PaymentSuccess from "../components/Pages/Dashboard/StudentsDashboard/Paym
 import Result from "../components/Pages/Dashboard/StudentsDashboard/Result/Result";
 import Routine from "../components/Pages/Dashboard/StudentsDashboard/Routine/Routine";
 import StudentsMainDashboard from "../components/Pages/Dashboard/StudentsDashboard/StudentsMainDashboard/StudentsMainDashboard";
+import StudentsProfile from "../components/Pages/Dashboard/StudentsDashboard/StudentsProfile/StudentsProfile";
 import ComplainByTeacher from "../components/Pages/Dashboard/TeachersDashboard/ComplainByTeacher/ComplainByTeacher";
 import MakeResult from "../components/Pages/Dashboard/TeachersDashboard/MakeResult/MakeResult";
 import MyClasses from "../components/Pages/Dashboard/TeachersDashboard/MyClasses/MyClasses";
@@ -17,6 +18,7 @@ import PublishNotice from "../components/Pages/Dashboard/TeachersDashboard/Publi
 import SeeResults from "../components/Pages/Dashboard/TeachersDashboard/SeeResults/SeeResults";
 import TakeAttendence from "../components/Pages/Dashboard/TeachersDashboard/TakeAttendence/TakeAttendence";
 import TeachersMainDashboard from "../components/Pages/Dashboard/TeachersDashboard/TeachersMainDashboard/TeachersMainDashboard";
+import TeachersProfile from "../components/Pages/Dashboard/TeachersDashboard/TeachersProfile/TeachersProfile";
 import Home from "../components/Pages/Home/Home";
 import Login from "../components/Pages/Login/Login";
 import Register from "../components/Pages/Register/Register";
@@ -63,6 +65,10 @@ export const router = createBrowserRouter([
         element: <StudentsMainDashboard></StudentsMainDashboard>,
       },
       {
+        path: "/studentsDashboard/students-profile",
+        element: <StudentsProfile />,
+      },
+      {
         path: "/studentsDashboard/attendence",
         element: <Attendence></Attendence>,
       },
@@ -107,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: "/teachersDashboard",
         element: <TeachersMainDashboard></TeachersMainDashboard>,
+      },
+      {
+        path: "/teachersDashboard/teachers-profile",
+        element: <TeachersProfile></TeachersProfile>,
       },
       {
         path: "/teachersDashboard/my-classes",

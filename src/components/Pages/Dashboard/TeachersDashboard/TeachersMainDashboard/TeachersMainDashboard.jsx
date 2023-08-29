@@ -52,7 +52,7 @@ const TeachersMainDashboard = () => {
             <div className="mt-16">
               <div className="grid grid-cols-5 gap-10">
                 <div className="card shadow-2xl bg-white relative col-span-3">
-                  <img
+                  {/* <img
                     src="https://i.ibb.co/DK1TNdJ/pexels-max-fischer-5212360.jpg"
                     alt=""
                     className="rounded-t-2xl"
@@ -99,7 +99,7 @@ const TeachersMainDashboard = () => {
                         Blood Group : <span>{teachersBloodGroup}</span>
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-span-2">
                   <div className="card shadow-2xl bg-green-50">

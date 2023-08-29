@@ -13,6 +13,7 @@ const StudentsDashboardLeft = ({
   const dispatch = useDispatch();
   const location = useLocation();
   const [isDashboard, setIsDashboard] = useState(true);
+  const [isStudentProfile, setIsStudentProfile] = useState(false);
   const [isRoutine, setIsRoutine] = useState(false);
   const [isResult, setIsResult] = useState(false);
   const [isNotice, setIsNotice] = useState(false);
@@ -25,6 +26,16 @@ const StudentsDashboardLeft = ({
   useEffect(() => {
     if (currentPathName === "/studentsDashboard") {
       setIsDashboard(true);
+      setIsStudentProfile(false);
+      setIsRoutine(false);
+      setIsResult(false);
+      setIsNotice(false);
+      setIsAttendence(false);
+      setIsComplain(false);
+      setIsPayment(false);
+    } else if (currentPathName === "/studentsDashboard/students-profile") {
+      setIsDashboard(false);
+      setIsStudentProfile(true);
       setIsRoutine(false);
       setIsResult(false);
       setIsNotice(false);
@@ -33,6 +44,7 @@ const StudentsDashboardLeft = ({
       setIsPayment(false);
     } else if (currentPathName === "/studentsDashboard/payment") {
       setIsDashboard(false);
+      setIsStudentProfile(false);
       setIsRoutine(false);
       setIsResult(false);
       setIsNotice(false);
@@ -41,6 +53,7 @@ const StudentsDashboardLeft = ({
       setIsPayment(true);
     } else if (currentPathName === "/studentsDashboard/routine") {
       setIsDashboard(false);
+      setIsStudentProfile(false);
       setIsRoutine(true);
       setIsResult(false);
       setIsNotice(false);
@@ -49,6 +62,7 @@ const StudentsDashboardLeft = ({
       setIsPayment(false);
     } else if (currentPathName === "/studentsDashboard/notice") {
       setIsDashboard(false);
+      setIsStudentProfile(false);
       setIsRoutine(false);
       setIsResult(false);
       setIsNotice(true);
@@ -57,6 +71,7 @@ const StudentsDashboardLeft = ({
       setIsPayment(false);
     } else if (currentPathName === "/studentsDashboard/complain") {
       setIsDashboard(false);
+      setIsStudentProfile(false);
       setIsRoutine(false);
       setIsResult(false);
       setIsNotice(false);
@@ -65,6 +80,7 @@ const StudentsDashboardLeft = ({
       setIsPayment(false);
     } else if (currentPathName === "/studentsDashboard/result") {
       setIsDashboard(false);
+      setIsStudentProfile(false);
       setIsRoutine(false);
       setIsResult(true);
       setIsNotice(false);
@@ -74,6 +90,7 @@ const StudentsDashboardLeft = ({
     } else if (currentPathName === "/studentsDashboard/attendence") {
       setIsDashboard(false);
       setIsRoutine(false);
+      setIsStudentProfile(false);
       setIsResult(false);
       setIsNotice(false);
       setIsAttendence(true);
@@ -123,6 +140,30 @@ const StudentsDashboardLeft = ({
                       className="w-6 mr-5"
                     />
                     <p className="">Dashboard</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              <Link to="/studentsDashboard/students-profile">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isStudentProfile && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">My Profile</p>
                   </div>
                   <div>
                     <p>

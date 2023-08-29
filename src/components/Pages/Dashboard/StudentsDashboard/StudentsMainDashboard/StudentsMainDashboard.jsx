@@ -29,10 +29,6 @@ const StudentsMainDashboard = () => {
   const studentsBloodGroup = user?.studentsInfo?.bloodGroup;
   const studentsGender = user?.studentsInfo?.gender;
   const studentsDateOfBirth = user?.studentsInfo?.studentsDateOfBirth;
-
-  console.log(studentsSection);
-
-  console.log(studentsAddress);
   return (
     <section
       style={{
@@ -57,7 +53,7 @@ const StudentsMainDashboard = () => {
           <div className="mt-16">
             <div className="grid grid-cols-5 gap-10">
               <div className="card shadow-2xl bg-white relative col-span-3">
-                <img
+                {/* <img
                   src="https://i.ibb.co/zmc55zF/pexels-pixabay-261909.jpg"
                   alt=""
                   className="rounded-t-2xl"
@@ -106,7 +102,7 @@ const StudentsMainDashboard = () => {
                       Blood Group : <span>{studentsBloodGroup}</span>
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="col-span-2">
                 <div className="card shadow-2xl bg-green-50">

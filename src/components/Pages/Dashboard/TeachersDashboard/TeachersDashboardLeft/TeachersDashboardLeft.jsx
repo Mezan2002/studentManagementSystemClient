@@ -8,6 +8,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
   const location = useLocation();
 
   const [isDashboard, setIsDashboard] = useState(true);
+  const [isTeachersProfile, setIsTeachersProfile] = useState(false);
   const [isMyClasses, setIsMyClasses] = useState(false);
   const [isTakeAttendence, setIsTakeAttendence] = useState(false);
   const [isMakeResult, setIsMakeResult] = useState(false);
@@ -24,6 +25,16 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
   useEffect(() => {
     if (currentPathName === "/teachersDashboard") {
       setIsDashboard(true);
+      setIsTeachersProfile(false);
+      setIsMyClasses(false);
+      setIsTakeAttendence(false);
+      setIsMakeResult(false);
+      setIsPublishNotice(false);
+      setIsSeeResults(false);
+      setIsComplainAStudent(false);
+    } else if (currentPathName === "/teachersDashboard/teachers-profile") {
+      setIsDashboard(false);
+      setIsTeachersProfile(true);
       setIsMyClasses(false);
       setIsTakeAttendence(false);
       setIsMakeResult(false);
@@ -32,6 +43,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsComplainAStudent(false);
     } else if (currentPathName === "/teachersDashboard/my-classes") {
       setIsDashboard(false);
+      setIsTeachersProfile(false);
       setIsMyClasses(true);
       setIsTakeAttendence(false);
       setIsMakeResult(false);
@@ -40,6 +52,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsComplainAStudent(false);
     } else if (currentPathName === "/teachersDashboard/take-attendance") {
       setIsDashboard(false);
+      setIsTeachersProfile(false);
       setIsMyClasses(false);
       setIsTakeAttendence(true);
       setIsMakeResult(false);
@@ -48,6 +61,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsComplainAStudent(false);
     } else if (currentPathName === "/teachersDashboard/make-result") {
       setIsDashboard(false);
+      setIsTeachersProfile(false);
       setIsMyClasses(false);
       setIsTakeAttendence(false);
       setIsMakeResult(true);
@@ -56,6 +70,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsComplainAStudent(false);
     } else if (currentPathName === "/teachersDashboard/see-results") {
       setIsDashboard(false);
+      setIsTeachersProfile(false);
       setIsMyClasses(false);
       setIsTakeAttendence(false);
       setIsMakeResult(false);
@@ -72,6 +87,7 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
       setIsComplainAStudent(false);
     } else if (currentPathName === "/teachersDashboard/complain") {
       setIsDashboard(false);
+      setIsTeachersProfile(false);
       setIsMyClasses(false);
       setIsTakeAttendence(false);
       setIsMakeResult(false);
@@ -116,6 +132,30 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                       className="w-6 mr-5"
                     />
                     <p className="">Dashboard</p>
+                  </div>
+                  <div>
+                    <p>
+                      {" "}
+                      <FaAngleRight></FaAngleRight>{" "}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+              <Link to="/teachersDashboard/teachers-profile">
+                <div
+                  className={`flex items-center hover:bg-white justify-between cursor-pointer ${
+                    isTeachersProfile && "bg-white"
+                  } 2xl:p-4 2xl:m-2 lg:p-3 lg:m-1 rounded-2xl`}
+                >
+                  <div className="flex items-center">
+                    <img
+                      draggable="false"
+                      loading="lazy"
+                      src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
+                      alt=""
+                      className="w-6 mr-5"
+                    />
+                    <p className="">My Profile</p>
                   </div>
                   <div>
                     <p>

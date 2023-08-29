@@ -159,7 +159,7 @@ const StudentsDashboardLeft = ({
                     <img
                       draggable="false"
                       loading="lazy"
-                      src="https://i.ibb.co/Y0K4W9f/dashboard-2.png"
+                      src="https://i.ibb.co/YfvH6zr/user-1.png"
                       alt=""
                       className="w-6 mr-5"
                     />

@@ -92,14 +92,14 @@ const Attendence = () => {
               </div>
             </div>
             <div className="mt-10">
-              {data._id ? (
+              {data?._id ? (
                 <div className="grid grid-cols-5 gap-5">
-                  {data.students.map((student) => (
+                  {data?.students?.map((student) => (
                     <>
                       {" "}
                       <div
-                        className={`card cursor-pointer relative ${
-                          student.isPresent ? "bg-green-100" : "bg-red-100"
+                        className={`card cursor-no-drop relative ${
+                          student?.isPresent ? "bg-green-100" : "bg-red-100"
                         } shadow-xl`}
                       >
                         <div className="h-10 w-10 bg-white rounded-full absolute top-2 right-2 flex items-center justify-center">
@@ -110,18 +110,18 @@ const Attendence = () => {
                                 : "text-red-500"
                             }`}
                           >
-                            {student.isPresent ? "P" : "A"}
+                            {student?.isPresent ? "P" : "A"}
                           </p>
                         </div>
                         <div className="px-5 py-8">
                           <div className="avatar flex items-center justify-center">
                             <div className="w-24 mask mask-squircle">
-                              <img src={student.studentsInfo.studentsImage} />
+                              <img src={student?.studentImage} />
                             </div>
                           </div>
                           <div className="">
                             <h2 className="text-xl font-semibold text-center">
-                              {student.studentsInfo.studentNameInEnglish}{" "}
+                              {student?.studentName}{" "}
                             </h2>
                           </div>
                         </div>
@@ -132,7 +132,7 @@ const Attendence = () => {
               ) : (
                 <div className="flex items-center justify-center min-h-[70vh]">
                   <h2 className="text-4xl font-medium text-red-300">
-                    {data.message}
+                    {data?.message}
                   </h2>
                 </div>
               )}

@@ -19,7 +19,7 @@ const PublishNotice = () => {
     formState: { errors },
   } = useForm();
   const [isClassError, setIsClassError] = useState(false);
-  const [selectedClass, setSelectedClass] = useState(null);
+  const [selectedClass, setSelectedClass] = useState("All Students");
   const handleChangeSelectedClass = (selectedClass) => {
     setSelectedClass(selectedClass);
   };
@@ -99,18 +99,19 @@ const PublishNotice = () => {
             >
               {isClassError ? (
                 <Select
+                  disabled
                   error
                   onChange={(selectedValue) => {
                     handleChangeSelectedClass(selectedValue);
                   }}
-                  label="Notice For"
+                  label="All Students"
                   animate={{
                     mount: { y: 0 },
                     unmount: { y: 25 },
                   }}
                 >
-                  <Option className="mb-2 text-xs" value="All">
-                    All
+                  <Option className="mb-2 text-xs" value="All Student">
+                    All Student
                   </Option>
                   <Option className="mb-2 text-xs" value="Class 6">
                     Class 6
@@ -130,17 +131,18 @@ const PublishNotice = () => {
                 </Select>
               ) : (
                 <Select
+                  disabled
                   onChange={(selectedValue) => {
                     handleChangeSelectedClass(selectedValue);
                   }}
-                  label="Notice For"
+                  label="All Students"
                   animate={{
                     mount: { y: 0 },
                     unmount: { y: 25 },
                   }}
                 >
-                  <Option className="mb-2 text-xs" value="All">
-                    All
+                  <Option className="mb-2 text-xs" value="All Student">
+                    All Student
                   </Option>
                   <Option className="mb-2 text-xs" value="Class 6">
                     Class 6

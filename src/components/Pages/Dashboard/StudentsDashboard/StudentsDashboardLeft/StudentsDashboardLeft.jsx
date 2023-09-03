@@ -336,7 +336,9 @@ const StudentsDashboardLeft = ({
                     </div>
                   </div>
                   <div className="text-left ml-2">
-                    <h2 className="font-semibold text-sm">{usersName}</h2>
+                    <h2 className="font-semibold text-sm text-left">
+                      {usersName}
+                    </h2>
                     <p className="text-gray-600 font-medium text-sm capitalize">
                       {" "}
                       {usersType} / {studentsClass}

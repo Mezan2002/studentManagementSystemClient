@@ -327,9 +327,13 @@ const TeachersDashboardLeft = ({ usersImage, usersName, usersType }) => {
                       />
                     </div>
                   </div>
-                  <div className="text-left ml-2">
-                    <h2 className="font-semibold text-sm">{usersName}</h2>
-                    <p className="text-gray-600 font-medium text-sm capitalize">
+                  <div
+                    className={`text-left ${
+                      usersName.length < 15 ? "text-sm" : "text-xs"
+                    } ml-2`}
+                  >
+                    <h2 className="font-semibold text-left ">{usersName}</h2>
+                    <p className="text-gray-600 font-medium capitalize">
                       {" "}
                       {usersType}
                     </p>

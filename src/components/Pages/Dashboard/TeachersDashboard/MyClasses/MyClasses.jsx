@@ -37,71 +37,50 @@ const MyClasses = () => {
                           <th>2nd</th>
                           <th>3rd</th>
                           <th>4th</th>
-                          <th>5th</th>
-                          <th>6th</th>
-                          <th>7th</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                           <th>Sat</th>
-                          <td>Bangla 2nd</td>
-                          <td>ICT</td>
-                          <td>Math</td>
-                          <td className="bg-green-100">English 1st</td>
-                          <td>Bangla 1st</td>
-                          <td>Religion</td>
-                          <td>Science</td>
+                          <td>Structured Programming Language</td>
+                          <td>Calculus</td>
+                          <td>English</td>
+                          <td>Electrical and Electronic Circuit</td>
                         </tr>
                         <tr>
                           <th>Sun</th>
-                          <td>ICT</td>
-                          <td>Math</td>
-                          <td>Religion</td>
-                          <td className="bg-green-100">English 1st</td>
-                          <td>Bangla 2nd</td>
-                          <td>Science</td>
-                          <td>Bangla 1st</td>
+                          <td>Structured Programming Language Lab</td>
+                          <td>Calculus</td>
+                          <td>Physics</td>
+                          <td>English</td>
                         </tr>
                         <tr>
                           <th>Mon</th>
-                          <td>Religion</td>
-                          <td>Bangla 1st</td>
-                          <td>ICT</td>
-                          <td>Science</td>
-                          <td>Math</td>
-                          <td className="bg-green-100">English 1st</td>
-                          <td>Bangla 2nd</td>
+                          <td>Calculus</td>
+                          <td>English</td>
+                          <td>Structured Programming Language Lab</td>
+                          <td>Electrical and Electronic Circuit</td>
                         </tr>
                         <tr>
                           <th>Tue</th>
-                          <td>Religion</td>
-                          <td>Bangla 2nd</td>
-                          <td>Science</td>
-                          <td>ICT</td>
-                          <td>Math</td>
-                          <td className="bg-green-100">English 1st</td>
-                          <td>Bangla 1st</td>
+                          <td>Physics</td>
+                          <td>Electrical and Electronic Circuit Lab</td>
+                          <td>Calculus</td>
+                          <td>Structured Programming Language Lab</td>
                         </tr>
                         <tr>
                           <th>Wed</th>
-                          <td>Science</td>
-                          <td className="bg-green-100">English 1st</td>
-                          <td>Math</td>
-                          <td>Religion</td>
-                          <td>Bangla 2nd</td>
-                          <td>Bangla 1st</td>
-                          <td>ICT</td>
+                          <td>Structured Programming Language</td>
+                          <td>English</td>
+                          <td>Calculus</td>
+                          <td>Electrical and Electronic Circuit Lab</td>
                         </tr>
                         <tr>
                           <th>Thu</th>
-                          <td>Bangla 2nd</td>
-                          <td>Science</td>
-                          <td>Religion</td>
-                          <td className="bg-green-100">English 1st</td>
-                          <td>Bangla 1st</td>
-                          <td>ICT</td>
-                          <td>Math</td>
+                          <td>Structured Programming Language Lab</td>
+                          <td>Physics</td>
+                          <td>Electrical and Electronic Circuit</td>
+                          <td>English</td>
                         </tr>
                       </tbody>
                     </table>

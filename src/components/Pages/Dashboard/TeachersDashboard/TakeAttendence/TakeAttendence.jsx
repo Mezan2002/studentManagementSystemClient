@@ -8,16 +8,39 @@ import { customDateOnly } from "../../../../../utils/takingDateOnly";
 const TakeAttendence = () => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [studentsDataFromDB, setStudentsDataFromDB] = useState([]);
+  const [attendenceDataFromDB, setAttendenceDataFromDB] = useState([]);
   const [isClassSelected, setIsClassSelected] = useState(false);
-  // const [section, setSection] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
   const sectionUppercase = selectedClass.toUpperCase();
+  const [attendenceTaken, setAttendenceTaken] = useState(false);
   const date = new Date();
+  const dateOnly = customDateOnly(date);
+
   useEffect(() => {
+    axios
+      .get(
+        `https://atg-server-tau.vercel.app/check-is-attendence-taken?dateOfAttendence=${dateOnly}&classOfAttendence=${user?.teachersInfo?.teachersTakingClass}&sectionOfAttendence=${sectionUppercase}`
+      )
+      .then((res) => {
+        if (res.data.isAttendence === false) {
+          setAttendenceTaken(true);
+        } else if (res.data.isAttendence === true) {
+          setAttendenceDataFromDB(res.data.result);
+          Swal.fire(
+            "Sorry!",
+            "Attendence has already taken! Please don't submit again",
+            "error"
+          );
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     if (selectedClass !== "") {
       axios
         .get(
-          `http://localhost:5001/getStudents?selectedClass=${user?.teachersInfo?.teachersTakingClass}&section=${sectionUppercase}`
+          `https://atg-server-tau.vercel.app/getStudents?selectedClass=${user?.teachersInfo?.teachersTakingClass}&section=${sectionUppercase}`
         )
         .then((res) => {
           setStudentsDataFromDB(
@@ -29,11 +52,8 @@ const TakeAttendence = () => {
     sectionUppercase,
     user?.teachersInfo?.teachersTakingClass,
     selectedClass,
+    dateOnly,
   ]);
-
-  console.log(
-    `http://localhost:5001/getStudents?selectedClass=${user?.teachersInfo?.teachersTakingClass}&section=${sectionUppercase}`
-  );
 
   const handleSelectClass = (selectedClass) => {
     setSelectedClass(selectedClass);
@@ -53,13 +73,15 @@ const TakeAttendence = () => {
   const handleSubmitAttendence = () => {
     const attendenceData = {
       dateOfAttendence: customDateOnly(date),
-      classOfAttendence: selectedClass,
+      classOfAttendence: user?.teachersInfo?.teachersTakingClass,
       sectionOfAttendence: sectionUppercase,
-      students: studentsDataFromDB,
+      students: studentsDataFromDB.map((student) => ({
+        studentId: student._id,
+        studentName: student.studentsInfo.studentNameInEnglish,
+        studentImage: student.studentsInfo.studentsImage,
+        isPresent: student.isPresent,
+      })),
     };
-
-    console.log(studentsDataFromDB);
-
     axios
       .post(
         "https://atg-server-tau.vercel.app/postAttendence",
@@ -72,13 +94,11 @@ const TakeAttendence = () => {
       )
       .then((res) => {
         if (res.data.acknowledged) {
-          Swal.fire("Attendence Submitted!", "", "success");
+          Swal.fire("Attendance Submitted!", "", "success");
         } else {
-          Swal.fire("Opps!", "Something went wrong, try again!", "error");
+          Swal.fire("Oops!", "Something went wrong, try again!", "error");
         }
       });
-
-    console.log(attendenceData);
   };
 
   const classesInfo = [
@@ -124,10 +144,11 @@ const TakeAttendence = () => {
               <p className="text-3xl font-bold"> {customDateOnly(date)} </p>
             </div>
           </div>
-          {selectedClass === "" ? (
-            <div className="mt-20">
-              {/* {isClassSelected ? ( */}
-              {/* <>
+          <div>
+            {selectedClass === "" ? (
+              <div className="mt-20">
+                {/* {isClassSelected ? ( */}
+                {/* <>
                   {" "}
                   <h2 className="text-4xl mb-5 font-medium">
                     Now select the section
@@ -191,85 +212,84 @@ const TakeAttendence = () => {
                     </Card>
                   </div>{" "}
                 </> */}
-              {/* ) : ( */}
-              <>
-                {" "}
-                <h2 className="text-4xl mb-5 font-medium">
-                  Want to take attendence of{" "}
-                  {user?.teachersInfo?.teachersTakingClass}, Select the Semister
-                </h2>
-                <div className={`grid grid-cols-8 gap-10 mt-20`}>
-                  {classesInfo.map((section) => {
-                    return (
-                      <>
-                        <Card
-                          key={section.section}
-                          onClick={() => handleSelectClass(section.section)}
-                          className=" p-10 text-center flex items-center justify-center cursor-pointer"
-                        >
-                          <>
-                            {/*  <p className="text-xl text-center font-medium">
-                              Semister
-                            </p> */}
-                            <h2 className="text-4xl font-semibold">
-                              {section.section}
+                {/* ) : ( */}
+                <>
+                  {" "}
+                  <h2 className="text-4xl mb-5 font-medium">
+                    Want to take attendence of{" "}
+                    {user?.teachersInfo?.teachersTakingClass}, Select the
+                    Semister
+                  </h2>
+                  <div className={`grid grid-cols-8 gap-10 mt-20`}>
+                    {classesInfo.map((section) => {
+                      return (
+                        <>
+                          <Card
+                            key={section.section}
+                            onClick={() => handleSelectClass(section.section)}
+                            className=" p-10 text-center flex items-center justify-center cursor-pointer"
+                          >
+                            <>
+                              <h2 className="text-4xl font-semibold">
+                                {section.section}
+                              </h2>
+                            </>
+                          </Card>
+                        </>
+                      );
+                    })}
+                  </div>
+                </>
+              </div>
+            ) : (
+              <div className="mt-10">
+                <div className="grid grid-cols-5 gap-5">
+                  {studentsDataFromDB.map((student) => (
+                    <>
+                      {" "}
+                      <div
+                        onClick={() => handleIsPresent(student._id)}
+                        className={`card cursor-pointer relative ${
+                          student.isPresent ? "bg-green-100" : "bg-red-100"
+                        } shadow-xl`}
+                      >
+                        <div className="h-10 w-10 bg-white rounded-full absolute top-2 right-2 flex items-center justify-center">
+                          <p
+                            className={`text-lg font-medium ${
+                              student.isPresent
+                                ? "text-green-500"
+                                : "text-red-500"
+                            }`}
+                          >
+                            {student.isPresent ? "P" : "A"}
+                          </p>
+                        </div>
+                        <div className="px-5 py-8">
+                          <div className="avatar flex items-center justify-center">
+                            <div className="w-24 mask mask-squircle">
+                              <img src={student.studentsInfo.studentsImage} />
+                            </div>
+                          </div>
+                          <div className="">
+                            <h2 className="text-xl font-semibold text-center">
+                              {student.studentsInfo.studentNameInEnglish}{" "}
                             </h2>
-                          </>
-                        </Card>
-                      </>
-                    );
-                  })}
-                </div>
-              </>
-              {/* )} */}
-            </div>
-          ) : (
-            <div className="mt-10">
-              <div className="grid grid-cols-5 gap-5">
-                {studentsDataFromDB.map((student) => (
-                  <>
-                    {" "}
-                    <div
-                      onClick={() => handleIsPresent(student._id)}
-                      className={`card cursor-pointer relative ${
-                        student.isPresent ? "bg-green-100" : "bg-red-100"
-                      } shadow-xl`}
-                    >
-                      <div className="h-10 w-10 bg-white rounded-full absolute top-2 right-2 flex items-center justify-center">
-                        <p
-                          className={`text-lg font-medium ${
-                            student.isPresent
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {student.isPresent ? "P" : "A"}
-                        </p>
-                      </div>
-                      <div className="px-5 py-8">
-                        <div className="avatar flex items-center justify-center">
-                          <div className="w-24 mask mask-squircle">
-                            <img src={student.studentsInfo.studentsImage} />
                           </div>
                         </div>
-                        <div className="">
-                          <h2 className="text-xl font-semibold text-center">
-                            {student.studentsInfo.studentNameInEnglish}{" "}
-                          </h2>
-                        </div>
                       </div>
-                    </div>
-                  </>
-                ))}
+                    </>
+                  ))}
+                </div>
+                <button
+                  // disabled={attendenceDataFromDB !== []}
+                  onClick={handleSubmitAttendence}
+                  className="btn bg-black text-white hover:bg-black mt-10 w-[81%] btn-circle fixed bottom-5 right-5"
+                >
+                  Submit Attendence
+                </button>
               </div>
-              <button
-                onClick={handleSubmitAttendence}
-                className="btn bg-black text-white hover:bg-black mt-10 w-[81%] btn-circle fixed bottom-5 right-5"
-              >
-                Submit Attendence
-              </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </section>

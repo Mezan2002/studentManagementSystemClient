@@ -22,7 +22,7 @@ const MakeResultOf = ({
     const registrationNumber = form.registrationNumber.value;
 
     try {
-      const urlWithRollAndReg = `http://localhost:5001/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
+      const urlWithRollAndReg = `https://atg-server-tau.vercel.app/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
       setStudentsRollNumber(rollNumber);
       setStudentsRegistrationNumber(registrationNumber);
       // setSection(sectionUpperCase);
@@ -32,7 +32,7 @@ const MakeResultOf = ({
       setExamName(firstApiResponse.data.paymentFor);
       setSelectedStudent(userId);
 
-      const urlWithUserId = `http://localhost:5001/get-student-by-userId/${userId}`;
+      const urlWithUserId = `https://atg-server-tau.vercel.app/get-student-by-userId/${userId}`;
       const secondApiResponse = await axios.get(urlWithUserId);
       const studentData = secondApiResponse.data;
       setStudentToMakeResult(studentData);

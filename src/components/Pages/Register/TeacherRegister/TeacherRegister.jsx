@@ -178,7 +178,6 @@ const TeacherRegister = () => {
       teachersMobileNumber: data.teachersMobileNumber,
       teachersEmail: data.teachersEmail,
     };
-
     const address = {
       presentAddress:
         data.presentDivision &&
@@ -214,7 +213,6 @@ const TeacherRegister = () => {
           ? presentAndPermanentAddress
           : null,
     };
-
     const logInInfo = {
       logInMobileNumber: data.logInMobileNumber,
       logInPassword: data.logInPassword,
@@ -237,6 +235,10 @@ const TeacherRegister = () => {
         } else {
           const teacherRegisteredData = {
             userType: "teacher",
+            isApproved: false,
+            registeredAt: new Date().toLocaleString("en-US", {
+              timeZone: "Asia/Dhaka",
+            }),
             teachersInfo,
             address,
             teachersEducationalQualification: educationalQualification,

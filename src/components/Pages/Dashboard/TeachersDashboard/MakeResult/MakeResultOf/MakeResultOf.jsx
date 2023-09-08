@@ -4,45 +4,41 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const MakeResultOf = ({
-  section,
   selectedClass,
   setSection,
-  setExamName,
-  setStudentToMakeResult,
-  setStudentsRollNumber,
-  setStudentsRegistrationNumber,
+  section,
+  session,
+  setSession,
+  setStudentOfMakingResult,
 }) => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   const [isClassError, setIsClassError] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState("");
   const handleGetResult = async (event) => {
     event.preventDefault();
-    const form = event.target;
-    const rollNumber = form.rollNumber.value;
-    const registrationNumber = form.registrationNumber.value;
-
     try {
-      const urlWithRollAndReg = `https://atg-server-tau.vercel.app/get-students-for-making-result?studentRollNumber=${rollNumber}&studentRegistrationNumber=${registrationNumber}`;
-      setStudentsRollNumber(rollNumber);
-      setStudentsRegistrationNumber(registrationNumber);
-      // setSection(sectionUpperCase);
-      const firstApiResponse = await axios.get(urlWithRollAndReg);
-      console.log(firstApiResponse);
-      const userId = firstApiResponse.data.userId;
-      setExamName(firstApiResponse.data.paymentFor);
-      setSelectedStudent(userId);
-
-      const urlWithUserId = `https://atg-server-tau.vercel.app/get-student-by-userId/${userId}`;
-      const secondApiResponse = await axios.get(urlWithUserId);
-      const studentData = secondApiResponse.data;
-      setStudentToMakeResult(studentData);
-
       if (isClassError === true) {
         setIsClassError(true);
       }
     } catch (error) {
       console.log(error);
     }
+    axios
+      .get(
+        `http://localhost:5001/get-students-by-semister?semister=${section}&session=${session}`
+      )
+      .then((res) => {
+        setStudentOfMakingResult(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const handleChangeSelectedClass = (selectedValue) => {
+    setSection(selectedValue.toUpperCase());
+  };
+  const handleChangeSelectedSession = (selectedValue) => {
+    setSession(selectedValue);
   };
 
   const handleButtonClicked = () => {
@@ -53,10 +49,6 @@ const MakeResultOf = ({
     }
   };
 
-  const handleChangeSelectedClass = (selectedValue) => {
-    // const sectionUpperCase = section.toUpperCase();
-    setSection(selectedValue.toUpperCase());
-  };
   return (
     <div>
       <div className="mt-32 flex items-center justify-center">
@@ -67,6 +59,14 @@ const MakeResultOf = ({
                 Making Result of
               </h2>
               <form onSubmit={handleGetResult} className="flex flex-col gap-5">
+                <>
+                  <Input
+                    size="lg"
+                    label="Department"
+                    disabled
+                    defaultValue={user?.teachersInfo?.teachersTakingClass}
+                  />
+                </>
                 {isClassError ? (
                   <Select
                     error
@@ -141,24 +141,44 @@ const MakeResultOf = ({
                     </Option>
                   </Select>
                 )}
-
-                <>
-                  <Input
-                    required
-                    name="rollNumber"
-                    size="lg"
-                    label="Exam's Roll Number"
-                  />
-                </>
-
-                <>
-                  <Input
-                    required
-                    name="registrationNumber"
-                    size="lg"
-                    label="Exam's Registration Number"
-                  />
-                </>
+                {isClassError ? (
+                  <Select
+                    error
+                    onChange={(selectedValue) => {
+                      handleChangeSelectedSession(selectedValue);
+                    }}
+                    label="Select Session"
+                    animate={{
+                      mount: { y: 0 },
+                      unmount: { y: 25 },
+                    }}
+                  >
+                    <Option className="mb-2 text-xs" value="22-23">
+                      2022-2023
+                    </Option>
+                    <Option className="mb-2 text-xs" value="21-22">
+                      2021-2022
+                    </Option>
+                  </Select>
+                ) : (
+                  <Select
+                    onChange={(selectedValue) => {
+                      handleChangeSelectedSession(selectedValue);
+                    }}
+                    label="Select Session"
+                    animate={{
+                      mount: { y: 0 },
+                      unmount: { y: 25 },
+                    }}
+                  >
+                    <Option className="mb-2 text-xs" value="22-23">
+                      2022-2023
+                    </Option>
+                    <Option className="mb-2 text-xs" value="21-22">
+                      2021-2022
+                    </Option>
+                  </Select>
+                )}
                 <input
                   onClick={handleButtonClicked}
                   type="submit"

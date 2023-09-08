@@ -5,15 +5,15 @@ import MakingResultFor from "./MakingResultFor/MakingResultFor";
 
 const MakeResult = () => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
-  const [studentToMakeResult, setStudentToMakeResult] = useState(null);
   const [studentsRollNumber, setStudentsRollNumber] = useState(null);
   const [section, setSection] = useState(null);
+  const [session, setSession] = useState(null);
+  const [studentsOfMakingResult, setStudentOfMakingResult] = useState([]);
   const [selectedClass, setSelectedClass] = useState(
     user?.teachersInfo?.teachersTakingClass
   );
-  const [examName, setExamName] = useState(null);
-  const [studentsRegistrationNumber, setStudentsRegistrationNumber] =
-    useState(null);
+  console.log(session);
+
   return (
     <section
       style={{
@@ -35,25 +35,20 @@ const MakeResult = () => {
               />
             </div>
           </div>
-          {studentToMakeResult === null ? (
+          {studentsOfMakingResult.length > 0 ? (
+            <MakingResultFor
+              setStudentOfMakingResult={setStudentOfMakingResult}
+              studentsOfMakingResult={studentsOfMakingResult}
+            ></MakingResultFor>
+          ) : (
             <MakeResultOf
               section={section}
+              session={session}
+              setSession={setSession}
               setSection={setSection}
               selectedClass={selectedClass}
-              setExamName={setExamName}
-              setStudentsRollNumber={setStudentsRollNumber}
-              setStudentsRegistrationNumber={setStudentsRegistrationNumber}
-              setStudentToMakeResult={setStudentToMakeResult}
+              setStudentOfMakingResult={setStudentOfMakingResult}
             ></MakeResultOf>
-          ) : (
-            <MakingResultFor
-              section={section}
-              selectedClass={selectedClass}
-              examName={examName}
-              studentsRollNumber={studentsRollNumber}
-              studentsRegistrationNumber={studentsRegistrationNumber}
-              studentToMakeResult={studentToMakeResult}
-            ></MakingResultFor>
           )}
         </div>
       </div>

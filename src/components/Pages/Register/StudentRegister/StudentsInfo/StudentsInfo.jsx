@@ -25,7 +25,11 @@ const StudentsInfo = ({
   isMaritalStatusError,
   handleChangeSelectedSemister,
   isStudentsDateOfBirthError,
+  handleChangeSession,
+  isSessionError,
+  session,
 }) => {
+  console.log(session);
   return (
     <section>
       <p className="text-xl font-bold mt-5">Student's Info</p>
@@ -91,6 +95,88 @@ const StudentsInfo = ({
             />
           </LocalizationProvider>
         )}
+        {/* <div>
+          {isSessionError ? (
+            <Select
+              error
+              value={session}
+              onChange={(selectedValue) => {
+                handleChangeSession(selectedValue);
+              }}
+              label="Select Your Session *"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="22-23">
+                2022-2023
+              </Option>
+              <Option className="" value="21-22">
+                2021-2022
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              value={session}
+              onChange={(selectedValue) => {
+                handleChangeSelectedClass(selectedValue);
+              }}
+              label="Select Your Session *"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="22-23">
+                2022-2023
+              </Option>
+              <Option className="" value="21-22">
+                2021-2022
+              </Option>
+            </Select>
+          )}
+        </div> */}
+        <div>
+          {isClassError ? (
+            <Select
+              error
+              onChange={(selectedValue) => {
+                handleChangeSession(selectedValue);
+              }}
+              label="Select Your Session *"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="22-23">
+                2022-2023
+              </Option>
+              <Option className="mb-2" value="21-22">
+                21-22
+              </Option>
+            </Select>
+          ) : (
+            <Select
+              onChange={(selectedValue) => {
+                handleChangeSession(selectedValue);
+              }}
+              label="Select Your Session *"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 25 },
+              }}
+            >
+              <Option className="mb-2" value="22-23">
+                2022-2023
+              </Option>
+              <Option className="mb-2" value="21-22">
+                2021-2022
+              </Option>
+            </Select>
+          )}
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-5 mb-5 border-b border-gray-500 pb-8 border-dashed">
         <div>
@@ -100,7 +186,7 @@ const StudentsInfo = ({
               onChange={(selectedValue) => {
                 handleChangeSelectedClass(selectedValue);
               }}
-              label="Select Your Department"
+              label="Select Your Department *"
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },
@@ -118,7 +204,7 @@ const StudentsInfo = ({
               onChange={(selectedValue) => {
                 handleChangeSelectedClass(selectedValue);
               }}
-              label="Select Your Department"
+              label="Select Your Department *"
               animate={{
                 mount: { y: 0 },
                 unmount: { y: 25 },

@@ -1,6 +1,6 @@
 // import axios from "axios";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -28,10 +28,13 @@ const StudentRegister = () => {
   const [, setIsRegisterClicked] = useState(false);
   const [isClassError, setIsClassError] = useState(false);
   const [semister, setSemister] = useState(null);
+  const [session, setSession] = useState(null);
+  const [isSessionError, setIsSessionError] = useState(null);
   const [isSemisterError, setIsSemisterError] = useState(false);
   const [isGenderError, setIsGenderError] = useState(false);
   const [isBloodGroupError, setIsBloodGroupError] = useState(false);
   const [isMaritalStatusError, setIsMaritalStatusError] = useState(false);
+  const [rollNumber, setRollNumber] = useState(0);
   const [isStudentsDateOfBirthError, setIsStudentsDateOfBirthError] =
     useState(false);
   const [isFathersDateOfBirthError, setIsFathersDateOfBirthError] =
@@ -43,7 +46,6 @@ const StudentRegister = () => {
 
   const imageHostingKey = import.meta.env.VITE_IMGBB_API_KEY;
   const navigate = useNavigate();
-  console.log();
 
   const handleRegisterClicked = () => {
     setIsRegisterClicked(true);
@@ -55,7 +57,8 @@ const StudentRegister = () => {
       selectedMaritalStatus === null ||
       studentsDateOfBirth === null ||
       fathersDateOfBirth === null ||
-      mothersDateOfBirth === null
+      mothersDateOfBirth === null ||
+      session === null
     ) {
       if (selectedClass === null) {
         setIsClassError(true);
@@ -80,6 +83,9 @@ const StudentRegister = () => {
       }
       if (mothersDateOfBirth === null) {
         setIsMothersDateOfBirthError(true);
+      }
+      if (session === null) {
+        setIsSessionError(true);
       }
     }
 
@@ -116,6 +122,11 @@ const StudentRegister = () => {
     setSemister(selectedSemister);
     setIsSemisterError(false);
   };
+  const handleChangeSession = (selectedSession) => {
+    console.log(selectedSession);
+    setSession(selectedSession);
+    setIsSessionError(false);
+  };
   const handleChangeGender = (selectedGender) => {
     setSelectedGender(selectedGender);
     setIsGenderError(false);
@@ -138,7 +149,7 @@ const StudentRegister = () => {
   const handleIsSameAddress = (event) => {
     setIsSameAddress(event);
   };
-
+  console.log(session);
   // handle functions end
 
   const handleImageChange = (event) => {
@@ -170,10 +181,28 @@ const StudentRegister = () => {
         });
     }
   };
+  console.log(session);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5001/generate-roll-number?session=${session}`)
+      .then((res) => {
+        setRollNumber(res.data.rollNumber);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [session]);
 
   const isStudent = true;
 
   const onSubmit = (data) => {
+    const cutSession = session?.split("-");
+    const mergeSession =
+      cutSession?.[0] && cutSession?.[1]
+        ? parseInt(cutSession[0] + cutSession[1])
+        : null;
+    const studentRollNumber = mergeSession.toString() + rollNumber.toString();
+
     const isLogInPassAndReTypePassNotSame =
       data.logInPassword !== data.reTypeLogInPassword;
 
@@ -182,7 +211,6 @@ const StudentRegister = () => {
         setIsLoginPassAndReTypePassSame(false);
       }
     }
-    console.log(data);
     const localGuardian = {
       localGuardiansNameInBangla: data.localGuardiansFullNameInBangla,
       localGuardiansNameInEnglish: data.localGuardiansFullNameInEnglish,
@@ -232,6 +260,8 @@ const StudentRegister = () => {
       religion: data.religion,
       class: selectedClass,
       section: semister.toUpperCase(),
+      session: session,
+      studentRollNumber,
       gender: selectedGender,
       bloodGroup: selectedBloodGroup,
       maritalStatus: selectedMaritalStatus,
@@ -330,6 +360,10 @@ const StudentRegister = () => {
         } else {
           const studentRegisteredData = {
             userType: "student",
+            isApproved: false,
+            registeredAt: new Date().toLocaleString("en-US", {
+              timeZone: "Asia/Dhaka",
+            }),
             studentsInfo,
             guardiantInfo,
             address,
@@ -385,6 +419,9 @@ const StudentRegister = () => {
             <StudentsInfo
               isSemisterError={isSemisterError}
               handleChangeSelectedSemister={handleChangeSelectedSemister}
+              isSessionError={isSessionError}
+              session={session}
+              handleChangeSession={handleChangeSession}
               isStudentsDateOfBirthError={isStudentsDateOfBirthError}
               isClassError={isClassError}
               isBloodGroupError={isBloodGroupError}

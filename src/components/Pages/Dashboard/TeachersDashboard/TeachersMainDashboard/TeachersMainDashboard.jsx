@@ -1,8 +1,11 @@
+import { addDays, format, isSameMonth, startOfWeek } from "date-fns";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { customDateOnly } from "../../../../../utils/takingDateOnly";
 
 const TeachersMainDashboard = () => {
   const [teachersAddress, setTeachersAddress] = useState({});
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
   console.log(user);
   useEffect(() => {
@@ -29,6 +32,10 @@ const TeachersMainDashboard = () => {
   const teachersBloodGroup = user?.teachersInfo?.bloodGroup;
   const teachersGender = user?.teachersInfo?.gender;
   const teachersDateOfBirth = user?.teachersInfo?.teachersDateOfBirth;
+
+  const customSelectedDate = customDateOnly(selectedDate);
+  const weekStart = startOfWeek(startOfWeek(selectedDate, { weekStartsOn: 1 }));
+  const days = Array.from({ length: 42 }, (_, i) => addDays(weekStart, i));
   return (
     <section
       style={{
@@ -49,9 +56,44 @@ const TeachersMainDashboard = () => {
                 className="w-10"
               />
             </div>
-            <div className="mt-16">
+            <div className="mt-10">
               <div className="grid grid-cols-5 gap-10">
                 <div className="card shadow-2xl bg-white relative col-span-3">
+                  <div className="">
+                    <div className="">
+                      <div className="calendar">
+                        <div className="weekdays">
+                          <div>Sun</div>
+                          <div>Mon</div>
+                          <div>Tue</div>
+                          <div>Wed</div>
+                          <div>Thu</div>
+                          <div className="offDays">Fri</div>
+                          <div>Sat</div>
+                        </div>
+                        <div className="dates">
+                          {days.map((day) => (
+                            <div
+                              key={day.toDateString()}
+                              className={`date-box${
+                                isSameMonth(day, selectedDate)
+                                  ? ""
+                                  : " disabled"
+                              }${
+                                day.toDateString() ===
+                                selectedDate.toDateString()
+                                  ? " selected"
+                                  : ""
+                              }`}
+                            >
+                              <span>{format(day, "d")}</span>
+                              {/* You can add event or other information for the day here */}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   {/* <img
                     src="https://i.ibb.co/DK1TNdJ/pexels-max-fischer-5212360.jpg"
                     alt=""

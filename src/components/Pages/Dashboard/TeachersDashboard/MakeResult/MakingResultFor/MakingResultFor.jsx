@@ -102,11 +102,15 @@ const MakingResultFor = ({
     console.log(formData);
 
     axios
-      .post("http://localhost:5001/make-result", JSON.stringify(formData), {
-        headers: {
-          "content-type": "application/json",
-        },
-      })
+      .post(
+        "https://atg-server-tau.vercel.app/make-result",
+        JSON.stringify(formData),
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         if (res.data.acknowledged) {
           Swal.fire("Result Maked Successfully!", "", "success");
@@ -122,7 +126,7 @@ const MakingResultFor = ({
     document.getElementById("make_result_modal").showModal();
     axios
       .get(
-        `http://localhost:5001/get-individual-students-data-by-id/${studentId}`
+        `https://atg-server-tau.vercel.app/get-individual-students-data-by-id/${studentId}`
       )
       .then((res) => {
         console.log(res.data);

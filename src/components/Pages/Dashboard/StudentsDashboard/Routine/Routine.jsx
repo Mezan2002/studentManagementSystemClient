@@ -87,9 +87,9 @@ const Routine = () => {
                   </div>
                 </div>
                 <div>
-                  <button className="btn btn-block mt-10 bg-black text-white hover:bg-black">
+                  {/* <button className="btn btn-block mt-10 bg-black text-white hover:bg-black">
                     Download Routine
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>

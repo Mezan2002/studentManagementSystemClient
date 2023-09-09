@@ -184,7 +184,9 @@ const StudentRegister = () => {
   console.log(session);
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/generate-roll-number?session=${session}`)
+      .get(
+        `https://atg-server-tau.vercel.app/generate-roll-number?session=${session}`
+      )
       .then((res) => {
         setRollNumber(res.data.rollNumber);
       })

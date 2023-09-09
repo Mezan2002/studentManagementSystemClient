@@ -24,7 +24,7 @@ const MakeResultOf = ({
     }
     axios
       .get(
-        `http://localhost:5001/get-students-by-semister?semister=${section}&session=${session}`
+        `https://atg-server-tau.vercel.app/get-students-by-semister?semister=${section}&session=${session}`
       )
       .then((res) => {
         setStudentOfMakingResult(res.data);
@@ -67,118 +67,61 @@ const MakeResultOf = ({
                     defaultValue={user?.teachersInfo?.teachersTakingClass}
                   />
                 </>
-                {isClassError ? (
-                  <Select
-                    error
-                    onChange={(selectedValue) => {
-                      handleChangeSelectedClass(selectedValue);
-                    }}
-                    label="Select Semister"
-                    animate={{
-                      mount: { y: 0 },
-                      unmount: { y: 25 },
-                    }}
-                  >
-                    <Option className="mb-2 text-xs" value="1st">
-                      1st
-                    </Option>
-                    <Option className="mb-2 text-xs" value="2nd">
-                      2nd
-                    </Option>
-                    <Option className="mb-2 text-xs" value="3rd">
-                      3rd
-                    </Option>
-                    <Option className="mb-2 text-xs" value="4th">
-                      4th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="5th">
-                      5th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="6th">
-                      6th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="7th">
-                      7th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="8th">
-                      8th
-                    </Option>
-                  </Select>
-                ) : (
-                  <Select
-                    onChange={(selectedValue) => {
-                      handleChangeSelectedClass(selectedValue);
-                    }}
-                    label="Select Semister"
-                    animate={{
-                      mount: { y: 0 },
-                      unmount: { y: 25 },
-                    }}
-                  >
-                    <Option className="mb-2 text-xs" value="1st">
-                      1st
-                    </Option>
-                    <Option className="mb-2 text-xs" value="2nd">
-                      2nd
-                    </Option>
-                    <Option className="mb-2 text-xs" value="3rd">
-                      3rd
-                    </Option>
-                    <Option className="mb-2 text-xs" value="4th">
-                      4th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="5th">
-                      5th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="6th">
-                      6th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="7th">
-                      7th
-                    </Option>
-                    <Option className="mb-2 text-xs" value="8th">
-                      8th
-                    </Option>
-                  </Select>
-                )}
-                {isClassError ? (
-                  <Select
-                    error
-                    onChange={(selectedValue) => {
-                      handleChangeSelectedSession(selectedValue);
-                    }}
-                    label="Select Session"
-                    animate={{
-                      mount: { y: 0 },
-                      unmount: { y: 25 },
-                    }}
-                  >
-                    <Option className="mb-2 text-xs" value="22-23">
-                      2022-2023
-                    </Option>
-                    <Option className="mb-2 text-xs" value="21-22">
-                      2021-2022
-                    </Option>
-                  </Select>
-                ) : (
-                  <Select
-                    onChange={(selectedValue) => {
-                      handleChangeSelectedSession(selectedValue);
-                    }}
-                    label="Select Session"
-                    animate={{
-                      mount: { y: 0 },
-                      unmount: { y: 25 },
-                    }}
-                  >
-                    <Option className="mb-2 text-xs" value="22-23">
-                      2022-2023
-                    </Option>
-                    <Option className="mb-2 text-xs" value="21-22">
-                      2021-2022
-                    </Option>
-                  </Select>
-                )}
+
+                <Select
+                  onChange={(selectedValue) => {
+                    handleChangeSelectedClass(selectedValue);
+                  }}
+                  label="Select Semister"
+                  animate={{
+                    mount: { y: 0 },
+                    unmount: { y: 25 },
+                  }}
+                >
+                  <Option className="mb-2 text-xs" value="1st">
+                    1st
+                  </Option>
+                  <Option className="mb-2 text-xs" value="2nd">
+                    2nd
+                  </Option>
+                  <Option className="mb-2 text-xs" value="3rd">
+                    3rd
+                  </Option>
+                  <Option className="mb-2 text-xs" value="4th">
+                    4th
+                  </Option>
+                  <Option className="mb-2 text-xs" value="5th">
+                    5th
+                  </Option>
+                  <Option className="mb-2 text-xs" value="6th">
+                    6th
+                  </Option>
+                  <Option className="mb-2 text-xs" value="7th">
+                    7th
+                  </Option>
+                  <Option className="mb-2 text-xs" value="8th">
+                    8th
+                  </Option>
+                </Select>
+
+                <Select
+                  onChange={(selectedValue) => {
+                    handleChangeSelectedSession(selectedValue);
+                  }}
+                  label="Select Session"
+                  animate={{
+                    mount: { y: 0 },
+                    unmount: { y: 25 },
+                  }}
+                >
+                  <Option className="mb-2 text-xs" value="22-23">
+                    2022-2023
+                  </Option>
+                  <Option className="mb-2 text-xs" value="21-22">
+                    2021-2022
+                  </Option>
+                </Select>
+
                 <input
                   onClick={handleButtonClicked}
                   type="submit"

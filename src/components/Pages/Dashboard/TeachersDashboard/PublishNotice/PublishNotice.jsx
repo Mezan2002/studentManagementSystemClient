@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import { customDateOnly } from "../../../../../utils/takingDateOnly";
 
 const PublishNotice = () => {
   const user = useSelector((state) => state.loggedInUser.loggedInUser);
@@ -31,9 +32,9 @@ const PublishNotice = () => {
       teachersId,
       noticeFor: selectedClass,
       titleOfNotice: data.titleOfNotice,
+      createdAt: customDateOnly(new Date()),
       notice: data.notice,
     };
-    console.log(noticeData);
 
     axios
       .post(

@@ -51,7 +51,7 @@ const StudentsProfile = () => {
             </div>
           </div>
           <div className="mt-16">
-            <div className="card shadow-2xl bg-white relative mx-auto">
+            <div className="card shadow-2xl bg-white relative w-1/2 mx-auto">
               <img
                 src="https://i.ibb.co/zmc55zF/pexels-pixabay-261909.jpg"
                 alt=""
